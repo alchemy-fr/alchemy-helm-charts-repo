@@ -12,7 +12,7 @@ metadata:
 spec:
   rules:
   {{- range $key, $value := .Values.ingress.hosts | fromYaml }}
-  {{- range $value }}
+  {{- range $value | toString }}
     - host: {{ . }}
       http:
         paths:
