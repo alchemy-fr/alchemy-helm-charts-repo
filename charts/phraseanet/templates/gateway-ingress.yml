@@ -11,7 +11,7 @@ metadata:
 {{- end }}
 spec:
   rules:
-  {{- range $key, $value := .Values.ingress.hosts }}
+  {{- range $key, $value := .Values.ingress.hosts | fromYaml }}
   {{- range $value }}
     - host: {{ . }}
       http:
