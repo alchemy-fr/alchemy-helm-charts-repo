@@ -11,8 +11,9 @@ metadata:
 {{- end }}
 spec:
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
+  {{- range $key, $value := .Values.ingress.hosts }}
+  {{- range $value.hosts }}
+    - host: {{ . }}
       http:
         paths:
         - backend:
@@ -22,6 +23,7 @@ spec:
                 number: 80
           path: /
           pathType: Prefix
+  {{- end }}
   {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
