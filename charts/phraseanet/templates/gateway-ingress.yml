@@ -11,8 +11,9 @@ metadata:
 {{- end }}
 spec:
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
+  {{- range $key, $value := .Values.ingress.hosts }}
+  {{- range $value }}
+    - host: {{ . }}
       http:
         paths:
         - backend:
