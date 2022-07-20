@@ -11,18 +11,16 @@ metadata:
 {{- end }}
 spec:
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . }}
-      http:
-        paths:
-        - backend:
-            service:
-              name: phraseanet-gateway
-              port:
-                number: 80
-          path: /
-          pathType: Prefix
-  {{- end }}
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: phraseanet-gateway
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
   {{- if .Values.ingress.tls }}
   tls:
 {{ toYaml .Values.ingress.tls | indent 4 }}

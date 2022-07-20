@@ -71,8 +71,7 @@ php:
 
 ingress:
   enabled: false
-  hosts: 
-    - phraseanet
+  host: phraseanet
   tls: false
 
 app:
