@@ -11,7 +11,8 @@ metadata:
 {{- end }}
 spec:
   rules:
-  - host: {{ .Values.ingress.host }}
+  {{- range .Values.ingress.hosts }}
+  - host: {{ . }}
     http:
       paths:
       - backend:
@@ -24,5 +25,6 @@ spec:
   {{- if .Values.ingress.tls }}
   tls:
 {{ toYaml .Values.ingress.tls | indent 4 }}
+  {{- end -}}
   {{- end -}}
 {{- end }}
