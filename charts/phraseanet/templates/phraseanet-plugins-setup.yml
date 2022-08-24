@@ -15,7 +15,7 @@ spec:
         configMap:
           name: phraseanet-plugins
       containers:
-      - name: phraseanet-setup
+      - name: phraseanet-plugins-setup
         image: busybox:latest
         imagePullPolicy: IfNotPresent
         terminationMessagePolicy: FallbackToLogsOnError
