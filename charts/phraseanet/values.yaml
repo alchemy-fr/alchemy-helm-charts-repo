@@ -71,7 +71,7 @@ php:
 
 ingress:
   enabled: false
-  hosts: 
+  hosts:
     - phraseanet
   tls: false
 
@@ -182,3 +182,5 @@ app:
     accessMode: ReadWriteOnce
     subPath:
     size: 1Gi
+
+  plugins:
