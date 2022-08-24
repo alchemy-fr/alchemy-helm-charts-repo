@@ -1,0 +1,45 @@
+{{- if .Values.app.plugins }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: phraseanet-plugins-setup
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      volumes:
+      - name: phraseanet-config
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc.config.name }}
+      - name: phraseanet-plugins
+        configMap:
+          name: phraseanet-plugins
+      containers:
+      - name: phraseanet-setup
+        image: busybox:latest
+        imagePullPolicy: IfNotPresent
+        terminationMessagePolicy: FallbackToLogsOnError
+        command:
+        - /bin/sh
+        - -c
+        - rm ${CONFIG_DIR}/* -rf
+        - for i in $(ls ${PLUGINS_DIR}/); do mkdir -p "${CONFIG_DIR}/$i"; cp "${PLUGINS_DIR}/$i" "${CONFIG_DIR}/$i/configuration.yaml"; done
+        - find ${CONFIG_DIR}
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "32Mi"
+          limits:
+            cpu: "200m"
+            memory: "64Mi"
+        volumeMounts:
+        - name: phraseanet-config
+          mountPath: "/var/alchemy/Phraseanet/config"
+        - name: phraseanet-plugins
+          mountPath: "/configurations"
+        env:
+        - name: PLUGINS_DIR
+          value: "/configurations"
+        - name: CONFIG_DIR
+          value: "/var/alchemy/Phraseanet/config"
+{{- end -}}
