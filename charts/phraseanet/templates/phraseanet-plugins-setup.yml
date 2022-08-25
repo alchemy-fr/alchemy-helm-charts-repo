@@ -22,9 +22,13 @@ spec:
         command:
         - /bin/sh
         - -c
-        - rm ${CONFIG_DIR}/* -rf
-        - for i in $(ls ${PLUGINS_DIR}/); do mkdir -p "${CONFIG_DIR}/$i"; cp "${PLUGINS_DIR}/$i" "${CONFIG_DIR}/$i/configuration.yaml"; done
-        - find ${CONFIG_DIR}
+        - |
+          echo "previous plugins config"
+          find ${CONFIG_DIR}
+          rm ${CONFIG_DIR}/* -rf
+          for i in $(ls ${PLUGINS_DIR}/); do mkdir -p "${CONFIG_DIR}/$i"; cp "${PLUGINS_DIR}/$i" "${CONFIG_DIR}/$i/configuration.yaml"; done
+          echo "new plugins config"
+          find ${CONFIG_DIR}
         resources:
           requests:
             cpu: "50m"
