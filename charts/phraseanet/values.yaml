@@ -182,5 +182,3 @@ app:
     accessMode: ReadWriteOnce
     subPath:
     size: 1Gi
-
-  plugins:
