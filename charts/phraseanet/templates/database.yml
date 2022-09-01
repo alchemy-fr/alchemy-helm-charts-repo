@@ -1,4 +1,4 @@
-
+{{- if .Values.mysql.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -38,3 +38,4 @@ spec:
         volumeMounts:
         - name: "database"
           mountPath: "/var/lib/mysql"
+{{- end }}
