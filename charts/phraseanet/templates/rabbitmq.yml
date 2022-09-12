@@ -1,3 +1,4 @@
+{{- if .Values.rabbitmq.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -29,4 +30,4 @@ spec:
           value: {{ .Values.rabbitmq.default_vhost }}
         - name: RABBITMQ_HEARTBEAT
           value: {{ .Values.rabbitmq.heartbeat | quote }}
-          
+{{- end }}

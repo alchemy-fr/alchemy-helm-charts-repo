@@ -8,7 +8,9 @@ image:
 
 mysql:
   enabled: true
-  root_password: phraseanet
+  user: "{{ .Values.app.phraseanet_db_user }}"
+  password: "{{ .Values.app.phraseanet_db_password }}"
+  root_password: "{{ .Values.app.phraseanet_db_password }}"
   max_allowed_packet: 16M
   pvc_name: phraseanet-database
   resources:
@@ -28,6 +30,7 @@ mysql:
     size: 1Gi
 
 elasticsearch:
+  enabled: true
   pvc_name: phraseanet-elasticsearch
   resources:
     requests:
@@ -46,6 +49,7 @@ elasticsearch:
     size: 1Gi
 
 rabbitmq:
+  enabled: true
   host: rabbitmq
   port: 5672
   default_user: rabbit
@@ -60,6 +64,9 @@ rabbitmq:
     limits:
       cpu: "2000m"
       memory: "4096Mi"
+
+redis:
+  enabled: true
 
 http:
   max_body_size: 2G
