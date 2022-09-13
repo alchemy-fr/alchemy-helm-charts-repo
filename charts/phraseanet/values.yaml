@@ -65,7 +65,7 @@ rabbitmq:
 
 redis:
   enabled: true
-  port: "{{ .Values.app.phraseanet_redis_port }}"
+  port: "{{ .Values.app.phraseanet_cache_port }}"
 
 http:
   max_body_size: 2G
@@ -82,7 +82,8 @@ ingress:
   tls: false
 
 app:
-  hostname: localhost
+  phraseanet_hostname: localhost
+  phraseanet_scheme: http
   phraseanet_install: 1
   phraseanet_setup: 1
   phraseanet_admin_account_email: admin@alchemy.fr
@@ -90,9 +91,10 @@ app:
   phraseanet_db_host: db
   phraseanet_db_user: root
   phraseanet_db_password: phraseanet
-  phraseanet_redis_host: redis
-  phraseanet_redis_port: 6379
-  phraseanet_redis_domain: phraseanet
+  phraseanet_cache_type: redis
+  phraseanet_cache_host: redis
+  phraseanet_cache_port: 6379
+  phraseanet_cache_domain: phraseanet
   phraseanet_elasticsearch_host: elasticsearch
   phraseanet_elasticsearch_port: 9200
   phraseanet_rabbitmq_host: rabbitmq
@@ -104,7 +106,6 @@ app:
   install_db_template: DublinCore
   install_appbox: ab_master
   install_databox: db_databox1
-  phraseanet_server_name: localhost
   phraseanet_trusted_proxies:
   gateway:
     resources:

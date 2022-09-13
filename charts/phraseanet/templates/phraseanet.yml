@@ -106,8 +106,10 @@ spec:
           value: {{ .Values.app.install_appbox | quote }}
         - name: INSTALL_DATABOX
           value: {{ .Values.app.install_databox | quote }}
-        - name: PHRASEANET_SERVER_NAME
-          value: {{ .Values.app.phraseanet_server_name | quote }}
+        - name: PHRASSEANET_HOSTNAME
+          value: {{ .Values.app.phraseanet_hostname | quote }}
+        - name: PHRASEANET_SCHEME
+          value: {{ .Values.app.phraseanet_scheme | quote }}
         - name: PHRASEANET_DOWNLOAD_DIR
           value: "/var/alchemy/Phraseanet/datas/download"
         - name: PHRASEANET_LAZARET_DIR
@@ -166,12 +168,14 @@ spec:
           value: {{ .Values.app.phraseanet_rabbitmq_ssl | quote }}
         - name: PHRASEANET_RABBITMQ_HEARTBEAT
           value: {{ .Values.rabbitmq.heartbeat | quote }}
-        - name: PHRASEANET_REDIS_HOST
-          value: {{ .Values.app.phraseanet_redis_host | quote }}
-        - name: PHRASEANET_REDIS_PORT
-          value: {{ .Values.app.phraseanet_redis_port | quote }}
-        - name: PHRASEANET_REDIS_DOMAIN
-          value: {{ .Values.app.phraseanet_redis_domain | quote }}
+        - name: PHRASEANET_CACHE_TYPE
+          value: {{ .Values.app.phraseanet_cache_type | quote }}
+        - name: PHRASEANET_CACHE_HOST
+          value: {{ .Values.app.phraseanet_cache_host | quote }}
+        - name: PHRASEANET_CACHE_PORT
+          value: {{ .Values.app.phraseanet_cache_port | quote }}
+        - name: PHRASEANET_CACHE_DOMAIN
+          value: {{ .Values.app.phraseanet_cache_domain | quote }}
         - name: SESSION_CACHE_LIMITER
           value: {{ .Values.php.session_cache_limiter | quote }}
         - name: SESSION_SAVE_HANDLER
