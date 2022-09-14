@@ -32,11 +32,11 @@ spec:
         terminationMessagePolicy: FallbackToLogsOnError
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: {{ .Values.mysql.root_password }}
+          value: {{ tpl .Values.mysql.root_password $ }}
         - name: MYSQL_USER
-          value: {{ .Values.mysql.user }}
+          value: {{ tpl .Values.mysql.user $ }}
         - name: MYSQL_PASSWORD
-          value: {{ .Values.mysql.password }}
+          value: {{ tpl .Values.mysql.password $ }}
         - name: MYSQL_MAX_ALLOWED_PACKET
           value: {{ .Values.mysql.max_allowed_packet }}
         volumeMounts:

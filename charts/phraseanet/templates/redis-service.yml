@@ -5,8 +5,8 @@ metadata:
   name: redis
 spec:
   ports:
-  - port: {{ .Values.redis.port }}
-    targetPort: {{ .Values.redis.port }}
+  - port: {{ tpl .Values.redis.port $ }}
+    targetPort: {{ tpl .Values.redis.port $ }}
   selector:
     app: phraseanet
     tier: redis

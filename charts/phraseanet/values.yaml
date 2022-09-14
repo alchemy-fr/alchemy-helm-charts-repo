@@ -75,6 +75,8 @@ php:
   opcache_enabled: 1
   log_level: warning
   session_cache_limiter: off
+  session_save_handler: redis
+  session_save_path: "tcp://redis-session:6379"
 
 ingress:
   enabled: false
@@ -103,6 +105,25 @@ app:
   phraseanet_rabbitmq_vhost: /
   phraseanet_rabbitmq_user: rabbit
   phraseanet_rabbitmq_pass: rabbit
+  phraseanet_install: 1
+  phraseanet_setup: 1
+  phraseanet_upgrade: 1
+  phraseanet_smtp_enabled:
+  phraseanet_smtp_auth_enabled:
+  phraseanet_smtp_secure_mode:
+  phraseanet_smtp_host:
+  phraseanet_smtp_port:
+  phraseanet_smtp_user:
+  phraseanet_smtp_password:
+  phraseanet_emitter_email:
+  phraseanet_mail_object_prefix:
+  phraseanet_ffmpeg_timeout:
+  phraseanet_ffprobe_timeout:
+  phraseanet_gs_timeout:
+  phraseanet_mp4box_timeout:
+  phraseanet_swftools_timeout:
+  phraseanet_unocon_timeout:
+  phraseanet_exiftool_timeout:
   install_db_template: DublinCore
   install_appbox: ab_master
   install_databox: db_databox1
@@ -200,3 +221,8 @@ app:
     accessMode: ReadWriteOnce
     subPath:
     size: 1Gi
+  pvc_name:
+      data: phraseanet-datas
+      thumbnails: phraseanet-thumbnails
+      custom: phraseanet-custom
+      config: phraseanet-config
