@@ -1,0 +1,10 @@
+{{- with .Values.expose }}
+{{- if .enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: expose-client-config
+data:
+  EXPOSE_REQUEST_SIGNATURE_TTL: {{ .api.config.requestSignatureTtl | quote }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,16 @@
+{{- if .Values.databox.enabled }}
+{{- with .Values.databox.api.config }}
+{{- $tplArgs := dict "app" "databox" "ctx" . "glob" $ }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: databox-api-config
+data:
+  DATABOX_REQUEST_SIGNATURE_TTL: {{ .requestSignatureTtl | quote }}
+  ELASTICSEARCH_URL: http://elasticsearch-databox-master:9200/
+  PHRASEANET_BASE_URL: {{ .phraseanet.baseUrl | default "" | quote }}
+  PHRASEANET_APP_OAUTH_TOKEN: {{ .phraseanet.oauthToken | default "" | quote }}
+{{ include "app.s3Storage.configMap" $tplArgs | indent 2 }}
+{{ include "app.cloudFront.configMap" $tplArgs | indent 2 }}
+{{- end }}
+{{- end }}

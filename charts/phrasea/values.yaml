@@ -1,0 +1,371 @@
+repository:
+  baseurl: alchemyfr
+  tag: latest
+
+auth:
+  enabled: true
+  defaultUser:
+    externalSecretName:
+    username: admin@phrasea.local
+    password: __CHANGE_ME_obIaHz6cVTkQKHqLBj
+  api:
+    hostname:
+    baseUrl:
+    config:
+      registrationValidateEmail: true
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+  adminOAuthClient:
+    externalSecretName:
+    id: auth-admin
+    randomId: 9mIGK
+    secret: '__CHANGE_ME_0sfyMAp@P@CSnZC71EuDQ2'
+    grantTypes:
+    - authorization_code
+  rabbitmq:
+    vhost: auth
+
+databox:
+  enabled: true
+  api:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      maxBodySize: 2G
+      tls: []
+    hostname:
+    baseUrl:
+    config:
+      requestSignatureTtl: 86400
+      s3Storage:
+        endpoint: "{{ .Values.minio.baseUrl }}"
+        region:
+        bucketName: databox
+        usePathSyleEndpoint: false
+        accessKey:
+        secretKey:
+        externalSecretKey:
+        externalSecretMapping:
+          accessKey: S3_STORAGE_ACCESS_KEY
+          secretKey: S3_STORAGE_SECRET_KEY
+      cloudFront:
+        url:
+        region:
+        privateKey:
+        keyPairId:
+        ttl: 86400
+      phraseanet:
+        baseUrl:
+        oauthToken:
+  adminOAuthClient:
+    externalSecretName:
+    id: databox-admin
+    randomId: fiMPj
+    secret: '__CHANGE_ME_9jZuZqkwf9qW881jTqG'
+    grantTypes:
+    - authorization_code
+    - client_credentials
+    scopes:
+    - user:list
+    - group:list
+  client:
+    hostname:
+    baseUrl:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+    oauthClient:
+      externalSecretName:
+      id: databox-app
+      randomId: difnr
+      secret: '__CHANGE_ME_kga7LfWB8vTowf$9V9'
+      redirectUri: "{{ .Values.databox.client.baseUrl }}"
+      grantTypes:
+      - authorization_code
+  rabbitmq:
+    vhost: databox
+  upload:
+    uploaderTargetSlug: databox-uploader
+
+expose:
+  enabled: true
+  api:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      maxBodySize: 22G
+      tls: []
+    hostname:
+    baseUrl:
+    config:
+      requestSignatureTtl: 86400
+      s3Storage:
+        endpoint: "{{ .Values.minio.baseUrl }}"
+        region:
+        bucketName: expose
+        usePathSyleEndpoint: false
+        accessKey:
+        secretKey:
+        externalSecretKey:
+        externalSecretMapping:
+          accessKey: S3_STORAGE_ACCESS_KEY
+          secretKey: S3_STORAGE_SECRET_KEY
+      cloudFront:
+        url:
+        region:
+        privateKey:
+        keyPairId:
+        ttl: 86400
+  adminOAuthClient:
+    externalSecretName:
+    id: expose-admin
+    randomId: wIB0s
+    secret: '__CHANGE_ME_71EuDQ2H$ei3sHwIB0sfy'
+    grantTypes:
+    - authorization_code
+    - client_credentials
+    scopes:
+    - user:list
+    - group:list
+  client:
+    hostname:
+    baseUrl:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+    oauthClient:
+      externalSecretName:
+      id: expose-app
+      randomId: difnr
+      secret: '__CHANGE_ME_owf$9V9kga7LfWB8vT'
+      redirectUri: "{{ .Values.expose.client.baseUrl }}"
+      grantTypes:
+      - password
+    mapbox:
+      token: "define-me"
+    logoUrl: ""
+    logoAlt: ""
+    sidebarDefaultOpen: false
+  rabbitmq:
+    vhost: expose
+  zippy:
+    enabled: false
+    baseUrl:
+    clientId:
+    clientSecret:
+
+notify:
+  enabled: true
+  api:
+    hostname:
+    baseUrl:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+  adminOAuthClient:
+    externalSecretName:
+    id: notify-admin
+    randomId: dUdGa
+    secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
+    grantTypes:
+    - authorization_code
+  rabbitmq:
+    vhost: notify
+
+uploader:
+  enabled: true
+  api:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      maxBodySize: 22G
+      tls: []
+    hostname:
+    baseUrl:
+    config:
+      deleteAssetGracefulTime: 0
+      assetConsumerCommitUri:
+      assetConsumerAccessToken:
+      requestSignatureTtl: 3600
+      s3Storage:
+        endpoint: "{{ .Values.minio.baseUrl }}"
+        region:
+        bucketName: uploader-deposit
+        usePathSyleEndpoint: false
+        accessKey:
+        secretKey:
+        externalSecretKey:
+        externalSecretMapping:
+          accessKey: S3_STORAGE_ACCESS_KEY
+          secretKey: S3_STORAGE_SECRET_KEY
+  adminOAuthClient:
+    externalSecretName:
+    id: uploader-admin
+    randomId: oqdsq
+    secret: '__CHANGE_ME_p@P@CSnZi3sHwIB0sfy'
+    grantTypes:
+    - authorization_code
+    - client_credentials
+    scopes:
+    - user:list
+    - group:list
+  client:
+    hostname:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+    oauthClient:
+      externalSecretName:
+      id: uploader-app
+      randomId: oqdsq
+      secret: '__CHANGE_ME_DpydN$mo7VZoOVw4inxqn'
+      redirectUri: "{{ .Values.uploader.client.baseUrl }}"
+      grantTypes:
+      - authorization_code
+  rabbitmq:
+    vhost: upload
+
+report:
+  enabled: true
+  replicas: 2
+  api:
+    hostname: report-api
+    baseUrl: http://report-api
+  databaseName: report
+
+dashboard:
+  enabled: true
+  hostname:
+  baseUrl:
+  ingress:
+    enabled: true
+    annotations: {}
+    extraLabels: {}
+    tls: []
+
+mailer:
+  dns: 'null://null'
+  from: 'no-reply@acme.com'
+
+postgresql:
+  enabled: true
+  externalSecretName:
+  host: postgresql
+  port: 5432
+  user: phrasea
+  password: '__CHANGE_ME_iHdBtyVGmT9Zj6shv'
+  persistence:
+    enabled: true
+    existingClaim:
+    storageClass:
+    annotations: {}
+    accessMode: ReadWriteOnce
+    size: 10Gi
+    subPath:
+
+rabbitmq:
+  enabled: true
+  externalSecretName:
+  host: rabbitmq
+  port: 5672
+  user: phrasea
+  password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
+  persistence:
+    enabled: true
+    existingClaim:
+    storageClass:
+    annotations: {}
+    accessMode: ReadWriteOnce
+    size: 20Gi
+    subPath:
+
+minio:
+  enabled: true
+  hostname:
+  baseUrl:
+  accessKey: '__CHANGE_ME_jw2G5OskVG2VVXIyHsuQJIo'
+  secretKey: '__CHANGE_ME_bIYN#LuI9$ED9B0ck2scn'
+  ingress:
+    enabled: true
+    annotations: {}
+    extraLabels: {}
+    maxBodySize: 22G
+    tls: []
+  persistence:
+    enabled: true
+    existingClaim:
+    storageClass:
+    annotations: {}
+    accessMode: ReadWriteOnce
+    size: 20Gi
+    subPath:
+
+ingress:
+  tls:
+    wildcard:
+      externalSecretName:
+      enabled: false
+      crt:
+      key:
+
+globalConfig:
+  externalConfigmapName:
+  content: |
+    {}
+
+_internal:
+  services:
+  - auth
+  - databox
+  - expose
+  - notify
+  - uploader
+  volumes:
+#    uploader:
+#      data:
+#        name: uploader-data
+#        mountPath: /var/data/upload
+#        uid: 1000
+  auth:
+  expose:
+    api:
+      ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+  notify:
+  uploader:
+    api:
+      ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+  minio:
+    ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+
+elasticsearch:
+  enabled: true
+  replicas: 1
+  clusterName: elasticsearch-databox
+  minimumMasterNodes: 1
+  volumeClaimTemplate:
+    resources:
+      requests:
+        storage: 5Gi
