@@ -84,6 +84,7 @@ ingress:
   tls: false
 
 app:
+  phraseanet_project_name : "My Phraseanet"
   phraseanet_hostname: localhost
   phraseanet_scheme: http
   phraseanet_install: 1
@@ -91,6 +92,7 @@ app:
   phraseanet_admin_account_email: admin@alchemy.fr
   phraseanet_admin_account_password: phraseanet
   phraseanet_db_host: db
+  phraseanet_db_port: 3306
   phraseanet_db_user: root
   phraseanet_db_password: phraseanet
   phraseanet_cache_type: redis
@@ -105,9 +107,16 @@ app:
   phraseanet_rabbitmq_vhost: /
   phraseanet_rabbitmq_user: rabbit
   phraseanet_rabbitmq_pass: rabbit
+  phraseanet_available_language: fr,en,de,du
+  phraseanet_default_language : en
   phraseanet_install: 1
   phraseanet_setup: 1
   phraseanet_upgrade: 1
+  phraseanet_api_enabled: 1
+  phraseanet_api_ssl: true
+  phraseanet_api_auth_token_header_only: false
+  phraseanet_emiter_email:
+  phraseanet_mail_object_prefix: Phraseanet
   phraseanet_smtp_enabled:
   phraseanet_smtp_auth_enabled:
   phraseanet_smtp_secure_mode:
