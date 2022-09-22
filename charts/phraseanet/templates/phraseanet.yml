@@ -106,7 +106,7 @@ spec:
           value: {{ .Values.app.install_appbox | quote }}
         - name: INSTALL_DATABOX
           value: {{ .Values.app.install_databox | quote }}
-        - name: PHRASSEANET_HOSTNAME
+        - name: PHRASEANET_HOSTNAME
           value: {{ .Values.app.phraseanet_hostname | quote }}
         - name: PHRASEANET_SCHEME
           value: {{ .Values.app.phraseanet_scheme | quote }}
