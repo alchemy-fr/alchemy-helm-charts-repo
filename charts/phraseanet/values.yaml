@@ -72,6 +72,9 @@ http:
   max_input_vars: 12000
 
 php:
+  newrelic_enabled: false
+  newrelic_licence_key: 
+  newrelic_app_name:
   opcache_enabled: 1
   log_level: warning
   session_cache_limiter: off
