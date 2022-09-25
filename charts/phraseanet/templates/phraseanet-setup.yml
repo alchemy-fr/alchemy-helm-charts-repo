@@ -92,7 +92,7 @@ spec:
           value: {{ .Values.app.phraseanet_admin_account_password | quote }}
         - name: PHRASEANET_DB_HOST
           value: {{ .Values.app.phraseanet_db_host | quote }}
-         - name: PHRASEANET_DB_PORT
+        - name: PHRASEANET_DB_PORT
           value: {{ .Values.app.phraseanet_db_port | quote }}
         - name: PHRASEANET_DB_USER
           value: {{ .Values.app.phraseanet_db_user | quote }}
@@ -108,7 +108,7 @@ spec:
           value: {{ .Values.app.phraseanet_hostname | quote }}
         - name: PHRASEANET_SCHEME
           value: {{ .Values.app.phraseanet_scheme | quote }}
-         - name: PHRASEANET_AVAILABLE_LANGUAGE
+        - name: PHRASEANET_AVAILABLE_LANGUAGE
           value: {{ .Values.app.phraseanet_available_language | quote }}  
         - name: PHRASEANET_DEFAULT_LANGUAGE
           value: {{ .Values.app.phraseanet_default_language | quote }}  
@@ -142,7 +142,7 @@ spec:
           value: {{ .Values.app.phraseanet_api_auth_token_header_only | quote }}  
         - name: PHRASEANET_EMITER_EMAIL
           value: {{ .Values.app.phraseanet_emiter_email | quote }}
-         - name: PHRASEANET_MAIL_OBJECT_PREFIX
+        - name: PHRASEANET_MAIL_OBJECT_PREFIX
           value: {{ .Values.app.phraseanet_mail_object_prefix | quote }}
         - name: PHRASEANET_SMTP_ENABLED
           value: {{ .Values.app.phraseanet_smtp_enabled | quote }}
