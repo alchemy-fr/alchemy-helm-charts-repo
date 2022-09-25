@@ -111,7 +111,7 @@ app:
   phraseanet_rabbitmq_user: rabbit
   phraseanet_rabbitmq_pass: rabbit
   phraseanet_available_language: fr,en,de,du
-  phraseanet_default_language : en
+  phraseanet_default_language: en
   phraseanet_install: 1
   phraseanet_setup: 1
   phraseanet_upgrade: 1
