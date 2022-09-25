@@ -87,7 +87,7 @@ ingress:
   tls: false
 
 app:
-  phraseanet_project_name : "My Phraseanet"
+  phraseanet_project_name: "My Phraseanet"
   phraseanet_hostname: localhost
   phraseanet_scheme: http
   phraseanet_install: 1
