@@ -60,6 +60,8 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/cache"
 
         env:
+        - name: PHRASEANET_PROJECT_NAME
+          value: {{ .Values.phraseanet_project_name | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS
@@ -90,6 +92,8 @@ spec:
           value: {{ .Values.app.phraseanet_admin_account_password | quote }}
         - name: PHRASEANET_DB_HOST
           value: {{ .Values.app.phraseanet_db_host | quote }}
+         - name: PHRASEANET_DB_PORT
+          value: {{ .Values.app.phraseanet_db_port | quote }}
         - name: PHRASEANET_DB_USER
           value: {{ .Values.app.phraseanet_db_user | quote }}
         - name: PHRASEANET_DB_PASSWORD
@@ -104,6 +108,10 @@ spec:
           value: {{ .Values.app.phraseanet_hostname | quote }}
         - name: PHRASEANET_SCHEME
           value: {{ .Values.app.phraseanet_scheme | quote }}
+         - name: PHRASEANET_AVAILABLE_LANGUAGE
+          value: {{ .Values.app.phraseanet_available_language | quote }}  
+        - name: PHRASEANET_DEFAULT_LANGUAGE
+          value: {{ .Values.app.phraseanet_default_language | quote }}  
         - name: PHRASEANET_DOWNLOAD_DIR
           value: "/var/alchemy/Phraseanet/datas/download"
         - name: PHRASEANET_LAZARET_DIR
@@ -126,6 +134,16 @@ spec:
           value: {{ .Values.app.phraseanet_unocon_timeout | quote }}
         - name: PHRASEANET_EXIFTOOL_TIMEOUT
           value: {{ .Values.app.phraseanet_exiftool_timeout | quote }}
+        - name: PHRASEANET_API_ENABLED
+          value: {{ .Values.app.phraseanet_api_enabled | quote }}
+        - name: PHRASEANET_API_SSL
+          value: {{ .Values.app.phraseanet_api_ssl | quote }}
+        - name: PHRASEANET_API_AUTH_TOKEN_ONLY
+          value: {{ .Values.app.phraseanet_api_auth_token_header_only | quote }}  
+        - name: PHRASEANET_EMITER_EMAIL
+          value: {{ .Values.app.phraseanet_emiter_email | quote }}
+         - name: PHRASEANET_MAIL_OBJECT_PREFIX
+          value: {{ .Values.app.phraseanet_mail_object_prefix | quote }}
         - name: PHRASEANET_SMTP_ENABLED
           value: {{ .Values.app.phraseanet_smtp_enabled | quote }}
         - name: PHRASEANET_SMTP_AUTH_ENABLED
