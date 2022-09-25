@@ -61,7 +61,7 @@ spec:
 
         env:
         - name: PHRASEANET_PROJECT_NAME
-          value: {{ .Values.phraseanet_project_name | quote }}
+          value: {{ .Values.app.phraseanet_project_name | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS
