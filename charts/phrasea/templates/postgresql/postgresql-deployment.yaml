@@ -33,6 +33,9 @@ spec:
         volumeMounts:
         - name: data
           mountPath: "/var/lib/postgresql/data"
+        {{- if .persistence.subPath }}
+          subPath: {{ .persistence.subPath }}
+        {{- end }}
         envFrom:
         - secretRef:
             name: {{ include "secretName.postgresql" $ }}
