@@ -1,4 +1,4 @@
-{{- if .Values.worker.launch.monoworker }
+{{- if .Values.worker.launch.records }
 apiVersion: apps/v1
 kind: Deployment
 metadata:
