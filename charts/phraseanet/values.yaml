@@ -87,7 +87,8 @@ ingress:
   tls: false
 
 app:
-  phraseanet_project_name: "My Phraseanet"
+  env_set_phraseanet_project_name: 1
+  phraseanet_project_name: My Phraseanet
   phraseanet_hostname: localhost
   phraseanet_scheme: http
   phraseanet_install: 1
@@ -157,6 +158,25 @@ app:
         cpu: "2000m"
         memory: "4096Mi"
   worker:
+    phraseanet_explode_worker: 1
+    phraseanet_workers_launch_method:
+    phraseanet_worker_mainqueue: 3
+    phraseanet_worker_assetsingest: 1
+    phraseanet_worker_createrecord: 2
+    phraseanet_worker_deleterecord: 2
+    phraseanet_worker_editrecord: 2
+    phraseanet_worker_exportmail: 2
+    phraseanet_worker_exposeupload: 2
+    phraseanet_worker_ftp: 1
+    phraseanet_worker_populateindex: 1
+    phraseanet_worker_pullassets: 1
+    phraseanet_worker_recordsactions: 1
+    phraseanet_worker_subdefcreation: 1
+    phraseanet_worker_subtitle: 1
+    phraseanet_worker_validationreminder: 1
+    phraseanet_worker_webhook: 1
+    phraseanet_worker_writemetadatas: 1
+    phraseanet_worker_sharebasket: 1
     resources:
       requests:
         cpu: "50m"
