@@ -60,6 +60,8 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/cache"
 
         env:
+        - name: ENV_SET_PHRASEANET_PROJECT_NAME
+          value: {{ .Values.app.env_set_phraseanet_project_name | quote }}
         - name: PHRASEANET_PROJECT_NAME
           value: {{ .Values.app.phraseanet_project_name | quote }}
         - name: MAX_BODY_SIZE
