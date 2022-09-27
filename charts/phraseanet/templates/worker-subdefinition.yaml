@@ -1,4 +1,4 @@
-{{- if .Values.worker.subdefinition }
+{{- if .Values.worker.launch.monoworker }
 
 apiVersion: apps/v1
 kind: Deployment
