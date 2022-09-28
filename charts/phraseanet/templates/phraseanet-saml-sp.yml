@@ -1,0 +1,59 @@
+  {{ if eq .Values.saml.activate "true" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phraseanet-saml-sp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phraseanet
+      tier: saml-sp
+  template:
+    metadata:
+      labels:
+        app: phraseanet
+        tier: saml-sp
+    spec:
+      volumes:
+      - name: phraseanet-saml-idp-config-dir
+        persistentVolumeClaim:
+          claimName: "idp"
+      - name: phraseanet-saml-sp-config-dir
+        persistentVolumeClaim:
+          claimName: "sp"
+      - name: phraseanet-saml-sp-cert-dir
+        persistentVolumeClaim:
+          claimName: "cert"
+
+      containers:
+      - name: phraseanet-saml-sp
+        image: {{ .Values.image.registry }}/phraseanet-saml-sp:{{ .Values.image.tag.phraseanet }}
+        imagePullPolicy: Always
+        terminationMessagePolicy: FallbackToLogsOnError
+        resources:
+{{ toYaml .Values.app.web.resources | indent 12 }}
+        volumeMounts:
+        - name: phraseanet-saml-idp-config-dir
+          mountPath: "/var/www/simplesamlphp-1.10.0/metadata"
+        - name: phraseanet-saml-sp-config-dir
+          mountPath: "/var/www/simplesamlphp-1.10.0/config"
+        - name: phraseanet-saml-sp-cert-dir
+          mountPath: "/var/www/simplesamlphp-1.10.0/cert"
+
+        env:
+        - name: MAX_BODY_SIZE
+          value: {{ .Values.http.max_body_size | quote }}
+        - name: GATEWAY_PROXY_TIMEOUT
+          value: "1200"
+        - name: GATEWAY_FASTCGI_TIMEOUT
+          value: "1200"
+        - name: SESSION_SAVE_HANDLER
+          value: {{ .Values.php.session_save_handler | quote }}
+        - name: SESSION_SAVE_PATH
+          value: {{ .Values.php.session_save_path | quote }}
+        - name: SAML_PHRASEANET_HOST
+          value: {{ .Values.saml.saml-phraseanet-host | quote }}
+        - name: SAML_SP_AUTHSOURCES
+          value: {{ .Values.saml.saml-sp-authsource | quote }}
+{{ end }}
