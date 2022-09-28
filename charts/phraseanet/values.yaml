@@ -112,7 +112,7 @@ saml:
         subPath:
         size: 1Gi
     cert:
-      name: phraseanet-saml-sp
+      name: phraseanet-saml-cert
       persistence:
         enabled: true
         existingClaim:
