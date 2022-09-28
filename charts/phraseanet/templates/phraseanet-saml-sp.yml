@@ -1,4 +1,4 @@
-  {{ if eq .Values.saml.activate "true" }}
+{{ if eq .Values.saml.enabled "true" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,13 +18,13 @@ spec:
       volumes:
       - name: phraseanet-saml-idp-config-dir
         persistentVolumeClaim:
-          claimName: "idp"
+          claimName: {{ .Values.saml.pvc.idp.name }}
       - name: phraseanet-saml-sp-config-dir
         persistentVolumeClaim:
-          claimName: "sp"
+          claimName: {{ .Values.saml.pvc.sp.name }}
       - name: phraseanet-saml-sp-cert-dir
         persistentVolumeClaim:
-          claimName: "cert"
+          claimName: {{ .Values.saml.pvc.cert.name }}
 
       containers:
       - name: phraseanet-saml-sp
@@ -53,7 +53,7 @@ spec:
         - name: SESSION_SAVE_PATH
           value: {{ .Values.php.session_save_path | quote }}
         - name: SAML_PHRASEANET_HOST
-          value: {{ .Values.saml.saml-phraseanet-host | quote }}
+          value: {{ .Values.saml.saml_phraseanet_host | quote }}
         - name: SAML_SP_AUTHSOURCES
-          value: {{ .Values.saml.saml-sp-authsource | quote }}
+          value: {{ .Values.saml.saml_sp_authsource | quote }}
 {{ end }}

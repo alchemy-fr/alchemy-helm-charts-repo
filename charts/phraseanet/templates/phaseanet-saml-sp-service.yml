@@ -1,5 +1,4 @@
-
-{{ if eq .Values.saml.activate "true" }}
+{{ if eq .Values.saml.enabled "true" }}
 apiVersion: v1
 kind: Service
 metadata:

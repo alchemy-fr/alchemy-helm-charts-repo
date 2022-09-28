@@ -86,6 +86,42 @@ ingress:
   host: phraseanet
   tls: false
 
+saml:
+  enabled: true
+  saml_phraseanet_host:
+  saml_sp_authsource:
+  pvc:
+    idp:
+      name: phraseanet-saml-idp
+      persistence:
+        enabled: true
+        existingClaim:
+        storageClass:
+        annotations: {}
+        accessMode: ReadWriteOnce
+        subPath:
+        size: 1Gi
+    sp:
+      name: phraseanet-saml-sp
+      persistence:
+        enabled: true
+        existingClaim:
+        storageClass:
+        annotations: {}
+        accessMode: ReadWriteOnce
+        subPath:
+        size: 1Gi
+    cert:
+      name: phraseanet-saml-sp
+      persistence:
+        enabled: true
+        existingClaim:
+        storageClass:
+        annotations: {}
+        accessMode: ReadWriteOnce
+        subPath:
+        size: 1Gi
+
 app:
   env_set_phraseanet_project_name: 1
   phraseanet_project_name: My Phraseanet
