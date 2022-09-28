@@ -1,8 +1,9 @@
-{{- if .Values.worker.launch.records }
+{{- if .Values.worker.launch.subdefinition "true"}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: worker-records
+  name: phraseanet-subdefinition
 spec:
   replicas: 1
   selector:
@@ -65,14 +66,8 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_createrecord
-          value: {{ .Values.app.worker.phraseanet_worker_createrecord | quote }}
-        - name: PHRASEANET_WORKER_deleterecord
-          value: {{ .Values.app.worker.phraseanet_worker_deleterecord | quote }}
-        - name: PHRASEANET_WORKER_editrecord
-          value: {{ .Values.app.worker.phraseanet_worker_editrecord | quote }}
-        - name:  PHRASEANET_WORKER_populateindex
-          value: {{ .Values.app.worker.phraseanet_worker_populateindex | quote }}
+        - name:  PHRASEANET_WORKER_subdefCreation
+          value: {{ .Values.app.worker.phraseanet_worker_subdefcreation | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS
