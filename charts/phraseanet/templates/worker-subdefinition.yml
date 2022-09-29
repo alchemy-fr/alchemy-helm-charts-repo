@@ -1,4 +1,4 @@
-{{- if .Values.worker.launch.subdefinition "true"}
+{{- if .Values.worker.launch.subdefinition "true"}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
