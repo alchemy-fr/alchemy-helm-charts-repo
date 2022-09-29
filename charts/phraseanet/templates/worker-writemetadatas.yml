@@ -1,4 +1,4 @@
-{{- if eq .Values.app.worker.launch.writemetas "true" }}
+{{- if eq (.Values.app.worker.launch.writemetas | quote) "true" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
