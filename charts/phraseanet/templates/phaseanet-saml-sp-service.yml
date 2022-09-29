@@ -1,4 +1,4 @@
-{{ if eq .Values.saml.enabled "true" }}
+{{- if eq .Values.saml.enabled true }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,4 +10,4 @@ spec:
   selector:
     app: phraseanet
     tier: saml-sp
-{{ end }}
+{{- end }}

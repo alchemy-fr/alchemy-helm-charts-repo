@@ -1,4 +1,4 @@
-{{ if eq .Values.saml.enabled "true" }}
+{{- if eq .Values.saml.enabled true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -56,4 +56,4 @@ spec:
           value: {{ .Values.saml.saml_phraseanet_host | quote }}
         - name: SAML_SP_AUTHSOURCES
           value: {{ .Values.saml.saml_sp_authsource | quote }}
-{{ end }}
+{{- end }}
