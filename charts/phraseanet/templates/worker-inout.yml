@@ -122,4 +122,4 @@ spec:
         - name: phraseanet-tmp
           mountPath: "/var/alchemy/Phraseanet/tmp"
         command: ['chown', '-R', 'app:app', '/var/alchemy/Phraseanet/tmp']
-
+{{- end }}
