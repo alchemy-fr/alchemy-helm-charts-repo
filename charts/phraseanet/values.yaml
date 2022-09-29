@@ -177,6 +177,15 @@ app:
     phraseanet_worker_webhook: 1
     phraseanet_worker_writemetadatas: 1
     phraseanet_worker_sharebasket: 1
+    phraseanet_scheduler:
+    launch:
+      monoworker: true
+      records: false
+      subdefinition: false
+      writemetas: false
+      inout: false
+      noscalable: false
+      scheduler: false
     resources:
       requests:
         cpu: "50m"

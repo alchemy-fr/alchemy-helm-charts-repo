@@ -1,9 +1,8 @@
----
-{{- if .Values.worker.launch.monoworker "true"}
+{{- if .Values.worker.launch.writemetas "true"}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker-monoworker
+  name: phraseanet-worker-writemetas
 spec:
   replicas: 1
   selector:
@@ -66,40 +65,8 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_mainQueue
-          value: {{ .Values.app.worker.phraseanet_worker_mainqueue | quote }}
-        - name: PHRASEANET_WORKER_assetsInjest
-          value: {{ .Values.app.worker.phraseanet_worker_assetsingest | quote }}
-        - name: PHRASEANET_WORKER_createRecord
-          value: {{ .Values.app.worker.phraseanet_worker_createrecord | quote }}
-        - name: PHRASEANET_WORKER_deleteRecord
-          value: {{ .Values.app.worker.phraseanet_worker_deleterecord | quote }}
-        - name: PHRASEANET_WORKER_editRecord
-          value: {{ .Values.app.worker.phraseanet_worker_editrecord | quote }}
-        - name: PHRASEANET_WORKER_exportMail
-          value: {{ .Values.app.worker.phraseanet_worker_exportmail | quote }}
-        - name: PHRASEANET_WORKER_exposeUpload
-          value: {{ .Values.app.worker.phraseanet_worker_exposeupload | quote }}
-        - name: PHRASEANET_WORKER_ftp
-          value: {{ .Values.app.worker.phraseanet_worker_ftp | quote }}
-        - name:  PHRASEANET_WORKER_populateIndex
-          value: {{ .Values.app.worker.phraseanet_worker_populateindex | quote }}
-        - name: PHRASEANET_WORKER_pullAssets
-          value: {{ .Values.app.worker.phraseanet_worker_pullassets | quote }}
-        - name: PHRASEANET_WORKER_recordsActions
-          value: {{ .Values.app.worker.phraseanet_worker_recordsactions| quote }}
-        - name:  PHRASEANET_WORKER_subdefCreation
-          value: {{ .Values.app.worker.phraseanet_worker_subdefcreation | quote }}
-        - name: PHRASEANET_WORKER_subtitle
-          value: {{ .Values.app.worker.phraseanet_worker_subtitle | quote }}
-        - name: PHRASEANET_WORKER_validationReminder
-          value: {{ .Values.app.worker.phraseanet_worker_validationreminder | quote }}
-        - name: PHRASEANET_WORKER_webhook
-          value: {{ .Values.app.worker.phraseanet_worker_webhook | quote }}
         - name: PHRASEANET_WORKER_writeMetadatas
           value: {{ .Values.app.worker.phraseanet_worker_writemetadatas | quote }}
-        - name: PHRASEANET_WORKER_shareBasket
-          value: {{ .Values.app.worker.phraseanet_worker_sharebasket | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS
