@@ -67,7 +67,7 @@ spec:
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
         - name: PHRASEANET_WORKER_mainQueue
           value: {{ .Values.app.worker.phraseanet_worker_mainqueue | quote }}
-        - name: PHRASEANET_WORKER_assetsInjest
+        - name: PHRASEANET_WORKER_assetsIngest
           value: {{ .Values.app.worker.phraseanet_worker_assetsingest | quote }}
         - name: PHRASEANET_WORKER_createRecord
           value: {{ .Values.app.worker.phraseanet_worker_createrecord | quote }}
