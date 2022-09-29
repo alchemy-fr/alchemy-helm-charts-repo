@@ -1,4 +1,4 @@
-{{- if .Values.worker.launch.scheduler "true"}}
+{{- if .Values.app.worker.launch.scheduler "true"}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
