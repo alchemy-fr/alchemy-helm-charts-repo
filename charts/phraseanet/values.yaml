@@ -185,7 +185,7 @@ app:
       writemetas: false
       inout: false
       noscalable: false
-      schedulers: false
+      scheduler: false
     resources:
       requests:
         cpu: "50m"
