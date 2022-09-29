@@ -1,9 +1,8 @@
----
 {{- if .Values.worker.launch.inout "true"}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker
+  name: phraseanet-worker-inout
 spec:
   replicas: 1
   selector:

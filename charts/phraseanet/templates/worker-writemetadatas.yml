@@ -1,9 +1,8 @@
----
 {{- if .Values.worker.launch.writemetas "true"}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker
+  name: phraseanet-worker-writemetas
 spec:
   replicas: 1
   selector:
