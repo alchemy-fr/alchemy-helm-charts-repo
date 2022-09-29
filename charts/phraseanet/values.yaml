@@ -182,7 +182,7 @@ app:
       monoworker: true
       records: false
       subdefinition: false
-      writemetas: false
+      writemetadatas: false
       inout: false
       noscalable: false
       scheduler: false
