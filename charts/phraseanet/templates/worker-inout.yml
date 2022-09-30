@@ -65,7 +65,7 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_assetsInjest
+        - name: PHRASEANET_WORKER_assetsIngest
           value: {{ .Values.app.worker.phraseanet_worker_assetsingest | quote }}
         - name: PHRASEANET_WORKER_exportMail
           value: {{ .Values.app.worker.phraseanet_worker_exportmail | quote }}
@@ -93,6 +93,12 @@ spec:
           value: {{ .Values.php.session_save_path | quote }}
         - name: XDEBUG
           value: "0"
+        - name: NEWRELIC_ENABLED
+          value: {{ .Values.php.newrelic_enabled | quote }}
+        - name: NEWRELIC_LICENSE_KEY
+          value: {{ .Values.php.newrelic_licence_key | quote }}
+        - name: NEWRELIC_APP_NAME
+          value: {{ .Values.php.newrelic_app_name | quote }}
         - name: LC_MESSAGES
           value: "C.UTF-8"
         - name: LC_COLLATE
