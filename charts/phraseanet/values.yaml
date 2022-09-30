@@ -89,7 +89,7 @@ ingress:
 saml:
   enabled: true
   saml_phraseanet_host:
-  saml_sp_authsource:
+  saml_sp_authsources:
   pvc:
     idp:
       name: phraseanet-saml-idp
