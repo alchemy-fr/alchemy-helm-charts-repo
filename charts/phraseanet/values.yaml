@@ -181,7 +181,7 @@ app:
     launch:
       monoworker: true
       records: false
-      subdefinition: false
+      subdefcreation: false
       writemetadatas: false
       inout: false
       noscalable: false
