@@ -28,7 +28,7 @@ spec:
 
       containers:
       - name: phraseanet-saml-sp
-        image: {{ .Values.image.registry }}/phraseanet-saml-sp:{{ .Values.image.tag.phraseanet }}
+        image: {{ .Values.image.registry }}/phraseanet-saml-sp:{{ .Values.image.tag.phraseanet-saml-sp }}
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
