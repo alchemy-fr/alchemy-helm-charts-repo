@@ -3,6 +3,7 @@ image:
   registry: alchemyfr
   tag:
       phraseanet: 4.1.3
+      phraseanet-saml-sp: latest
       database: 4.1.3
       elasticsearch: 4.1.3
 
