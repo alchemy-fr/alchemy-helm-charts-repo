@@ -1,8 +1,8 @@
-{{- if eq .Values.app.worker.launch.subdefinition true }}
+{{- if eq .Values.app.worker.launch.subdefcreation true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker-subdefinition
+  name: phraseanet-worker-subdefcreation
 spec:
   replicas: 1
   selector:
