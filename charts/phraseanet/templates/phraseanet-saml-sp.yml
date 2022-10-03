@@ -55,5 +55,5 @@ spec:
         - name: SAML_PHRASEANET_HOST
           value: {{ .Values.saml.saml_phraseanet_host | quote }}
         - name: SAML_SP_AUTHSOURCES
-          value: {{ .Values.saml.saml_sp_authsource | quote }}
+          value: {{ .Values.saml.saml_sp_authsources | quote }}
 {{- end }}
