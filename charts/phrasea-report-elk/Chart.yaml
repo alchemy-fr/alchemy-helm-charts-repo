@@ -14,7 +14,7 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 0.1.0
+version: 0.1.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
@@ -22,13 +22,13 @@ appVersion: 1.16.0
 
 dependencies:
   - name: elasticsearch
-    version: "7.11.2"
+    version: "7.17.1"
     repository: "https://helm.elastic.co"
 
   - name: logstash
-    version: "7.11.2"
+    version: "7.17.1"
     repository: "https://helm.elastic.co"
 
   - name: kibana
-    version: "7.11.2"
+    version: "7.17.1"
     repository: "https://helm.elastic.co"
