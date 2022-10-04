@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.app.phraeanet_hostname }}-saml-config
+  name: {{ .Values.app.phraseanet_hostname }}-saml-config
 data:
   saml20-idp-remote.php: |
     {{ .Values.saml.idp_config | quote }}

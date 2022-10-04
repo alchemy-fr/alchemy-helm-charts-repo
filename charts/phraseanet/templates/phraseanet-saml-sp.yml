@@ -20,7 +20,7 @@ spec:
       {{- if eq .Values.saml.saml_configmap.enabled true }}
       - name: phraseanet-saml-idp-config-dir
         configMap:
-          name: {{ include "app.phraseanet_hostname" $ }}-saml-config
+          name: {{ .Values.app.phraseanet_hostname }}-saml-config
           items:
             - key: saml20-idp-remote.php
               path: saml20-idp-remote.php
@@ -35,7 +35,7 @@ spec:
       {{- if eq .Values.saml.saml_secret.enabled true }}
       - name: phraseanet-saml-sp-cert-dir
         secret:
-          secretName: {{ include "app.phraseanet_hostname" $ }}-saml-secret
+          secretName: {{ .Values.app.phraseanet_hostname }}-saml-secret
       {{ else }}
       - name: phraseanet-saml-sp-cert-dir
         persistentVolumeClaim:
