@@ -150,6 +150,16 @@ entries:
   phraseanet:
   - apiVersion: v2
     appVersion: 4.0.0
+    created: "2022-10-04T13:07:28.553560277Z"
+    description: Helm chart for Phraseanet
+    digest: 410500faa7e491b3aec3e79005b96f776cbdfe411982e3046659d3ae6079f620
+    name: phraseanet
+    type: application
+    urls:
+    - https://github.com/ChamMach/alchemy-helm-charts-repo/releases/download/phraseanet-0.7.9/phraseanet-0.7.9.tgz
+    version: 0.7.9
+  - apiVersion: v2
+    appVersion: 4.0.0
     created: "2022-10-04T13:00:23.554722716Z"
     description: Helm chart for Phraseanet
     digest: 5744b4a7ec3fda078b5c1bc302a2f139868d3886b5900c231ce1c70a1427f14d
