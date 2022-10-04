@@ -32,7 +32,7 @@ spec:
       - name: phraseanet-saml-sp-config-dir
         persistentVolumeClaim:
           claimName: {{ .Values.saml.pvc.sp.name }}
-      {{- if eq .Values.saml.saml_secret.enabled true }}
+      {{- if eq .Values.saml.saml_secrets.enabled true }}
       - name: phraseanet-saml-sp-cert-dir
         secret:
           secretName: {{ .Values.app.phraseanet_hostname }}-saml-secret
