@@ -109,6 +109,26 @@ entries:
   phrasea-report-elk:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-10-04T09:42:46.736033867Z"
+    dependencies:
+    - name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 7.17.1
+    - name: logstash
+      repository: https://helm.elastic.co
+      version: 7.17.1
+    - name: kibana
+      repository: https://helm.elastic.co
+      version: 7.17.1
+    description: A Helm chart for Kubernetes
+    digest: 4f1d8ce527cc2b6b8649ee7fe2dc52e10591dfd1796aefafa753ed18efbf0ddd
+    name: phrasea-report-elk
+    type: application
+    urls:
+    - https://github.com/ChamMach/alchemy-helm-charts-repo/releases/download/phrasea-report-elk-0.1.1/phrasea-report-elk-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-09-19T12:11:18.531533469Z"
     dependencies:
     - name: elasticsearch
