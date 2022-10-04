@@ -6,8 +6,8 @@ metadata:
   name: {{ .Values.app.phraseanet_hostname }}-saml-config
 data:
   saml20-idp-remote.php: |-
-    {{ .Values.saml.saml_configmap.idp_config | indent 4 }}
+{{ .Values.saml.saml_configmap.idp_config | indent 4 }}
   authsources.php: |-
-    {{ .Values.saml.saml_configmap.authsources_config | indent 4 }}
+{{ .Values.saml.saml_configmap.authsources_config | indent 4 }}
 {{- end }}
 {{- end }}
