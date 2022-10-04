@@ -3,7 +3,7 @@ image:
   registry: alchemyfr
   tag:
       phraseanet: 4.1.3
-      phraseanet-saml-sp: latest
+      phraseanet_saml_sp: latest
       database: 4.1.3
       elasticsearch: 4.1.3
 
@@ -91,6 +91,15 @@ saml:
   enabled: true
   saml_phraseanet_host:
   saml_sp_authsources:
+  saml_configmap:
+    enabled: false
+    idp_config:
+    authsources_config:
+  saml_secret:
+    enabled: false
+    all:               
+      #phrasea.pem: ''
+      #phrasea.crt: ''
   pvc:
     idp:
       name: phraseanet-saml-idp

@@ -1,0 +1,13 @@
+{{- if eq .Values.saml.enabled true }}
+{{- if eq .Values.saml.saml_secret.enabled true }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "app.phraseanet_hostname" $ }}-saml-config
+data:
+  saml20-idp-remote.php: |
+    {{ .Values.saml.idp_config | quote }}
+  authsources.php: |
+    {{ .Values.saml.authsources_config | quote }}
+{{- end }}
+{{- end }}
