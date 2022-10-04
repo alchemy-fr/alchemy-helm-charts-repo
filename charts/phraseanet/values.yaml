@@ -96,7 +96,7 @@ saml:
     enabled: false
     idp_config:
     authsources_config:
-  saml_secret:
+  saml_secrets:
     enabled: false
     all:               
       #phrasea.pem: ''
