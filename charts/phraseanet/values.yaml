@@ -89,6 +89,7 @@ ingress:
 
 saml:
   enabled: true
+  annotations: {}
   saml_phraseanet_host:
   saml_sp_authsources:
   saml_configmap:

@@ -12,3 +12,20 @@ Sets extra Phraseanet Ingress annotations
     {{- end }}
   {{- end }}
 {{- end -}}
+
+
+
+{{/*
+Sets extra SAML Deployment annotations
+*/}}
+{{- define "saml.annotations" -}}
+  {{- if .Values.saml.annotations }}
+      annotations:
+        {{- $tp := typeOf .Values.saml.annotations }}
+        {{- if eq $tp "string" }}
+          {{- tpl .Values.saml.annotations . | nindent 8 }}
+        {{- else }}
+          {{- toYaml .Values.saml.annotations | nindent 8 }}
+        {{- end }}
+  {{- end }}
+{{- end -}}

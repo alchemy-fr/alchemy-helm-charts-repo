@@ -14,6 +14,7 @@ spec:
       labels:
         app: phraseanet
         tier: saml-sp
+      {{- template "saml.annotations" . }}
     spec:
       volumes:
       {{- if eq .Values.saml.saml_configmap.enabled true }}
