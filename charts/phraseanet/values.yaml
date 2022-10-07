@@ -90,6 +90,7 @@ ingress:
 saml:
   enabled: true
   annotations: {}
+  phraseanet_k8s_namespace:
   saml_phraseanet_host:
   saml_sp_authsources:
   saml_configmap:
