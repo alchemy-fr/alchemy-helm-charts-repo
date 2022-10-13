@@ -37,6 +37,13 @@ spec:
         emptyDir:
       - name: phraseanet-cache
         emptyDir:
+      - name: phraseanet-ftp
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc.ftp.name }}
+       - name: phraseanet-backup
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc.backup.name }}
+
 
       {{ if eq .Values.image.imagepullsecrets "true" }}
       imagePullSecrets:
@@ -66,6 +73,10 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/www/plugins"
         - name: phraseanet-cache
           mountPath: "/var/alchemy/Phraseanet/cache"
+        - name: phraseanet-ftp
+          mountPath: "/var/alchemy/Phraseanet/ftp"
+        - name: phraseanet-backup
+          mountPath: "/var/alchemy/Phraseanet/backup"
 
         env:
         - name: NEWRELIC_ENABLED
