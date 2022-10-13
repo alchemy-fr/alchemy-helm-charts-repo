@@ -39,6 +39,8 @@ spec:
           value: {{ tpl .Values.mysql.password $ }}
         - name: MYSQL_MAX_ALLOWED_PACKET
           value: {{ .Values.mysql.max_allowed_packet }}
+        - name: MYSQL_MAX_CONNECTION
+          value: {{ .Values.mysql.max_connection | quote }}
         volumeMounts:
         - name: "database"
           mountPath: "/var/lib/mysql"

@@ -13,6 +13,7 @@ mysql:
   password: "{{ .Values.app.phraseanet_db_password }}"
   root_password: "{{ .Values.app.phraseanet_db_password }}"
   max_allowed_packet: 16M
+  max_connection: 100
   pvc_name: phraseanet-database
   resources:
     requests:
