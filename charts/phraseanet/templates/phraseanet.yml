@@ -40,7 +40,7 @@ spec:
       - name: phraseanet-ftp
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc.ftp.name }}
-       - name: phraseanet-backup
+      - name: phraseanet-backup
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc.backup.name }}
 
