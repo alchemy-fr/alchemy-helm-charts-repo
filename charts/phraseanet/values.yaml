@@ -302,6 +302,26 @@ app:
         accessMode: ReadWriteOnce
         subPath:
         size: 1Gi
+    ftp:
+      name: phraseanet-ftp
+      persistence:
+        enabled: true
+        existingClaim:
+        storageClass:
+        annotations: {}
+        accessMode: ReadWriteOnce
+        subPath:
+        size: 1Gi
+    backup:
+      name: phraseanet-backup
+      persistence:
+        enabled: true
+        existingClaim:
+        storageClass:
+        annotations: {}
+        accessMode: ReadWriteOnce
+        subPath:
+        size: 1Gi
   persistence:
     enabled: true
     existingClaim:
@@ -315,3 +335,5 @@ app:
       thumbnails: phraseanet-thumbnails
       custom: phraseanet-custom
       config: phraseanet-config
+      ftp: phraseanet-ftp
+      backup: phraseanet-backup

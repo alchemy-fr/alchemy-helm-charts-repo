@@ -34,6 +34,9 @@ spec:
         emptyDir:
       - name: phraseanet-cache
         emptyDir:
+      - name: phraseanet-ftp
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc.ftp.name }}          
       {{ if eq .Values.image.imagepullsecrets "true" }}
       imagePullSecrets:
       - name: {{ .Values.image.secretename }}
@@ -60,6 +63,8 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/www/custom"
         - name: phraseanet-cache
           mountPath: "/var/alchemy/Phraseanet/cache"
+        - name: phraseanet-ftp
+          mountPath: "/var/alchemy/Phraseanet/ftp"
         env:
         - name: PHRASEANET_SCHEDULER
           value: {{ .Values.app.worker.phraseanet_scheduler | quote }}
