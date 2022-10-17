@@ -75,7 +75,7 @@ http:
 
 php:
   newrelic_enabled: false
-  newrelic_licence_key: 
+  newrelic_licence_key:
   newrelic_app_name:
   opcache_enabled: 1
   log_level: warning
