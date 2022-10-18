@@ -1,8 +1,8 @@
-{{- if eq .Values.app.worker.launch.records true }}
+{{- if eq .Values.app.worker.launch.ps true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker-records
+  name: phraseanet-worker-inout
 spec:
   replicas: 1
   selector:
@@ -65,18 +65,12 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_mainQueue
-          value: {{ .Values.app.worker.phraseanet_worker_mainqueue | quote }}
-        - name: PHRASEANET_WORKER_createRecord
-          value: {{ .Values.app.worker.phraseanet_worker_createrecord | quote }}
-        - name: PHRASEANET_WORKER_deleteRecord
-          value: {{ .Values.app.worker.phraseanet_worker_deleterecord | quote }}
-        - name: PHRASEANET_WORKER_editRecord
-          value: {{ .Values.app.worker.phraseanet_worker_editrecord | quote }}
-        - name:  PHRASEANET_WORKER_populateIndex
-          value: {{ .Values.app.worker.phraseanet_worker_populateindex | quote }}
-        - name: PHRASEANET_WORKER_webhook
-          value: {{ .Values.app.worker.phraseanet_worker_webhook | quote }}
+        - name: PHRASEANET_WORKER_assetsIngest
+          value: {{ .Values.app.worker.phraseanet_worker_assetsingest | quote }}
+        - name: PHRASEANET_WORKER_exposeUpload
+          value: {{ .Values.app.worker.phraseanet_worker_exposeupload | quote }}
+        - name: PHRASEANET_WORKER_pullAssets
+          value: {{ .Values.app.worker.phraseanet_worker_pullassets | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS

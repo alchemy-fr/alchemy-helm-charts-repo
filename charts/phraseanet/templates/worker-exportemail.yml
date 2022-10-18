@@ -1,4 +1,4 @@
-{{- if eq .Values.app.worker.launch.inout true }}
+{{- if eq .Values.app.worker.launch.exportemail true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -65,18 +65,8 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_assetsIngest
-          value: {{ .Values.app.worker.phraseanet_worker_assetsingest | quote }}
         - name: PHRASEANET_WORKER_exportMail
           value: {{ .Values.app.worker.phraseanet_worker_exportmail | quote }}
-        - name: PHRASEANET_WORKER_exposeUpload
-          value: {{ .Values.app.worker.phraseanet_worker_exposeupload | quote }}
-        - name: PHRASEANET_WORKER_ftp
-          value: {{ .Values.app.worker.phraseanet_worker_ftp | quote }}
-        - name: PHRASEANET_WORKER_pullAssets
-          value: {{ .Values.app.worker.phraseanet_worker_pullassets | quote }}
-        - name: PHRASEANET_WORKER_webhook
-          value: {{ .Values.app.worker.phraseanet_worker_webhook | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS

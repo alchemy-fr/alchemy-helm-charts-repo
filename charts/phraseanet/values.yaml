@@ -232,7 +232,9 @@ app:
       records: false
       subdefcreation: false
       writemetadatas: false
-      inout: false
+      exportemail: false
+      exportftp: false
+      ps: false
       noscalable: false
       scheduler: false
     resources:
