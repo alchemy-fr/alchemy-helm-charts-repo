@@ -79,6 +79,8 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/backup"
 
         env:
+        - name: STACK_NAME
+          value: {{ .Values.app.stack_name | quote }}
         - name: NEWRELIC_ENABLED
           value: {{ .Values.php.newrelic_enabled | quote }}
         - name: NEWRELIC_LICENSE_KEY
@@ -113,6 +115,8 @@ spec:
           value: {{ .Values.app.phraseanet_admin_account_password | quote }}
         - name: PHRASEANET_DB_HOST
           value: {{ .Values.app.phraseanet_db_host | quote }}
+        - name: PHRASEANET_DB_PORT
+          value: {{ .Values.app.phraseanet_db_port | quote }}
         - name: PHRASEANET_DB_USER
           value: {{ .Values.app.phraseanet_db_user | quote }}
         - name: PHRASEANET_DB_PASSWORD
@@ -131,7 +135,7 @@ spec:
           value: "/var/alchemy/Phraseanet/datas/download"
         - name: PHRASEANET_LAZARET_DIR
           value: "/var/alchemy/Phraseanet/datas/lazaret"
-        - name: "PHRASEANET_WORKER_TMP"
+        - name: PHRASEANET_WORKER_TMP
           value: "/var/alchemy/Phraseanet/tmp/worker"
         - name: PHRASEANET_CAPTION_DIR
           value: "/var/alchemy/Phraseanet/tmp/caption"

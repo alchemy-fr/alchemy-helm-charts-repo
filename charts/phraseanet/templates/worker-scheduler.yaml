@@ -66,6 +66,8 @@ spec:
         - name: phraseanet-ftp
           mountPath: "/var/alchemy/Phraseanet/ftp"
         env:
+        - name: STACK_NAME
+          value: {{ .Values.app.stack_name | quote }}
         - name: PHRASEANET_SCHEDULER
           value: {{ .Values.app.worker.phraseanet_scheduler | quote }}
         - name: MAX_BODY_SIZE
