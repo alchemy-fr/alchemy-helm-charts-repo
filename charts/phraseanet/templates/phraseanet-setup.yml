@@ -72,6 +72,8 @@ spec:
 
 
         env:
+        - name: STACK_NAME
+          value: {{ .Values.app.stack_name | quote }}
         - name: ENV_SET_PHRASEANET_PROJECT_NAME
           value: {{ .Values.app.env_set_phraseanet_project_name | quote }}
         - name: PHRASEANET_PROJECT_NAME

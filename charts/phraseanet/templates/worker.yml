@@ -71,6 +71,8 @@ spec:
         - name: phraseanet-backup
           mountPath: "/var/alchemy/Phraseanet/backup"
         env:
+        - name: STACK_NAME
+          value: {{ .Values.app.stack_name | quote }}
         - name: PHRASEANET_EXPLODE_WORKER
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
