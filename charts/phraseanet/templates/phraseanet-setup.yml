@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: phraseanet-setup
 spec:
+  ttlSecondsAfterFinished: 420
   template:
     spec:
       {{ if eq .Values.image.imagepullsecrets "true" }}
