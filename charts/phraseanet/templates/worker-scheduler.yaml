@@ -8,12 +8,12 @@ spec:
   selector:
     matchLabels:
       app: phraseanet
-      tier: worker
+      tier: scheduler
   template:
     metadata:
       labels:
         app: phraseanet
-        tier: worker
+        tier: scheduler
     spec:
       volumes:
       - name: phraseanet-config

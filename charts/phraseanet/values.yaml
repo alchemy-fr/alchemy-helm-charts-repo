@@ -244,6 +244,22 @@ app:
       limits:
         cpu: "2000m"
         memory: "4096Mi"
+  hpa:
+    subdefcreation:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    records:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    exportemail:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
   pvc:
     data:
       name: phraseanet-datas
