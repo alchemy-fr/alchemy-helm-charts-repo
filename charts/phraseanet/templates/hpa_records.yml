@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.records.started true }}
+{{- if eq .Values.app.hpa.records.enabled true }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

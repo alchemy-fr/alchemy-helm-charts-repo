@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.exportemail.started true }}
+{{- if eq .Values.app.hpa.exportemail.enabled true }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
