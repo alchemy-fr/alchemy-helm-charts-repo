@@ -7,7 +7,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: worker-exportemail
+    name: phraseanet-worker-exportemail
   minReplicas: {{ .Values.app.hpa.exportemail.minReplicas }}
   maxReplicas: {{ .Values.app.hpa.exportemail.maxReplicas }}
   metrics:
