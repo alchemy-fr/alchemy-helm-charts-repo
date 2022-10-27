@@ -246,42 +246,42 @@ app:
         memory: "4096Mi"
   hpa:
     fpm:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     gateway:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     subdefcreation:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     records:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     exportemail:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     ps:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     writemetadatas:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
     exportftp:
-      started: false
+      enabled: false
       minReplicas: 1
       maxReplicas: 2
       averageUtilization: 60
