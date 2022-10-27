@@ -245,6 +245,16 @@ app:
         cpu: "2000m"
         memory: "4096Mi"
   hpa:
+    fpm:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    gateway:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
     subdefcreation:
       started: false
       minReplicas: 1
@@ -256,6 +266,21 @@ app:
       maxReplicas: 2
       averageUtilization: 60
     exportemail:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    ps:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    writemetadatas:
+      started: false
+      minReplicas: 1
+      maxReplicas: 2
+      averageUtilization: 60
+    exportftp:
       started: false
       minReplicas: 1
       maxReplicas: 2

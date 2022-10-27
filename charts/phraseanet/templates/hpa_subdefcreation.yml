@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.subdefcreation.started true }}
+{{- if eq .Values.app.hpa.subdefcreation.enabled true }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

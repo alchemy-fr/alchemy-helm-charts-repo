@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.exportemail.started true }}
+{{- if eq .Values.app.hpa.exportemail.enabled true }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -7,7 +7,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: phraseanet-worker-exportemail
+    name: phraseanet-worker-fpm
   minReplicas: {{ .Values.app.hpa.exportemail.minReplicas }}
   maxReplicas: {{ .Values.app.hpa.exportemail.maxReplicas }}
   metrics:
