@@ -76,12 +76,12 @@ gateway-tls
 {{- if or (eq $appName "databox") (or (eq $appName "uploader") (eq $appName "expose")) }}
 {{- $secretName := $ctx.api.config.s3Storage.externalSecretKey | default (printf "%s-s3-secret" $appName) }}
 {{- $mapping := $ctx.api.config.s3Storage.externalSecretMapping }}
-- name: S3_STORAGE_ACCESS_KEY
+- name: S3_ACCESS_KEY
   valueFrom:
     secretKeyRef:
       name: {{ $secretName }}
       key: {{ $mapping.accessKey }}
-- name: S3_STORAGE_SECRET_KEY
+- name: S3_SECRET_KEY
   valueFrom:
     secretKeyRef:
       name: {{ $secretName }}
@@ -137,10 +137,11 @@ gateway-tls
 {{- define "app.s3Storage.configMap" }}
 {{- $ctx := .ctx }}
 {{- $glob := .glob }}
-S3_STORAGE_ENDPOINT: {{ tpl $ctx.s3Storage.endpoint $glob | quote }}
-S3_STORAGE_REGION: {{ $ctx.s3Storage.region | default "eu-central-1" | quote }}
-S3_STORAGE_USE_PATH_STYLE_ENDPOINT: {{ ternary "true" "false" (or $ctx.s3Storage.usePathSyleEndpoint $glob.Values.minio.enabled) | quote }}
-S3_STORAGE_BUCKET_NAME: {{ $ctx.s3Storage.bucketName | quote }}
+S3_ENDPOINT: {{ tpl $ctx.s3Storage.endpoint $glob | quote }}
+S3_REGION: {{ $ctx.s3Storage.region | default "eu-central-1" | quote }}
+S3_USE_PATH_STYLE_ENDPOINT: {{ ternary "true" "false" (or $ctx.s3Storage.usePathSyleEndpoint $glob.Values.minio.enabled) | quote }}
+S3_BUCKET_NAME: {{ $ctx.s3Storage.bucketName | quote }}
+S3_PATH_PREFIX: {{ $ctx.s3Storage.pathPrefix | quote }}
 {{- end }}
 
 {{- define "app.cloudFront.configMap" }}
@@ -152,6 +153,12 @@ CLOUD_FRONT_REGION: {{ $ctx.cloudFront.region | default "eu-central-1" | quote }
 CLOUD_FRONT_PRIVATE_KEY: {{ $ctx.cloudFront.privateKey | quote }}
 CLOUD_FRONT_KEY_PAIR_ID: {{ $ctx.cloudFront.keyPairId | quote }}
 CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
+{{- end }}
+{{- end }}
+
+{{- define "app.client.configMap" }}
+{{- if .Values.auth.autoConnectIdP }}
+AUTO_CONNECT_IDP: {{ .Values.auth.autoConnectIdP | quote }}
 {{- end }}
 {{- end }}
 
