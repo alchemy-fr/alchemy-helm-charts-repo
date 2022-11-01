@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.ps.enabled true }}
+{{- if and .Values.app.hpa.ps.enabled .Values.app.worker.launch.ps }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

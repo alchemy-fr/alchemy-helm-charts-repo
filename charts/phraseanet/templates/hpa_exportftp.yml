@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.exportftp.enabled true }}
+{{- if and .Values.app.hpa.exportftp.enabled  .Values.app.worker.launch.exportftp }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
