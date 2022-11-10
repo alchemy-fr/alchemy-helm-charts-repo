@@ -165,6 +165,7 @@ expose:
     logoUrl: ""
     logoAlt: ""
     sidebarDefaultOpen: false
+    disableIndexPage: false
   rabbitmq:
     vhost: expose
   database:
@@ -268,6 +269,7 @@ report:
 
 dashboard:
   enabled: true
+  menuEnabled: true
   hostname:
   baseUrl:
   ingress:
