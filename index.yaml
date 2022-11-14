@@ -3,6 +3,21 @@ entries:
   phrasea:
   - apiVersion: v2
     appVersion: 1.17.0
+    created: "2022-11-14T15:32:42.980421589Z"
+    dependencies:
+    - condition: elasticsearch.enabled
+      name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 7.10.1
+    description: A Helm chart for Kubernetes
+    digest: 328c475bd6f51e09b3a6989af96eab1d51cfd8412c6b6eb6101a85df679b5faf
+    name: phrasea
+    type: application
+    urls:
+    - https://github.com/ChamMach/alchemy-helm-charts-repo/releases/download/phrasea-0.3.3/phrasea-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v2
+    appVersion: 1.17.0
     created: "2022-11-10T11:12:14.272392287Z"
     dependencies:
     - condition: elasticsearch.enabled
