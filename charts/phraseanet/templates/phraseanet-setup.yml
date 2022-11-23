@@ -6,9 +6,9 @@ spec:
   ttlSecondsAfterFinished: 420
   template:
     spec:
-      {{ if eq .Values.image.imagepullsecrets "true" }}
+      {{ if eq .Values.image.pullSecret.enabled true }}
       imagePullSecrets:
-      - name: {{ .Values.image.secretename }}
+      - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
       restartPolicy: OnFailure
       volumes:

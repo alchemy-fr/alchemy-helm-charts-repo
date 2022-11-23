@@ -37,9 +37,9 @@ spec:
       - name: phraseanet-ftp
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc.ftp.name }}          
-      {{ if eq .Values.image.imagepullsecrets "true" }}
+      {{ if eq .Values.image.pullSecret.enabled true }}
       imagePullSecrets:
-      - name: {{ .Values.image.secretename }}
+      - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
       containers:
       - name: phraseanet-worker

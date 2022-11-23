@@ -28,9 +28,9 @@ spec:
       - name: phraseanet-wwwplugins
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc.wwwplugins.name }}
-      {{ if eq .Values.image.imagepullsecrets "true" }}
+      {{ if eq .Values.image.pullSecret.enabled true }}
       imagePullSecrets:
-      - name: {{ .Values.image.secretename }}
+      - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
       containers:
       - name: gateway
