@@ -21,9 +21,9 @@ spec:
       - name: elastic-data
         persistentVolumeClaim:
           claimName: {{ .Values.elasticsearch.pvc_name }}
-      {{ if eq .Values.image.imagepullsecrets "true" }}
+      {{ if eq .Values.image.pullSecret.enabled true }}
       imagePullSecrets:
-      - name: {{ .Values.image.secretename }}
+      - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
       containers:
       - name: elasticsearch

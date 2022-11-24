@@ -40,9 +40,9 @@ spec:
       - name: phraseanet-backup
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc.backup.name }}
-      {{ if eq .Values.image.imagepullsecrets "true" }}
+      {{ if eq .Values.image.pullSecret.enabled true }}
       imagePullSecrets:
-      - name: {{ .Values.image.secretename }}
+      - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
       containers:
       - name: phraseanet-worker

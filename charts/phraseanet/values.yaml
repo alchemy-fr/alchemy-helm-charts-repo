@@ -6,6 +6,13 @@ image:
       phraseanet_saml_sp: latest
       database: 4.1.3
       elasticsearch: 4.1.3
+  pullSecret:
+    enabled: false
+    name: registry-secret
+    registry:
+    username:
+    password:
+    email:
 
 mysql:
   enabled: true
