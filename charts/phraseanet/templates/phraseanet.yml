@@ -45,7 +45,7 @@ spec:
           claimName: {{ .Values.app.pvc.backup.name }}
 
 
-      {{ if eq .Values.image.pullSecret.enabled true }}
+      {{ if .Values.image.pullSecret.enabled }}
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret.name }}
       {{ end }}

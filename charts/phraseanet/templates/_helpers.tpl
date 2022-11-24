@@ -35,7 +35,7 @@ Sets extra SAML Deployment annotations
 Creating Image Pull Secret
 */}}
 {{- define "imagePullSecret" }}
-{{- if .Values.image.pullSecret.enabled "true" }}
+{{- if .Values.image.pullSecret.enabled }}
 {{- with .Values.image.pullSecret }}
 {{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .password .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
 {{- end }}

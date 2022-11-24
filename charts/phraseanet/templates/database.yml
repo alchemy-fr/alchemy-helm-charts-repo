@@ -21,7 +21,7 @@ spec:
       - name: database
         persistentVolumeClaim:
           claimName: {{ .Values.mysql.pvc_name }}
-      {{ if eq .Values.image.pullSecret.enabled true }}
+      {{ if .Values.image.pullSecret.enabled }}
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret.name }}
       {{ end }}
