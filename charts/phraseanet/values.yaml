@@ -275,42 +275,42 @@ app:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 2000
     gateway:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     subdefcreation:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 1000
     records:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     exportemail:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     ps:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      averageUtilization: 250
     writemetadatas:
       enabled: false
       minReplicas: 1
-      maxReplicas: 2
-      averageUtilization: 60
+      maxReplicas: 1
+      averageUtilization: 2000
     exportftp:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60  
+      averageUtilization: 1000  
   pvc:
     data:
       name: phraseanet-datas
