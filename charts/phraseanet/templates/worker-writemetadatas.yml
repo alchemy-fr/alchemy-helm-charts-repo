@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: phraseanet-worker-writemetas
 spec:
-  replicas: 1
+  replicas: {{ .Values.app.replicas.writemetadatas.scale }}
   selector:
     matchLabels:
       app: phraseanet

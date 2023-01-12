@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: phraseanet-fpm
 spec:
-  replicas: 1
+  replicas: {{ .Values.app.replicas.fpm.scale }}
   selector:
     matchLabels:
       app: phraseanet
