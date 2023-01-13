@@ -305,7 +305,7 @@ app:
       enabled: false
       minReplicas: 1
       maxReplicas: 1
-      averageUtilization: 2000
+      cpuAverageUtilization: 2000
     exportftp:
       enabled: false
       minReplicas: 1
