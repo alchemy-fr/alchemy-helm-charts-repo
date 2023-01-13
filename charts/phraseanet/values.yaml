@@ -300,7 +300,7 @@ app:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 250
+      cpuAverageUtilization: 250
     writemetadatas:
       enabled: false
       minReplicas: 1
