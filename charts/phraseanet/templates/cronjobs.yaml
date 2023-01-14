@@ -1,5 +1,5 @@
 {{- range $cronjob := $.Values.app.cronjobs }}
-{{- if eq $cronjob.toInstall true  }}
+{{- if eq $cronjob.installed true  }}
 ---
 
 apiVersion: batch/v1

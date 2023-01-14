@@ -253,33 +253,47 @@ app:
         memory: "4096Mi"
   cronjobs:
   - id: job-1
-    toInstall: true
+    installed: false
     name: helloworld
     image: alchemyfr/phraseanet-worker:nightly
     suspend: false
     schedule: "* * * * *"
     command: "date; bin/console; env |grep USER; echo $USER ; sleep 20"
   - id: job-2
-    toInstall: true
+    installed: true
     name: validationreminder
     image: alchemyfr/phraseanet-worker:nightly
     suspend: false
     schedule: "0 0-23/2 * * *"
     command: "bin/console validation:remind"
   - id: job-3
-    toInstall: true
+    installed: true
     name: cleanusers
     image: alchemyfr/phraseanet-worker:nightly
     suspend: true
     schedule: "30 3 * * 2"
     command: "bin/maintenance clean:user --inactivity_period 365 --grace_duration 7 --max_relances 1 --remove_basket --dry-run"
   - id: job-4
-    toInstall: false
+    installed: false
     name: dbbackup
     image: alchemyfr/phraseanet-worker:nightly
     suspend: false
     schedule: "* 5 * * 0-6"
     command: "bin/console system:backup-db -g backup/" 
+  - id: job-5
+    installed: false
+    name: apilogclean
+    image: alchemyfr/phraseanet-worker:nightly
+    suspend: false
+    schedule: "* 5 * * 5"
+    command: "bin/maintenance clean:ApiLogs --help" 
+  - id: job-6
+    installed: false
+    name: workerjobclean
+    image: alchemyfr/phraseanet-worker:nightly
+    suspend: false
+    schedule: "* 4 * * 3"
+    command: "bin/maintenance clean:WorkerRunningJob --help" 
   replicas:
     fpm:
       scale: 1
