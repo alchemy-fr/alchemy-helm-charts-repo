@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: phraseanet-worker-exportemail
 spec:
-  replicas: 1
+  replicas: {{ .Values.app.replicas.exportemail.scale }}
   selector:
     matchLabels:
       app: phraseanet

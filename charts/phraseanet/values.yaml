@@ -251,47 +251,66 @@ app:
       limits:
         cpu: "2000m"
         memory: "4096Mi"
+  replicas:
+    fpm:
+      scale: 1
+    gateway:
+      scale: 1
+    subdefcreation:
+      scale: 1
+    records:
+      scale: 1
+    exportemail:
+      scale: 1
+    exportftp:
+      scale: 1
+    ps:
+      scale: 1
+    writemetadatas:
+      scale: 1
+    monoworker:
+      scale: 1
   hpa:
     fpm:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 2000
     gateway:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     subdefcreation:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 1000
     records:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     exportemail:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     ps:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 250
     writemetadatas:
       enabled: false
       minReplicas: 1
-      maxReplicas: 2
-      averageUtilization: 60
+      maxReplicas: 1
+      cpuAverageUtilization: 2000
     exportftp:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      averageUtilization: 60
+      cpuAverageUtilization: 1000  
   pvc:
     data:
       name: phraseanet-datas

@@ -16,5 +16,5 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{ .Values.app.hpa.gateway.averageUtilization }}
+        averageUtilization: {{ .Values.app.hpa.gateway.cpuAverageUtilization }}
 {{- end }}
