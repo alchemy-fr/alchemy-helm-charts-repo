@@ -1,5 +1,6 @@
 {{- range $cronjob := $.Values.app.cronjobs }}
 {{- if eq $cronjob.installed true  }}
+
 ---
 
 apiVersion: batch/v1
@@ -41,7 +42,7 @@ spec:
           terminationGracePeriodSeconds: 60
           containers:
           - name: {{ $cronjob.name }}
-            image: {{ $cronjob.image }}
+            image: {{ $.Values.image.registry }}/phraseanet-worker:{{ $.Values.image.tag.phraseanet }}
             securityContext:
               runAsUser: 1000
             command:
@@ -99,5 +100,5 @@ spec:
               - name: LC_NAME
                 value: "C.UTF-8"
 
-  {{- end }}
+{{- end }}
 {{- end }}          
