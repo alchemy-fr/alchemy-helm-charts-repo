@@ -67,12 +67,8 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name: PHRASEANET_WORKER_recordsActions
-          value: {{ .Values.app.worker.phraseanet_worker_recordsactions| quote }}
         - name: PHRASEANET_WORKER_subtitle
           value: {{ .Values.app.worker.phraseanet_worker_subtitle | quote }}
-        - name: PHRASEANET_WORKER_validationReminder
-          value: {{ .Values.app.worker.phraseanet_worker_validationreminder | quote }}
         - name: PHRASEANET_WORKER_shareBasket
           value: {{ .Values.app.worker.phraseanet_worker_sharebasket | quote }}
         - name: MAX_BODY_SIZE
