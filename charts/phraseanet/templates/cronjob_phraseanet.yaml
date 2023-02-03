@@ -14,7 +14,7 @@ metadata:
 spec:
   schedule: {{ $cronjob.schedule | quote }}
   suspend: {{ $cronjob.suspend }}
-  successfulJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
