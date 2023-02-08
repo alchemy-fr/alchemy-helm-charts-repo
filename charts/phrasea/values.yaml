@@ -108,6 +108,11 @@ databox:
     name: databox
   upload:
     uploaderTargetSlug: databox-uploader
+  zippy:
+    enabled: true
+    baseUrl:
+    clientId:
+    clientSecret:
 
 expose:
   enabled: true
@@ -180,7 +185,7 @@ expose:
   database:
     name: expose
   zippy:
-    enabled: false
+    enabled: true
     baseUrl:
     clientId:
     clientSecret:
@@ -402,3 +407,6 @@ elasticsearch:
     resources:
       requests:
         storage: 5Gi
+
+zippy:
+  enabled: true
