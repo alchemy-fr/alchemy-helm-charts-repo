@@ -11,10 +11,10 @@ data:
   ELASTICSEARCH_INDEX_PREFIX: {{ $.Values.elasticsearch.indexPrefix | quote }}
   PHRASEANET_BASE_URL: {{ .phraseanet.baseUrl | default "" | quote }}
   PHRASEANET_APP_OAUTH_TOKEN: {{ .phraseanet.oauthToken | default "" | quote }}
-  {{- if .zippy.enabled }}
-  ZIPPY_BASE_URL: {{ required "Missing databox.zippy.baseUrl" .zippy.baseUrl | quote }}
-  ZIPPY_CLIENT_ID: {{ required "Missing databox.zippy.clientId" .zippy.clientId | quote }}
-  ZIPPY_CLIENT_SECRET: {{ required "Missing databox.zippy.clientSecret" .zippy.clientSecret | quote }}
+  {{- if $.Values.databox.zippy.enabled }}
+  ZIPPY_BASE_URL: {{ required "Missing databox.zippy.baseUrl" $.Values.databox.zippy.baseUrl | quote }}
+  ZIPPY_CLIENT_ID: {{ required "Missing databox.zippy.clientId" $.Values.databox.zippy.clientId | quote }}
+  ZIPPY_CLIENT_SECRET: {{ required "Missing databox.zippy.clientSecret" $.Values.databox.zippy.clientSecret | quote }}
   {{- end }}
 {{- include "app.s3Storage.configMap" $tplArgs | indent 2 }}
 {{- include "app.cloudFront.configMap" $tplArgs | indent 2 }}
