@@ -251,6 +251,37 @@ app:
       limits:
         cpu: "2000m"
         memory: "4096Mi"
+  cronjobs:
+  - id: job-1
+    installed: true
+    name: validationreminder
+    suspend: false
+    schedule: "0 0-23/2 * * *"
+    command: "bin/console validation:remind"
+  - id: job-2
+    installed: false
+    name: cleanusers
+    suspend: true
+    schedule: "30 3 * * 2"
+    command: "bin/maintenance clean:user --inactivity_period 365 --grace_duration 7 --max_relances 2 --remove_basket --dry-run"
+  - id: job-3
+    installed: false
+    name: apilogclean
+    suspend: false
+    schedule: "* 5 * * 5"
+    command: "bin/maintenance clean:ApiLogs --help" 
+  - id: job-4
+    installed: false
+    name: workerjobclean
+    suspend: false
+    schedule: "* 4 * * 3"
+    command: "bin/maintenance clean:WorkerRunningJob --help" 
+  - id: job-5
+    installed: false
+    name: dbbackup
+    suspend: false
+    schedule: "* 5 * * 0-6"
+    command: "bin/console system:backup-db -g backup/" 
   replicas:
     fpm:
       scale: 1
