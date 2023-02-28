@@ -15,10 +15,25 @@ spec:
         app: phraseanet
         tier: rabbitmq
     spec:
+      volumes:
+      - name: data
+      {{- if .Values.rabbitmq.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.rabbitmq.persistence.existingClaim | default (printf "phraseanet-rabbitmq") }}
+      {{- else }}
+        emptyDir: {}
+      {{- end }}
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+            - "rabbitmq"
       containers:
       - name: rabbitmq
         image: rabbitmq:3-management
         terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - name: data
+          mountPath: "/var/lib/rabbitmq"
         env:
         - name: RABBITMQ_DEFAULT_USER
           value: {{ tpl .Values.rabbitmq.default_user $ | quote }}
@@ -30,4 +45,6 @@ spec:
           value: {{ tpl .Values.rabbitmq.default_vhost $ | quote }}
         - name: RABBITMQ_HEARTBEAT
           value: {{ .Values.rabbitmq.heartbeat | quote }}
+        - name: RABBITMQ_NODENAME
+          value: {{ tpl .Values.rabbitmq.node_name $ | quote }}
 {{- end }}

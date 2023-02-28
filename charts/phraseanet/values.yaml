@@ -63,7 +63,15 @@ rabbitmq:
   default_user: "{{ .Values.app.phraseanet_rabbitmq_user }}"
   default_pass: "{{ .Values.app.phraseanet_rabbitmq_pass }}"
   default_vhost: "{{ .Values.app.phraseanet_rabbitmq_vhost }}"
+  node_name: rabbit@rabbitmq
   heartbeat: 60
+  persistence:
+    enabled: true
+    existingClaim:
+    storageClass:
+    annotations: {}
+    accessMode: ReadWriteOnce
+    size: 1Gi
   resources:
     requests:
       cpu: "50m"
@@ -107,7 +115,7 @@ saml:
     authsources_config:
   saml_secrets:
     enabled: false
-    all:               
+    all:
       #phrasea.pem: ''
       #phrasea.crt: ''
   pvc:
@@ -269,19 +277,19 @@ app:
     name: apilogclean
     suspend: false
     schedule: "* 5 * * 5"
-    command: "bin/maintenance clean:ApiLogs --help" 
+    command: "bin/maintenance clean:ApiLogs --help"
   - id: job-4
     installed: false
     name: workerjobclean
     suspend: false
     schedule: "* 4 * * 3"
-    command: "bin/maintenance clean:WorkerRunningJob --help" 
+    command: "bin/maintenance clean:WorkerRunningJob --help"
   - id: job-5
     installed: false
     name: dbbackup
     suspend: false
     schedule: "* 5 * * 0-6"
-    command: "bin/console system:backup-db -g backup/" 
+    command: "bin/console system:backup-db -g backup/"
   replicas:
     fpm:
       scale: 1
@@ -341,7 +349,7 @@ app:
       enabled: false
       minReplicas: 1
       maxReplicas: 2
-      cpuAverageUtilization: 1000  
+      cpuAverageUtilization: 1000
   pvc:
     data:
       name: phraseanet-datas
