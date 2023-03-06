@@ -65,6 +65,8 @@ rabbitmq:
   default_vhost: "{{ .Values.app.phraseanet_rabbitmq_vhost }}"
   node_name: rabbit@rabbitmq
   heartbeat: 60
+  runAsUser:
+  runAsGroup:
   persistence:
     enabled: true
     existingClaim:
