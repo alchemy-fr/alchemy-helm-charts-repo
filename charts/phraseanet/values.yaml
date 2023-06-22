@@ -101,6 +101,7 @@ php:
   session_cache_limiter: off
   session_save_handler: redis
   session_save_path: "tcp://redis-session:6379"
+  cookie_secure: false
 
 ingress:
   enabled: false
