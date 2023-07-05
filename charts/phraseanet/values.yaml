@@ -162,6 +162,8 @@ app:
   phraseanet_scheme: http
   phraseanet_install: 1
   phraseanet_setup: 1
+  phraseanet_upgrade: 1
+  phraseanet_admin_account_id:
   phraseanet_admin_account_email: admin@alchemy.fr
   phraseanet_admin_account_password: phraseanet
   phraseanet_db_host: db
@@ -182,9 +184,6 @@ app:
   phraseanet_rabbitmq_pass: rabbit
   phraseanet_available_language: fr,en,de,du
   phraseanet_default_language: en
-  phraseanet_install: 1
-  phraseanet_setup: 1
-  phraseanet_upgrade: 1
   phraseanet_api_enabled: 1
   phraseanet_api_ssl: true
   phraseanet_api_auth_token_header_only: false
