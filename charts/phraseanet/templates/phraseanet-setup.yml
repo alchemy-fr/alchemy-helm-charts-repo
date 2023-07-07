@@ -103,6 +103,8 @@ spec:
           value: {{ .Values.app.phraseanet_setup | quote }}
         - name: PHRASEANET_UPGRADE
           value: {{ .Values.app.phraseanet_upgrade | quote }}
+        - name: PHRASEANET_ADMIN_ACCOUNT_ID
+          value: {{ .Values.app.phraseanet_admin_account_id | quote }}
         - name: PHRASEANET_ADMIN_ACCOUNT_EMAIL
           value: {{ .Values.app.phraseanet_admin_account_email | quote }}
         - name: PHRASEANET_ADMIN_ACCOUNT_PASSWORD
