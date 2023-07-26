@@ -1,4 +1,4 @@
-{{- if and .Values.app.hpa.writemetadatas.enabled .Values.app.worker.launch.writemetadatas }}
+{{- if and .Values.running .Values.app.hpa.writemetadatas.enabled .Values.app.worker.launch.writemetadatas }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

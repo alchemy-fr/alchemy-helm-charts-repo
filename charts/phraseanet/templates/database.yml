@@ -1,4 +1,4 @@
-{{- if .Values.mysql.enabled }}
+{{- if and .Values.running .Values.mysql.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

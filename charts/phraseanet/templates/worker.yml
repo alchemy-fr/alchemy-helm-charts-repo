@@ -1,4 +1,4 @@
-{{- if eq .Values.app.worker.launch.monoworker true }}
+{{- if and .Values.running .Values.app.worker.launch.monoworker true }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -1,3 +1,4 @@
+{{- if .Values.running }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -229,3 +230,4 @@ spec:
           value: "C.UTF-8"
         - name: LC_NAME
           value: "C.UTF-8"
+{{- end }}

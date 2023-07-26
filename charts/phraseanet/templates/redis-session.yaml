@@ -1,4 +1,4 @@
-
+{{- if .Values.running  }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,3 +19,4 @@ spec:
       - name: redis-session
         image: redis:5.0.5
         terminationMessagePolicy: FallbackToLogsOnError
+{{- end }}

@@ -14,6 +14,8 @@ image:
     password:
     email:
 
+running: true
+
 mysql:
   enabled: true
   user: "{{ .Values.app.phraseanet_db_user }}"
@@ -92,6 +94,7 @@ http:
   gateway_allowed_ips:
   gateway_denied_ips:
   gateway_users:
+  gateway_https: "on"
 php:
   newrelic_enabled: false
   newrelic_licence_key:
