@@ -1,4 +1,6 @@
 
+running: true
+
 image:
   registry: alchemyfr
   tag:
@@ -14,7 +16,6 @@ image:
     password:
     email:
 
-running: true
 
 mysql:
   enabled: true
