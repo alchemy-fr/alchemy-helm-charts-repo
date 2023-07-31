@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.fpm.enabled true }}
+{{- if and .Values.running .Values.app.hpa.fpm.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:

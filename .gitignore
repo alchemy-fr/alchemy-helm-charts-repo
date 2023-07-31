@@ -1,2 +1,2 @@
-my_values.yaml
-myvalues.yaml
+*values*.yaml 
+! values.yaml

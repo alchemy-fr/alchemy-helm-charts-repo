@@ -1,4 +1,4 @@
-{{- if eq .Values.app.worker.launch.ps true }}
+{{- if and .Values.running .Values.app.worker.launch.ps }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

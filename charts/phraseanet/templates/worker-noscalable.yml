@@ -1,4 +1,4 @@
-{{- if eq .Values.app.worker.launch.noscalable true }}
+{{- if and .Values.running .Values.app.worker.launch.noscalable }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

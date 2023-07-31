@@ -1,5 +1,6 @@
+{{- if  .Values.running }}
 {{- range $cronjob := $.Values.app.cronjobs }}
-{{- if eq $cronjob.installed true  }}
+{{- if eq $cronjob.installed true }}
 
 ---
 
@@ -101,4 +102,5 @@ spec:
                 value: "C.UTF-8"
 
 {{- end }}
-{{- end }}          
+{{- end }}
+{{- end }}       

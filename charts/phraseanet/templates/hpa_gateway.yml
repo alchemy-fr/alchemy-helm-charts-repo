@@ -1,4 +1,4 @@
-{{- if eq .Values.app.hpa.gateway.enabled true }}
+{{- if and .Values.running .Values.app.hpa.gateway.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
