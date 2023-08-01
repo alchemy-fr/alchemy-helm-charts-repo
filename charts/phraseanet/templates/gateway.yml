@@ -61,7 +61,7 @@ spec:
           value: {{ .Values.http.gateway_https | quote }}
         - name: PHRASEANET_K8S_NAMESPACE
           value: {{ .Values.saml.phraseanet_k8s_namespace }}          
-        - name: "PHRASEANET_TRUSTED_PROXIES"
+        - name: PHRASEANET_TRUSTED_PROXIES
           value: {{ .Values.app.phraseanet_trusted_proxies }}
         - name: "GATEWAY_ALLOWED_IPS"
           value: {{ .Values.http.gateway_allowed_ips }}
