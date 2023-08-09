@@ -97,6 +97,7 @@ http:
   gateway_users:
   gateway_https: "on"
 php:
+  php_cli_memory_limit: 2048
   fpm_memory_limit: 2048
   fpm_pm_type: "dynamic"
   fpm_maxchildren: 9
