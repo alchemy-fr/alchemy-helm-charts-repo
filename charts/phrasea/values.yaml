@@ -1,3 +1,6 @@
+stack:
+  running: true
+  
 repository:
   baseurl: alchemyfr
   tag: latest
