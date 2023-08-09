@@ -106,6 +106,20 @@ spec:
           value: {{ .Values.php.opcache_enabled | quote }}
         - name: PHP_LOG_LEVEL
           value: {{ .Values.php.log_level | quote }}
+        - name: FPM_MEMORY_LIMIT
+          value: {{ .Values.php.fpm_memory_limit | quote }}
+        - name: FPM_PM_TYPE
+          value: {{ .Values.php.fpm_pm_type | quote }}
+        - name: FPM_MAXCHILDREN
+          value: {{ .Values.php.fpm_maxchildren | quote }}
+        - name: FPM_STARTSERVERS
+          value: {{ .Values.php.fpm_startservers | quote }}
+        - name: FPM_MINSPARESERVER
+          value: {{ .Values.php.fpm_minspareserver | quote }}
+        - name: FPM_MAXSPARESERVER
+          value: {{ .Values.php.fpm_maxspareserver | quote }}
+        - name: FPM_MAX_REQUESTS
+          value: {{ .Values.php.fpm_max_requests | quote }}
         - name: COOKIE_SECURE
           value: {{ .Values.php.cookie_secure | quote }}
         - name: PHRASEANET_INSTALL
