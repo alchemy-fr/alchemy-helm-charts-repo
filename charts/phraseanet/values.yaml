@@ -97,6 +97,14 @@ http:
   gateway_users:
   gateway_https: "on"
 php:
+  php_cli_memory_limit: "2048M"
+  fpm_memory_limit: "2048M"
+  fpm_pm_type: "dynamic"
+  fpm_maxchildren: 9
+  fpm_startservers: 3
+  fpm_minspareserver: 2 
+  fpm_maxspareserver: 4
+  fpm_max_requests: 1000
   newrelic_enabled: false
   newrelic_licence_key:
   newrelic_app_name:
