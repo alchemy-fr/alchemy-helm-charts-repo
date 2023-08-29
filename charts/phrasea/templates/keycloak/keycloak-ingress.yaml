@@ -1,27 +1,19 @@
-{{- range .Values._internal.services }}
-{{- $appName := . }}
-{{- if (index $.Values $appName).enabled }}
-{{- with (index $.Values $appName).api  }}
-{{- $apiNode := . }}
-{{- if .ingress }}
-{{- if .ingress.enabled }}
+{{- if .Values.keycloak.enabled }}
+{{- if .Values.keycloak.ingress.enabled }}
+{{- with .Values.keycloak }}
+{{- $ingressNode := . }}
 apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
-  name: {{ $appName }}-api-ingress
+  name: keycloak-ingress
   annotations:
 {{- if .ingress.annotations }}
 {{ toYaml .ingress.annotations | indent 4 }}
 {{- else }}
-{{- if .ingress.maxBodySize }}
-    nginx.ingress.kubernetes.io/proxy-body-size: {{ .ingress.maxBodySize | quote }}
-{{- end }}
-{{- with (index $.Values._internal $appName) }}
-{{- if .api }}
-{{- if .api.ingress }}
-{{- if .api.ingress.annotations }}
-{{ toYaml .api.ingress.annotations | indent 4 }}
-{{- end }}
+{{- with $.Values._internal.keycloak }}
+{{- if .ingress }}
+{{- if .ingress.annotations }}
+{{ toYaml .ingress.annotations | indent 4 }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -36,12 +28,12 @@ spec:
   - host: {{ .hostname }}
     http:
       paths:
-      {{- include "ingress.rule_path" (dict "_" $ "name" (printf "%s-api-nginx" $appName) "port" 80) | indent 6 }}
+      {{- include "ingress.rule_path" (dict "_" $ "name" "keycloak" "port" 80) | indent 6 }}
 {{- if .ingress.tls }}
 {{- $tlsNode := .ingress.tls -}}
 {{- range $value := $tlsNode }}
   {{- if not (hasKey $value "hosts") }}
-    {{- $hosts := list $apiNode.hostname }}
+    {{- $hosts := list $ingressNode.hostname }}
     {{- $_ := set $value "hosts" $hosts }}
   {{- end -}}
 {{- end }}
@@ -52,9 +44,6 @@ spec:
   - hosts:
     - {{ .hostname }}
     secretName: {{ include "secretRef.ingress.tls.wildcard" $ }}
-{{- end }}
----
-{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}

@@ -2,6 +2,9 @@ repository:
   baseurl: alchemyfr
   tag: latest
 
+security:
+  verifySsl: true
+
 image:
   pullSecret:
     enabled: false
@@ -11,34 +14,23 @@ image:
     password:
     email:
 
-auth:
+keycloak:
   enabled: true
   autoConnectIdP:
   defaultUser:
     externalSecretName:
     username: admin@phrasea.local
     password: __CHANGE_ME_obIaHz6cVTkQKHqLBj
-  api:
-    hostname:
-    baseUrl:
-    config:
-      registrationValidateEmail: true
-    ingress:
-      enabled: true
-      annotations: {}
-      extraLabels: {}
-      tls: []
-  adminOAuthClient:
-    externalSecretName:
-    id: auth-admin
-    randomId: 9mIGK
-    secret: '__CHANGE_ME_0sfyMAp@P@CSnZC71EuDQ2'
-    grantTypes:
-    - authorization_code
-  rabbitmq:
-    vhost: auth
   database:
-    name: auth
+    create: true
+    name: keycloak
+  hostname:
+  baseUrl:
+  ingress:
+    enabled: true
+    annotations: {}
+    extraLabels: {}
+    tls: []
 
 databox:
   enabled: true
@@ -75,10 +67,12 @@ databox:
       phraseanet:
         baseUrl:
         oauthToken:
+      secrets:
+        publicKey:
+        secretKey:
   adminOAuthClient:
     externalSecretName:
     id: databox-admin
-    randomId: fiMPj
     secret: '__CHANGE_ME_9jZuZqkwf9qW881jTqG'
     grantTypes:
     - authorization_code
@@ -97,7 +91,6 @@ databox:
     oauthClient:
       externalSecretName:
       id: databox-app
-      randomId: difnr
       secret: '__CHANGE_ME_kga7LfWB8vTowf$9V9'
       redirectUri: "{{ .Values.databox.client.baseUrl }}"
       grantTypes:
@@ -110,9 +103,9 @@ databox:
     uploaderTargetSlug: databox-uploader
   zippy:
     enabled: true
-    baseUrl:
-    clientId:
-    clientSecret:
+    baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
+    clientId: databox
+    clientSecret: __CHANGE_ME_MxWoVddUWq
 
 expose:
   enabled: true
@@ -161,7 +154,6 @@ expose:
   adminOAuthClient:
     externalSecretName:
     id: expose-admin
-    randomId: wIB0s
     secret: '__CHANGE_ME_71EuDQ2H$ei3sHwIB0sfy'
     grantTypes:
     - authorization_code
@@ -180,7 +172,6 @@ expose:
     oauthClient:
       externalSecretName:
       id: expose-app
-      randomId: difnr
       secret: '__CHANGE_ME_owf$9V9kga7LfWB8vT'
       redirectUri: "{{ .Values.expose.client.baseUrl }}"
       grantTypes:
@@ -197,9 +188,9 @@ expose:
     name: expose
   zippy:
     enabled: true
-    baseUrl:
-    clientId:
-    clientSecret:
+    baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
+    clientId: expose
+    clientSecret: __CHANGE_ME_zEp1JbcjuQ
 
 notify:
   enabled: true
@@ -214,7 +205,6 @@ notify:
   adminOAuthClient:
     externalSecretName:
     id: notify-admin
-    randomId: dUdGa
     secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
     grantTypes:
     - authorization_code
@@ -255,7 +245,6 @@ uploader:
   adminOAuthClient:
     externalSecretName:
     id: uploader-admin
-    randomId: oqdsq
     secret: '__CHANGE_ME_p@P@CSnZi3sHwIB0sfy'
     grantTypes:
     - authorization_code
@@ -273,7 +262,6 @@ uploader:
     oauthClient:
       externalSecretName:
       id: uploader-app
-      randomId: oqdsq
       secret: '__CHANGE_ME_DpydN$mo7VZoOVw4inxqn'
       redirectUri: "{{ .Values.uploader.client.baseUrl }}"
       grantTypes:
@@ -376,10 +364,13 @@ globalConfig:
 
 _internal:
   services:
-  - auth
   - databox
   - expose
   - notify
+  - uploader
+  clients:
+  - databox
+  - expose
   - uploader
   volumes:
 #    uploader:
@@ -387,7 +378,6 @@ _internal:
 #        name: uploader-data
 #        mountPath: /var/data/upload
 #        uid: 1000
-  auth:
   expose:
     api:
       ingress:
@@ -421,3 +411,10 @@ elasticsearch:
 
 zippy:
   enabled: true
+  ingress:
+    baseUrl: ""
+    hostname: ""
+
+newrelic:
+  enabled: false
+  licenceKey: ~

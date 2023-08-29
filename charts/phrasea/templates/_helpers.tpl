@@ -168,8 +168,8 @@ CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
 {{- end }}
 
 {{- define "app.client.configMap" }}
-{{- if .Values.auth.autoConnectIdP }}
-AUTO_CONNECT_IDP: {{ .Values.auth.autoConnectIdP | quote }}
+{{- if .Values.keycloak.autoConnectIdP }}
+AUTO_CONNECT_IDP: {{ .Values.keycloak.autoConnectIdP | quote }}
 {{- end }}
 {{- end }}
 

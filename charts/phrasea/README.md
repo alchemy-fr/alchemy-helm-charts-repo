@@ -1,4 +1,4 @@
-# PS Chart
+# Phrasea Chart
 
 ### TLS
 

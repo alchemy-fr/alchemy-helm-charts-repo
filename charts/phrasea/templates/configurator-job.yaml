@@ -1,0 +1,60 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configurator
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "6"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      {{ include "imagePullSecrets" $ | indent 6 }}
+      volumes:
+      containers:
+      - name: configurator
+        image: {{ $.Values.repository.baseurl }}/ps-configurator:{{ $.Values.repository.tag }}
+        {{- if not (eq "latest" $.Values.repository.tag) }}
+        imagePullPolicy: Always
+        {{- end }}
+        terminationMessagePolicy: FallbackToLogsOnError
+        volumeMounts:
+        - name: configs
+          mountPath: /configs
+        env:
+        - name: EXPOSE_DB_NAME
+          value: {{ .Values.expose.database.name | quote }}
+        - name: NOTIFY_DB_NAME
+          value: {{ .Values.notify.database.name | quote }}
+        - name: UPLOADER_DB_NAME
+          value: {{ .Values.uploader.database.name | quote }}
+        - name: MAIL_FROM
+          value: {{ .Values.mailer.from | quote }}
+        - name: MAILER_DSN
+          value: {{ required "Missing .mailer.dsn value" .Values.mailer.dsn | quote }}
+        {{- range .Values._internal.services }}
+        {{- $appName := . }}
+        {{- with (index $.Values $appName) }}
+        - name: {{ upper $appName }}_DB_NAME
+          value: {{ .database.name | quote }}
+        - name: {{ upper $appName }}_ADMIN_CLIENT_ID
+          value: {{ .adminOAuthClient.id | quote }}
+        - name: {{ upper $appName }}_ADMIN_CLIENT_SECRET
+          value: {{ .adminOAuthClient.secret | quote }}
+        {{- end }}
+        {{- end }}
+        {{- range .Values._internal.clients }}
+        {{- $appName := . }}
+        {{- with (index $.Values $appName) }}
+        - name: {{ upper $appName }}_CLIENT_ID
+          value: {{ .client.oauthClient.id | quote }}
+        - name: {{ upper $appName }}_CLIENT_SECRET
+          value: {{ .client.oauthClient.secret | quote }}
+        {{- end }}
+        {{- end }}
+        envFrom:
+{{- include "configMapRef.phpApp" $ | indent 8 }}
+{{- include "envFrom.rabbitmq" $ | indent 8 }}
+{{- include "envFrom.postgresql" $ | indent 8 }}
+      restartPolicy: Never
+  backoffLimit: 0
