@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configurator-configure
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "6"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      {{ include "imagePullSecrets" $ | indent 6 }}
+      containers:
+      - {{- include "configurator.containerSpecs" $ | nindent 8 }}
+      restartPolicy: Never
+  backoffLimit: 0

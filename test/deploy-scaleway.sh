@@ -2,12 +2,12 @@
 
 set -e
 
-NS=${NS:-"ps"}
-RELEASE_NAME="ps"
+NS=${NS:-"ps-test"}
+RELEASE_NAME="ps-test"
 CHART_DIR=charts/phrasea
-VALUE_SRC=test/values.yaml
+VALUE_SRC=test/scaleway.yaml
 
-kubectl config use-context minikube
+kubectl config use-context scaleway-phrasea-test
 
 case $1 in
   uninstall)

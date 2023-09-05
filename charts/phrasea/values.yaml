@@ -14,6 +14,9 @@ image:
     password:
     email:
 
+configurator:
+  executeMigration: ~
+
 keycloak:
   enabled: true
   autoConnectIdP:

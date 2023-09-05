@@ -1,0 +1,16 @@
+{{- if .Values.configurator.executeMigration }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configurator-migrate-{{ .Values.configurator.executeMigration }}
+spec:
+  template:
+    spec:
+      {{- include "imagePullSecrets" $ | indent 6 }}
+      containers:
+      - {{- include "configurator.containerSpecs" $ | nindent 8 }}
+        args:
+          - migrate:{{ .Values.configurator.executeMigration }}
+      restartPolicy: Never
+  backoffLimit: 0
+{{- end }}
