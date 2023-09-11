@@ -1,4 +1,4 @@
-{{- if .Values.expose.enabled }}
+{{- if and $.Values.stack.running .Values.expose.enabled }}
 {{- with .Values.expose.client }}
 {{- if .ingress.enabled }}
 {{- $ingressNode := . }}
@@ -15,6 +15,7 @@ metadata:
 {{ toYaml .ingress.extraLabels | indent 4 }}
 {{- end }}
 spec:
+  ingressClassName: nginx
   rules:
   - host: {{ required "Missing .Values.expose.client.hostname" .hostname }}
     http:

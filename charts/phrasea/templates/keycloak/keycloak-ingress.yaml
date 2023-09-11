@@ -1,4 +1,4 @@
-{{- if .Values.keycloak.enabled }}
+{{- if and $.Values.stack.running .Values.keycloak.enabled }}
 {{- if .Values.keycloak.ingress.enabled }}
 {{- with .Values.keycloak }}
 {{- $ingressNode := . }}

@@ -1,5 +1,4 @@
 {{- with .Values.expose }}
-{{- if .enabled }}
 {{- $tplArgs := dict "app" "expose" "ctx" .api.config "glob" $ }}
 apiVersion: v1
 kind: ConfigMap
@@ -23,5 +22,4 @@ data:
   {{- end }}
 {{- include "app.s3Storage.configMap" $tplArgs | indent 2 }}
 {{- include "app.cloudFront.configMap" $tplArgs | indent 2 }}
-{{- end }}
 {{- end }}

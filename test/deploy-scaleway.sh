@@ -18,7 +18,7 @@ case $1 in
         -f "${VALUE_SRC}" \
         --namespace $NS
     ;;
-  update)
+  update | upgrade)
     echo "Updating..."
     helm upgrade ${RELEASE_NAME} "${CHART_DIR}" \
         -f "${VALUE_SRC}" \

@@ -10,6 +10,7 @@ keycloak:
   baseUrl: "https://keycloak.phrasea.minikube"
 
 databox:
+  enabled: false
   api:
     hostname: "api-databox.phrasea.minikube"
     baseUrl: "https://api-databox.phrasea.minikube"
@@ -22,6 +23,7 @@ databox:
     baseUrl: "https://databox.phrasea.minikube"
 
 expose:
+  enabled: false
   api:
     hostname: "api-expose.phrasea.minikube"
     baseUrl: "https://api-expose.phrasea.minikube"
@@ -35,6 +37,7 @@ expose:
     clientSecret: __CHANGE_ME_zEp1JbcjuQ
 
 uploader:
+  enabled: false
   api:
     hostname: "api-uploader.phrasea.minikube"
     baseUrl: "https://api-uploader.phrasea.minikube"
@@ -45,6 +48,7 @@ uploader:
     enabled: false
 
 notify:
+  enabled: false
   api:
     hostname: "api-notify.phrasea.minikube"
     baseUrl: "https://api-notify.phrasea.minikube"
@@ -62,7 +66,7 @@ mailer:
   dsn: "smtp://localhost"
 
 minio:
-  enabled: true
+  enabled: false
   hostname: "minio.phrasea.minikube"
   baseUrl: "https://minio.phrasea.minikube"
 
@@ -179,6 +183,10 @@ globalConfig:
     }
 
 zippy:
-    ingress:
-        hostname: "zippy.phrasea.minikube"
-        baseUrl: "https://zippy.phrasea.minikube"
+  enabled: false
+  ingress:
+    hostname: "zippy.phrasea.minikube"
+    baseUrl: "https://zippy.phrasea.minikube"
+
+elasticsearch:
+  enabled: false

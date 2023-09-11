@@ -2,8 +2,23 @@ repository:
   baseurl: alchemyfr
   tag: latest
 
+acme:
+  email:
+  enabled: false
+  production: false
+  rootHost:
+  gandi:
+    apiToken:
+
 security:
   verifySsl: true
+
+stack:
+  # Custom stack name to distinguish multiple stacks
+  name:
+  running: true
+  runSetups: true
+  runMigrations: true
 
 image:
   pullSecret:
@@ -18,6 +33,8 @@ configurator:
   executeMigration: ~
 
 keycloak:
+  realm:
+    name: master
   enabled: true
   autoConnectIdP:
   defaultUser:
@@ -351,6 +368,15 @@ minio:
     accessMode: ReadWriteOnce
     size: 20Gi
     subPath:
+  console:
+    enabled: true
+    hostname:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      maxBodySize: 22G
+      tls: []
 
 ingress:
   tls:
@@ -381,6 +407,11 @@ _internal:
 #        name: uploader-data
 #        mountPath: /var/data/upload
 #        uid: 1000
+  keycloak:
+    ingress:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+        nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
   expose:
     api:
       ingress:

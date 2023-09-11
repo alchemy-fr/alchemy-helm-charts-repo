@@ -1,4 +1,4 @@
-{{- if and .Values.minio.enabled .Values.expose.enabled }}
+{{- if and .Values.minio.enabled }}
 {{ $jobName := "minio-create-buckets" }}
 apiVersion: v1
 kind: ConfigMap
@@ -14,12 +14,9 @@ data:
     done;
     sleep 5
     mc config host add minio http://minio:80 $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
-  {{- if .Values.expose.enabled }}
     mc mb --ignore-existing minio/{{ .Values.expose.api.config.s3Storage.bucketName }}
-  {{- end }}
-  {{- if .Values.uploader.enabled }}
     mc mb --ignore-existing minio/{{ .Values.uploader.api.config.s3Storage.bucketName }}
-  {{- end }}
+    mc mb --ignore-existing minio/{{ .Values.databox.api.config.s3Storage.bucketName }}
 ---
 apiVersion: batch/v1
 kind: Job

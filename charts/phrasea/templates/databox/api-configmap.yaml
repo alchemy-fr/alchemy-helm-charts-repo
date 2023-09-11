@@ -1,4 +1,3 @@
-{{- if .Values.databox.enabled }}
 {{- with .Values.databox.api.config }}
 {{- $tplArgs := dict "app" "databox" "ctx" . "glob" $ }}
 apiVersion: v1
@@ -18,5 +17,4 @@ data:
   {{- end }}
 {{- include "app.s3Storage.configMap" $tplArgs | indent 2 }}
 {{- include "app.cloudFront.configMap" $tplArgs | indent 2 }}
-{{- end }}
 {{- end }}

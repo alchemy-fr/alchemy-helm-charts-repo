@@ -1,14 +1,12 @@
-{{- range .Values._internal.services }}
-{{- $appName := . }}
-{{- if and $.Values.stack.running (index $.Values $appName).enabled }}
-{{- with (index $.Values $appName).api  }}
-{{- $apiNode := . }}
-{{- if .ingress }}
-{{- if .ingress.enabled }}
+{{- if and $.Values.stack.running .Values.minio.enabled }}
+{{- if .Values.minio.console.enabled }}
+{{- if .Values.minio.console.ingress.enabled }}
+{{- with .Values.minio.console }}
+{{- $ingressNode := . }}
 apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
-  name: {{ $appName }}-api-ingress
+  name: minio-console
   annotations:
 {{- if .ingress.annotations }}
 {{ toYaml .ingress.annotations | indent 4 }}
@@ -16,12 +14,10 @@ metadata:
 {{- if .ingress.maxBodySize }}
     nginx.ingress.kubernetes.io/proxy-body-size: {{ .ingress.maxBodySize | quote }}
 {{- end }}
-{{- with (index $.Values._internal $appName) }}
-{{- if .api }}
-{{- if .api.ingress }}
-{{- if .api.ingress.annotations }}
-{{ toYaml .api.ingress.annotations | indent 4 }}
-{{- end }}
+{{- with $.Values._internal.minio }}
+{{- if .ingress }}
+{{- if .ingress.annotations }}
+{{ toYaml .ingress.annotations | indent 4 }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -33,15 +29,15 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .hostname }}
+  - host: {{ required "Missing minio.console.hostname" .hostname }}
     http:
       paths:
-      {{- include "ingress.rule_path" (dict "_" $ "name" (printf "%s-api-nginx" $appName) "port" 80) | indent 6 }}
+      {{- include "ingress.rule_path" (dict "_" $ "name" "minio-console" "port" 9001) | indent 6 }}
 {{- if .ingress.tls }}
 {{- $tlsNode := .ingress.tls -}}
 {{- range $value := $tlsNode }}
   {{- if not (hasKey $value "hosts") }}
-    {{- $hosts := list $apiNode.hostname }}
+    {{- $hosts := list $ingressNode.hostname }}
     {{- $_ := set $value "hosts" $hosts }}
   {{- end -}}
 {{- end }}
@@ -52,8 +48,6 @@ spec:
   - hosts:
     - {{ .hostname }}
     secretName: {{ include "secretRef.ingress.tls.wildcard" $ }}
-{{- end }}
----
 {{- end }}
 {{- end }}
 {{- end }}

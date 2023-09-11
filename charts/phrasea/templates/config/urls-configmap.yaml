@@ -3,27 +3,17 @@ kind: ConfigMap
 metadata:
   name: urls-config
 data:
-{{- if .Values.report.enabled }}
+  STACK_NAME: {{ .Values.stack.name | default "" | quote }}
   REPORT_API_URL: {{ quote .Values.report.api.baseUrl }}
-{{- end }}
-{{- if .Values.notify.enabled }}
   NOTIFY_API_URL: {{ quote .Values.notify.api.baseUrl }}
-{{- end }}
-{{- if .Values.keycloak.enabled }}
   KEYCLOAK_URL: {{ quote .Values.keycloak.baseUrl }}
-{{- end }}
-{{- if .Values.expose.enabled }}
+  OPENID_CONNECT_URL: "{{ .Values.keycloak.baseUrl }}/realms/{{ .Values.keycloak.realm.name }}/protocol/openid-connect"
   EXPOSE_API_URL: {{ quote .Values.expose.api.baseUrl }}
   EXPOSE_CLIENT_URL: {{ quote .Values.expose.client.baseUrl }}
-{{- end }}
-{{- if .Values.databox.enabled }}
   DATABOX_API_URL: {{ quote .Values.databox.api.baseUrl }}
   DATABOX_CLIENT_URL: {{ quote .Values.databox.client.baseUrl }}
-{{- end }}
-{{- if .Values.uploader.enabled }}
   UPLOADER_API_URL: {{ quote .Values.uploader.api.baseUrl }}
   UPLOADER_CLIENT_URL: {{ quote .Values.uploader.client.baseUrl }}
-{{- end }}
 {{- if .Values.dashboard.enabled }}
   DASHBOARD_URL: {{ quote .Values.dashboard.baseUrl }}
   DISPLAY_SERVICES_MENU: {{ ternary "true" "false" .Values.dashboard.menuEnabled | quote }}

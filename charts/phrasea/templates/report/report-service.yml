@@ -1,5 +1,5 @@
 {{- with .Values.report }}
-{{- if .enabled }}
+{{- if and $.Values.stack.running .enabled }}
 apiVersion: v1
 kind: Service
 metadata:

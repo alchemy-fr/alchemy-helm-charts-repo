@@ -13,4 +13,4 @@ spec:
       containers:
       - {{- include "configurator.containerSpecs" $ | nindent 8 }}
       restartPolicy: Never
-  backoffLimit: 0
+  backoffLimit: 10

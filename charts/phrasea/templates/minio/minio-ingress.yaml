@@ -1,4 +1,4 @@
-{{- if .Values.minio.enabled }}
+{{- if and $.Values.stack.running .Values.minio.enabled }}
 {{- if .Values.minio.ingress.enabled }}
 {{- with .Values.minio }}
 {{- $ingressNode := . }}
@@ -28,7 +28,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .hostname }}
+  - host: {{ required "Missing minio.hostname" .hostname }}
     http:
       paths:
       {{- include "ingress.rule_path" (dict "_" $ "name" "minio" "port" 80) | indent 6 }}

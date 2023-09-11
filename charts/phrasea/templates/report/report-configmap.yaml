@@ -1,5 +1,4 @@
 {{- with .Values.report }}
-{{- if .enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,5 +8,4 @@ data:
   POSTGRES_HOST: {{ $.Values.postgresql.host | quote }}
   POSTGRES_PORT: {{ $.Values.postgresql.port | quote }}
   POSTGRES_DATABASE: {{ .databaseName | quote }}
-{{- end }}
 {{- end }}

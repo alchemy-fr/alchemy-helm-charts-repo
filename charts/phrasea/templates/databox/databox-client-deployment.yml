@@ -1,4 +1,4 @@
-{{- if .Values.databox.enabled }}
+{{- if and $.Values.stack.running .Values.databox.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

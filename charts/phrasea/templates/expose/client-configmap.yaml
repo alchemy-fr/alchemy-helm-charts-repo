@@ -1,5 +1,5 @@
 {{- with .Values.expose }}
-{{- if .enabled }}
+{{- if and $.Values.stack.running .enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

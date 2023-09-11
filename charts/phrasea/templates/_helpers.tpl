@@ -226,12 +226,12 @@ env:
 {{- with (index $.Values $appName) }}
 - name: {{ upper $appName }}_CLIENT_ID
   value: {{ .client.oauthClient.id | quote }}
-- name: {{ upper $appName }}_CLIENT_SECRET
-  value: {{ .client.oauthClient.secret | quote }}
 {{- end }}
 {{- end }}
 envFrom:
-{{- include "configMapRef.phpApp" $ | indent 8 }}
-{{- include "envFrom.rabbitmq" $ | indent 8 }}
-{{- include "envFrom.postgresql" $ | indent 8 }}
+- secretRef:
+    name: keycloak
+{{- include "configMapRef.phpApp" $ }}
+{{- include "envFrom.rabbitmq" $ }}
+{{- include "envFrom.postgresql" $ }}
 {{- end }}

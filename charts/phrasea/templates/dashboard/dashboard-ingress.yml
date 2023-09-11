@@ -1,4 +1,4 @@
-{{- if .Values.dashboard.enabled }}
+{{- if and $.Values.stack.running .Values.dashboard.enabled }}
 {{- with .Values.dashboard }}
 {{- if .ingress.enabled }}
 {{- $ingressNode := . }}
@@ -15,6 +15,7 @@ metadata:
 {{ toYaml .ingress.extraLabels | indent 4 }}
 {{- end }}
 spec:
+  ingressClassName: nginx
   rules:
   - host: {{ .hostname }}
     http:
