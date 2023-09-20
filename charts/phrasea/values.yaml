@@ -3,8 +3,8 @@ repository:
   tag: latest
 
 acme:
-  email:
   enabled: false
+  email:
   production: false
   rootHost:
   gandi:
@@ -39,7 +39,7 @@ keycloak:
   autoConnectIdP:
   defaultUser:
     externalSecretName:
-    username: admin@phrasea.local
+    username: admin
     password: __CHANGE_ME_obIaHz6cVTkQKHqLBj
   database:
     create: true
@@ -293,7 +293,7 @@ uploader:
 
 report:
   enabled: true
-  replicas: 2
+  replicas: 1
   api:
     hostname: report-api
     baseUrl: http://report-api
@@ -452,3 +452,8 @@ zippy:
 newrelic:
   enabled: false
   licenceKey: ~
+
+sentry:
+  enabled: false
+  dsn: ~
+  environment: prod
