@@ -33,6 +33,9 @@ spec:
           - name: phraseanet-custom
             persistentVolumeClaim:
               claimName: {{ $.Values.app.pvc_name.custom }}
+          - name: phraseanet-ftp
+            persistentVolumeClaim:
+              claimName: {{ .Values.app.pvc.ftp.name }}
           - name: phraseanet-tmp
             emptyDir:
           - name: phraseanet-logs

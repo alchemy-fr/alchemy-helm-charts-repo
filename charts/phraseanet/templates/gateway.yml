@@ -69,4 +69,7 @@ spec:
           value: {{ .Values.http.gateway_denied_ips }}
         - name: "GATEWAY_USERS"
           value: {{ .Values.http.gateway_users }}
+        - name: "GATEWAY_CSP"
+          value: {{ .Values.http.gateway_csp }}
 {{- end }}
+
