@@ -34,13 +34,15 @@ configurator:
 
 keycloak:
   realm:
-    name: master
+    name: phrasea
   enabled: true
   autoConnectIdP:
-  defaultUser:
-    externalSecretName:
+  masterAdmin:
     username: admin
     password: __CHANGE_ME_obIaHz6cVTkQKHqLBj
+  defaultAdmin:
+    username: phrasea-admin
+    password: __CHANGE_ME_KFBsKzc7RupJhXkr
   database:
     create: true
     name: keycloak
