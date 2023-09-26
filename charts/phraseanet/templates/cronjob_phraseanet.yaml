@@ -36,6 +36,9 @@ spec:
           - name: phraseanet-ftp
             persistentVolumeClaim:
               claimName: {{ $.Values.app.pvc_name.ftp }}
+          - name: phraseanet-backup
+            persistentVolumeClaim:
+              claimName: {{ $.Values.app.pvc_name.backup }}
           - name: phraseanet-tmp
             emptyDir:
           - name: phraseanet-logs
@@ -68,6 +71,11 @@ spec:
                 mountPath: "/var/alchemy/Phraseanet/www/custom"
               - name: phraseanet-cache
                 mountPath: "/var/alchemy/Phraseanet/cache"
+              - name: phraseanet-ftp
+                mountPath: "/var/alchemy/Phraseanet/ftp"
+              - name: phraseanet-backup
+                mountPath: "/var/alchemy/Phraseanet/backup"
+
             env:
               - name: STACK_NAME
                 value: {{ $.Values.app.stack_name | quote }}
