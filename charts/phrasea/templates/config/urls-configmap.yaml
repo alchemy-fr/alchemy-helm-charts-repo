@@ -7,7 +7,7 @@ data:
   REPORT_API_URL: {{ quote .Values.report.api.baseUrl }}
   NOTIFY_API_URL: {{ quote .Values.notify.api.baseUrl }}
   KEYCLOAK_URL: {{ quote .Values.keycloak.baseUrl }}
-  OPENID_CONNECT_URL: "{{ .Values.keycloak.baseUrl }}/realms/{{ .Values.keycloak.realm.name }}/protocol/openid-connect"
+  KEYCLOAK_REALM_NAME: {{ required "Missing .mailer.dsn value" .Values.keycloak.realm.name | quote }}
   EXPOSE_API_URL: {{ quote .Values.expose.api.baseUrl }}
   EXPOSE_CLIENT_URL: {{ quote .Values.expose.client.baseUrl }}
   DATABOX_API_URL: {{ quote .Values.databox.api.baseUrl }}

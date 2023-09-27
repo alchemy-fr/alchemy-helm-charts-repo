@@ -210,8 +210,6 @@ env:
   value: {{ .Values.mailer.from | quote }}
 - name: MAILER_DSN
   value: {{ required "Missing .mailer.dsn value" .Values.mailer.dsn | quote }}
-- name: KEYCLOAK_REALM_NAME
-  value: {{ required "Missing .mailer.dsn value" .Values.keycloak.realm.name | quote }}
 {{- range .Values._internal.services }}
 {{- $appName := . }}
 {{- with (index $.Values $appName) }}
