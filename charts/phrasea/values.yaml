@@ -116,6 +116,11 @@ databox:
 
 expose:
   enabled: true
+  matomo:
+    enabled: false
+    siteId:
+    baseUrl:
+    authToken:
   api:
     subnet: 0.0.0.0/0
     ingress:
