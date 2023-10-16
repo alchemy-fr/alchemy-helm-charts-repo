@@ -8,7 +8,7 @@ data:
   S3_REQUEST_SIGNATURE_TTL: {{ .api.config.requestSignatureTtl | quote }}
   DISABLE_INDEX_PAGE: {{ ternary "true" "false" .client.disableIndexPage | quote }}
   {{- include "app.client.configMap" $ | indent 2 }}
-  {{ - if .matomo.enabled }}
+  {{- if .matomo.enabled }}
   MATOMO_BASE_URL: {{ required "Missing matomo.baseUrl" .zippy.baseUrl | quote }}
   MATOMO_SITE_ID: {{ required "Missing matomo.siteId" .zippy.siteId | quote }}
   {{- end }}
