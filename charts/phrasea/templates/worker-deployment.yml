@@ -44,11 +44,13 @@ spec:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
         - configMapRef:
             name: {{ $appName }}-api-config
-        {{- if and .matomo .matomo.enabled }}
+        {{- if .matomo }}
+        {{- if .matomo.enabled }}
         - configMapRef:
             name: matomo
         - secretRef:
             name: matomo
+        {{- end }}
         {{- end }}
 ---
 {{- end }}
