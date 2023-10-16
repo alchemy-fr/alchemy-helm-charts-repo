@@ -152,6 +152,9 @@ expose:
         privateKey:
         keyPairId:
         ttl: 86400
+      phraseanet:
+        baseUrl:
+        oauthToken:
   adminOAuthClient:
     externalSecretName:
     id: expose-admin
