@@ -1,0 +1,15 @@
+{{- if .Values.expose.enabled }}
+{{- with .Values.expose }}
+{{- if .matomo.enabled }}
+{{- with .matomo }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: matomo
+stringData:
+  MATOMO_BASE_URL: {{ .baseUrl | quote }}
+  MATOMO_SITE_ID: {{ .siteId | quote }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
