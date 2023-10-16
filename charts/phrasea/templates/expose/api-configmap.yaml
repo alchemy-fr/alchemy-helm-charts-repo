@@ -17,9 +17,9 @@ data:
   {{- end }}
   EXPOSE_CLIENT_LOGO_URL: {{ .client.logoUrl | quote }}
   EXPOSE_CLIENT_LOGO_ALT: {{ .client.logoAlt | quote }}
-  {{- with .api.config.config }}
-  PHRASEANET_BASE_URL: {{ .phraseanet.baseUrl | default "" | quote }}
-  PHRASEANET_APP_OAUTH_TOKEN: {{ .phraseanet.oauthToken | default "" | quote }}
+  {{- with .api.config.phraseanet }}
+  PHRASEANET_BASE_URL: {{ .baseUrl | default "" | quote }}
+  PHRASEANET_APP_OAUTH_TOKEN: {{ .oauthToken | default "" | quote }}
   {{- end }}
 {{- include "app.s3Storage.configMap" $tplArgs | indent 2 }}
 {{- include "app.cloudFront.configMap" $tplArgs | indent 2 }}
