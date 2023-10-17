@@ -2,18 +2,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phraseanet-worker-export
+  name: phraseanet-worker-exportemail
 spec:
   replicas: {{ .Values.app.replicas.exportemail.scale }}
   selector:
     matchLabels:
       app: phraseanet
-      tier: worker-export
+      tier: worker-exportemail
   template:
     metadata:
       labels:
         app: phraseanet
-        tier: worker-export
+        tier: worker-exportemail
     spec:
       volumes:
       - name: phraseanet-config
