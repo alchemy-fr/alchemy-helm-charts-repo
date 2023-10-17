@@ -248,6 +248,7 @@ app:
     phraseanet_worker_deleterecord: 2
     phraseanet_worker_editrecord: 2
     phraseanet_worker_exportmail: 2
+    phraseanet_worker_downloadAsync: 2
     phraseanet_worker_exposeupload: 2
     phraseanet_worker_ftp: 1
     phraseanet_worker_populateindex: 1
