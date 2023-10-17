@@ -121,6 +121,9 @@ expose:
     siteId:
     baseUrl:
     authToken:
+    syncPhraseanet:
+      enabled: false
+      schedule: "5 30 * * *"
   api:
     subnet: 0.0.0.0/0
     ingress:

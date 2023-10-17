@@ -1,7 +1,7 @@
 {{- range .Values._internal.services }}
 {{- $appName := . }}
 {{- if (index $.Values $appName).enabled }}
-{{- with (index $.Values $appName)  }}
+{{- with (index $.Values $appName) }}
 {{ $tplArgs := dict "app" $appName "ctx" . "glob" $ }}
 apiVersion: apps/v1
 kind: Deployment

@@ -9,8 +9,8 @@ data:
   DISABLE_INDEX_PAGE: {{ ternary "true" "false" .client.disableIndexPage | quote }}
   {{- include "app.client.configMap" $ | indent 2 }}
   {{- if .matomo.enabled }}
-  MATOMO_BASE_URL: {{ required "Missing matomo.baseUrl" .matomo.baseUrl | quote }}
-  MATOMO_SITE_ID: {{ required "Missing matomo.siteId" .matomo.siteId | quote }}
+  MATOMO_BASE_URL: {{ required "Missing expose.matomo.baseUrl" .matomo.baseUrl | quote }}
+  MATOMO_SITE_ID: {{ required "Missing expose.matomo.siteId" .matomo.siteId | quote }}
   {{- end }}
 {{- end }}
 {{- end }}
