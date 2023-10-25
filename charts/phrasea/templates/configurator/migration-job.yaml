@@ -10,7 +10,7 @@ spec:
       containers:
       - {{- include "configurator.containerSpecs" $ | nindent 8 }}
         args:
-          - migrate:{{ .Values.configurator.executeMigration }}
+          - 'migration:{{ .Values.configurator.executeMigration }}'
       restartPolicy: Never
   backoffLimit: 0
 {{- end }}

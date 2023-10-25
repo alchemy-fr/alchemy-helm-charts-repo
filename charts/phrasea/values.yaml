@@ -54,6 +54,10 @@ keycloak:
     extraLabels: {}
     tls: []
 
+auth:
+  database:
+    name: auth
+
 databox:
   enabled: true
   api:
