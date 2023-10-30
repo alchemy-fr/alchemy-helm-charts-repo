@@ -14,6 +14,9 @@ spec:
     spec:
       template:
         spec:
+          volumes:
+            {{- include "volumes.configs" $ | indent 12 }}
+            {{- include "app.volumes" $tplArgs | indent 12 }}
           containers:
           - name: {{ $appName }}-api-php
             image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
