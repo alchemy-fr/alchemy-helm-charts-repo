@@ -162,6 +162,14 @@ spec:
           value: {{ .Values.app.phraseanet_api_ssl | quote }}
         - name: PHRASEANET_API_AUTH_TOKEN_ONLY
           value: {{ .Values.app.phraseanet_api_auth_token_header_only | quote }}  
+        - name: PHRASEANET_DOWNLOAD_ASYNC
+          value: {{ .Values.app.phraseanet_download_async | quote }}
+        - name: PUSCHER_AUTH_KEY
+          value: {{ .Values.pusher.pusher_auth_key | quote }}
+        - name: PUSCHER_SECRET
+          value: {{ .Values.pusher.pusher_secret | quote }}
+        - name: PUSCHER_AUTH_KEY
+          value: {{ .Values.pusher.pusher_app_id | quote }}
         - name: PHRASEANET_EMITTER_EMAIL
           value: {{ .Values.app.phraseanet_emitter_email | quote }}
         - name: PHRASEANET_MAIL_OBJECT_PREFIX
