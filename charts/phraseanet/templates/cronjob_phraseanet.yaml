@@ -50,12 +50,11 @@ spec:
           containers:
           - name: {{ $cronjob.name }}
             image: {{ $.Values.image.registry }}/phraseanet-worker:{{ $.Values.image.tag.phraseanet }}
-            securityContext:
-              runAsUser: 1000
+            securityContext: {}
             command:
             - /bin/bash
             - -c
-            - {{ $cronjob.command }}
+            - docker/phraseanet/worker/entrypoint.sh; export TERM=xterm; su app -c {{ $cronjob.command }}
             volumeMounts:
               - name: phraseanet-config
                 mountPath: "/var/alchemy/Phraseanet/config"
