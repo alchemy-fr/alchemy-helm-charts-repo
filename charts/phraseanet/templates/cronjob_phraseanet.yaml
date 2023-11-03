@@ -54,7 +54,7 @@ spec:
             command:
             - /bin/bash
             - -c
-            - docker/phraseanet/worker/entrypoint.sh; export TERM=xterm; su app -c {{ $cronjob.command }}
+            - docker/phraseanet/worker/entrypoint.sh; export TERM=xterm; su app -c "{{ $cronjob.command }}"
             volumeMounts:
               - name: phraseanet-config
                 mountPath: "/var/alchemy/Phraseanet/config"
