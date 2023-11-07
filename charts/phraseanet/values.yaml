@@ -206,7 +206,7 @@ app:
   phraseanet_api_enabled: 1
   phraseanet_api_ssl: true
   phraseanet_api_auth_token_header_only: false
-  phraseanet_donwload_async: false
+  phraseanet_download_async: false
   phraseanet_emiter_email:
   phraseanet_mail_object_prefix: Phraseanet
   phraseanet_smtp_enabled:
