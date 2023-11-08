@@ -454,6 +454,10 @@ zippy:
   ingress:
     baseUrl: ""
     hostname: ""
+  rabbitmq:
+    enabled: false
+    username: phrasea
+    password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
 
 newrelic:
   enabled: false
