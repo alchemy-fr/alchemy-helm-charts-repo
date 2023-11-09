@@ -50,12 +50,11 @@ spec:
           containers:
           - name: {{ $cronjob.name }}
             image: {{ $.Values.image.registry }}/phraseanet-worker:{{ $.Values.image.tag.phraseanet }}
-            securityContext:
-              runAsUser: 1000
+            securityContext: {}
             command:
             - /bin/bash
             - -c
-            - {{ $cronjob.command }}
+            - docker/phraseanet/worker/entrypoint.sh; export TERM=xterm; su app -c "{{ $cronjob.command }}"
             volumeMounts:
               - name: phraseanet-config
                 mountPath: "/var/alchemy/Phraseanet/config"
@@ -79,6 +78,8 @@ spec:
             env:
               - name: STACK_NAME
                 value: {{ $.Values.app.stack_name | quote }}
+              - name: PHP_CLI_MEMORY_LIMIT
+                value: {{ $.Values.php.php_cli_memory_limit | quote }}
               - name: PHP_LOG_LEVEL
                 value: {{ $.Values.php.log_level | quote }}
               - name: SESSION_CACHE_LIMITER
