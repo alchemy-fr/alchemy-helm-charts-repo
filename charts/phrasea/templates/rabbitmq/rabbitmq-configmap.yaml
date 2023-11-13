@@ -5,8 +5,8 @@ kind: ConfigMap
 metadata:
   name: rabbitmq-config
 data:
-  RABBITMQ_NODENAME: "rabbit@rabbitmq"
-  RABBITMQ_ERLANG_COOKIE: "H#75$3CjoTKn3129DNwcqlHvhfqs15"
-  ERL_EPMD_PORT: "55950"
+  RABBITMQ_NODENAME: {{ .nodeName | quote }}
+  RABBITMQ_ERLANG_COOKIE: {{ .erlangCookie | quote }}
+  ERL_EPMD_PORT: {{ .epmdPort | quote }}
 {{- end }}
 {{- end }}

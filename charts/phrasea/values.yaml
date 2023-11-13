@@ -345,6 +345,9 @@ rabbitmq:
   user: phrasea
   ssl: false
   password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
+  erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
+  epmdPort: 55950
+  nodeName: rabbit@rabbitmq
   persistence:
     enabled: true
     existingClaim:
@@ -458,6 +461,8 @@ zippy:
     enabled: false
     username: phrasea
     password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
+    erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
+    nodeName: 'zippy@rabbitmq'
 
 newrelic:
   enabled: false
