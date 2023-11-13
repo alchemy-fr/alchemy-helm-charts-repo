@@ -1,4 +1,5 @@
-{{- if .Values.rabbitmq.enabled }}
+{{- with .Values.rabbitmq }}
+{{- if .enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -19,26 +20,27 @@ spec:
 
             n=0
             until [ "$n" -ge 20 ]; do
-            rabbitmqctl -n {{ .rabbitmq.nodeName }} await_startup && break
+            rabbitmqctl -n {{ .nodeName }} await_startup && break
             n=$((n+1))
             sleep 5
             done
 
-            rabbitmqctl -n {{ .rabbitmq.nodeName }} await_startup
-            {{- range .Values._internal.services }}
+            rabbitmqctl -n {{ .nodeName }} await_startup
+            {{- range $.Values._internal.services }}
             {{- $appName := . }}
             {{- if (index $.Values $appName).enabled }}
             {{- $vhost := (index $.Values $appName).rabbitmq.vhost }}
-            rabbitmqctl -n {{ .rabbitmq.nodeName }} add_vhost {{ $vhost | quote }}
-            rabbitmqctl -n {{ .rabbitmq.nodeName }} set_permissions -p {{ $vhost | quote }} ${RABBITMQ_USER} '.*' '.*' '.*'
+            rabbitmqctl -n {{ .nodeName }} add_vhost {{ $vhost | quote }}
+            rabbitmqctl -n {{ .nodeName }} set_permissions -p {{ $vhost | quote }} ${RABBITMQ_USER} '.*' '.*' '.*'
             {{- end }}
             {{- end }}
 
         envFrom:
         - secretRef:
-            name: {{ include "secretName.rabbitmq" . }}
+            name: {{ include "secretName.rabbitmq" $ }}
         - configMapRef:
             name: rabbitmq-config
       restartPolicy: Never
   backoffLimit: 10
+{{- end }}
 {{- end }}
