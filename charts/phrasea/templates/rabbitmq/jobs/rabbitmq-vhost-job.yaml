@@ -20,18 +20,19 @@ spec:
 
             n=0
             until [ "$n" -ge 20 ]; do
-            rabbitmqctl -n {{ .nodeName }} await_startup && break
-            n=$((n+1))
-            sleep 5
+              rabbitmqctl -n {{ .nodeName }} await_startup && break
+              n=$((n+1))
+              sleep 5
             done
 
-            rabbitmqctl -n {{ .nodeName }} await_startup
+            {{- $nodeName := .nodeName }}
+            rabbitmqctl -n {{ $nodeName }} await_startup
             {{- range $.Values._internal.services }}
             {{- $appName := . }}
             {{- if (index $.Values $appName).enabled }}
             {{- $vhost := (index $.Values $appName).rabbitmq.vhost }}
-            rabbitmqctl -n {{ .nodeName }} add_vhost {{ $vhost | quote }}
-            rabbitmqctl -n {{ .nodeName }} set_permissions -p {{ $vhost | quote }} ${RABBITMQ_USER} '.*' '.*' '.*'
+            rabbitmqctl -n {{ $nodeName }} add_vhost {{ $vhost | quote }}
+            rabbitmqctl -n {{ $nodeName }} set_permissions -p {{ $vhost | quote }} ${RABBITMQ_USER} '.*' '.*' '.*'
             {{- end }}
             {{- end }}
 
