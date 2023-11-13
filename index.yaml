@@ -3,6 +3,25 @@ entries:
   phrasea:
   - apiVersion: v2
     appVersion: 1.17.0
+    created: "2023-11-13T13:21:21.117314427Z"
+    dependencies:
+    - condition: elasticsearch.enabled
+      name: elasticsearch
+      repository: https://helm.elastic.co
+      version: 7.17.3
+    - condition: zippy.enabled
+      name: zippy
+      repository: https://alchemy-fr.github.io/zippy-svc/
+      version: 0.1.6
+    description: A Helm chart for Kubernetes
+    digest: 3785ce028b3a4c75c40f652d38c2e8e8f8fa36d7e7b4f50b4b0cc9f073fdf4f1
+    name: phrasea
+    type: application
+    urls:
+    - https://github.com/alchemy-fr/alchemy-helm-charts-repo/releases/download/phrasea-1.0.0-alpha6/phrasea-1.0.0-alpha6.tgz
+    version: 1.0.0-alpha6
+  - apiVersion: v2
+    appVersion: 1.17.0
     created: "2023-11-13T10:22:49.921631272Z"
     dependencies:
     - condition: elasticsearch.enabled
