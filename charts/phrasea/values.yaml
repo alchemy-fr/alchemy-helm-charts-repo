@@ -462,7 +462,7 @@ zippy:
     username: phrasea
     password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
     erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
-    nodeName: 'zippy@rabbitmq'
+    nodeName: 'rabbit@rabbitmq'
 
 newrelic:
   enabled: false
