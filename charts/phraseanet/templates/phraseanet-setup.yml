@@ -168,7 +168,7 @@ spec:
           value: {{ .Values.externalservice.pusher.pusher_auth_key | quote }}
         - name: PUSCHER_SECRET
           value: {{ .Values.externalservice.pusher.pusher_secret | quote }}
-        - name: PUSCHER_AUTH_KEY
+        - name: PUSCHER_APP_ID
           value: {{ .Values.externalservice.pusher.pusher_app_id | quote }}
         - name: PHRASEANET_EMITTER_EMAIL
           value: {{ .Values.app.phraseanet_emitter_email | quote }}
