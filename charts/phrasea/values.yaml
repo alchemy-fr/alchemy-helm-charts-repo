@@ -50,7 +50,9 @@ keycloak:
   baseUrl:
   ingress:
     enabled: true
-    annotations: {}
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
     extraLabels: {}
     tls: []
 
@@ -63,7 +65,8 @@ databox:
   api:
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "2G"
       extraLabels: {}
       maxBodySize: 2G
       tls: []
@@ -142,12 +145,14 @@ expose:
     authToken:
     syncPhraseanet:
       enabled: false
-      schedule: "5 30 * * *"
+      schedule: '30 5 * * *'
   api:
     subnet: 0.0.0.0/0
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-body-size: "22G"
       extraLabels: {}
       maxBodySize: 22G
       tls: []
@@ -244,7 +249,9 @@ uploader:
   api:
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-body-size: "22G"
       extraLabels: {}
       maxBodySize: 22G
       tls: []
@@ -365,7 +372,9 @@ minio:
   secretKey: '__CHANGE_ME_bIYN#LuI9$ED9B0ck2scn'
   ingress:
     enabled: true
-    annotations: {}
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-body-size: "22G"
     extraLabels: {}
     maxBodySize: 22G
     tls: []
@@ -384,7 +393,6 @@ minio:
       enabled: true
       annotations: {}
       extraLabels: {}
-      maxBodySize: 22G
       tls: []
 
 ingress:
@@ -416,29 +424,6 @@ _internal:
 #        name: uploader-data
 #        mountPath: /var/data/upload
 #        uid: 1000
-  keycloak:
-    ingress:
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
-        nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
-  expose:
-    api:
-      ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-  notify:
-  uploader:
-    api:
-      ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-  minio:
-    ingress:
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-        #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
 
 elasticsearch:
   enabled: true

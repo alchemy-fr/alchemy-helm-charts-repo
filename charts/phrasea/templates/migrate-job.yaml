@@ -15,8 +15,8 @@ spec:
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
       volumes:
-{{- include "volumes.configs" $ | indent 6 }}
-{{- include "app.volumes" $tplArgs | indent 6 }}
+      {{- include "volumes.configs" $ | indent 6 }}
+      {{- include "app.volumes" $tplArgs | indent 6 }}
       containers:
       - name: {{ $appName }}-php-job
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}

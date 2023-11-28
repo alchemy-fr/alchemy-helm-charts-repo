@@ -3,12 +3,14 @@ kind: Job
 metadata:
   name: configurator-configure
   annotations:
-    "helm.sh/hook": post-install
+    "helm.sh/hook": post-{{- if .Values.configurator.executeMigration -}}upgrade{{- else -}}install{{- end }}
     "helm.sh/hook-weight": "6"
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
     spec:
+      volumes:
+      {{- include "volumes.configs" $ | indent 6 }}
       {{ include "imagePullSecrets" $ | indent 6 }}
       containers:
       - {{- include "configurator.containerSpecs" $ | nindent 8 }}

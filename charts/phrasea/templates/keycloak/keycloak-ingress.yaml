@@ -6,17 +6,9 @@ apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
   name: keycloak-ingress
+{{- if .ingress.annotations }}
   annotations:
-{{- if .ingress.annotations }}
 {{ toYaml .ingress.annotations | indent 4 }}
-{{- else }}
-{{- with $.Values._internal.keycloak }}
-{{- if .ingress }}
-{{- if .ingress.annotations }}
-{{ toYaml .ingress.annotations | indent 4 }}
-{{- end }}
-{{- end }}
-{{- end }}
 {{- end }}
 {{- if .ingress.extraLabels }}
   labels:

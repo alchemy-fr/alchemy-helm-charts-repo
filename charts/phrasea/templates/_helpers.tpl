@@ -205,6 +205,9 @@ image: {{ .Values.repository.baseurl }}/ps-configurator:{{ .Values.repository.ta
 imagePullPolicy: Always
 {{- end }}
 terminationMessagePolicy: FallbackToLogsOnError
+volumeMounts:
+- name: configs
+  mountPath: /configs
 env:
 - name: MAIL_FROM
   value: {{ .Values.mailer.from | quote }}

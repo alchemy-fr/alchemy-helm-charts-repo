@@ -7,20 +7,9 @@ apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
   name: minio-console
+{{- if .ingress.annotations }}
   annotations:
-{{- if .ingress.annotations }}
 {{ toYaml .ingress.annotations | indent 4 }}
-{{- else }}
-{{- if .ingress.maxBodySize }}
-    nginx.ingress.kubernetes.io/proxy-body-size: {{ .ingress.maxBodySize | quote }}
-{{- end }}
-{{- with $.Values._internal.minio }}
-{{- if .ingress }}
-{{- if .ingress.annotations }}
-{{ toYaml .ingress.annotations | indent 4 }}
-{{- end }}
-{{- end }}
-{{- end }}
 {{- end }}
 {{- if .ingress.extraLabels }}
   labels:
