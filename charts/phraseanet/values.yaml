@@ -85,6 +85,12 @@ rabbitmq:
       cpu: "2000m"
       memory: "4096Mi"
 
+externalservice:
+  pusher:
+    pusher_auth_key:
+    pusher_secret:
+    pusher_app_id:
+
 redis:
   enabled: true
   port: "{{ .Values.app.phraseanet_cache_port }}"
@@ -201,6 +207,7 @@ app:
   phraseanet_api_enabled: 1
   phraseanet_api_ssl: true
   phraseanet_api_auth_token_header_only: false
+  phraseanet_download_async: false
   phraseanet_emiter_email:
   phraseanet_mail_object_prefix: Phraseanet
   phraseanet_smtp_enabled:
@@ -248,6 +255,7 @@ app:
     phraseanet_worker_deleterecord: 2
     phraseanet_worker_editrecord: 2
     phraseanet_worker_exportmail: 2
+    phraseanet_worker_downloadasync: 2
     phraseanet_worker_exposeupload: 2
     phraseanet_worker_ftp: 1
     phraseanet_worker_populateindex: 1

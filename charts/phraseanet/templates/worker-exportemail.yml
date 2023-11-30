@@ -69,6 +69,8 @@ spec:
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
         - name: PHRASEANET_WORKER_exportMail
           value: {{ .Values.app.worker.phraseanet_worker_exportmail | quote }}
+        - name: PHRASEANET_WORKER_downloadAsync
+          value: {{ .Values.app.worker.phraseanet_worker_downloadasync | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
         - name: MAX_INPUT_VARS
