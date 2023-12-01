@@ -164,11 +164,11 @@ spec:
           value: {{ .Values.app.phraseanet_api_auth_token_header_only | quote }}  
         - name: PHRASEANET_DOWNLOAD_ASYNC
           value: {{ .Values.app.phraseanet_download_async | quote }}
-        - name: PUSCHER_AUTH_KEY
+        - name: PUSHER_AUTH_KEY
           value: {{ .Values.externalservice.pusher.pusher_auth_key | quote }}
-        - name: PUSCHER_SECRET
+        - name: PUSHER_SECRET
           value: {{ .Values.externalservice.pusher.pusher_secret | quote }}
-        - name: PUSCHER_APP_ID
+        - name: PUSHER_APP_ID
           value: {{ .Values.externalservice.pusher.pusher_app_id | quote }}
         - name: PHRASEANET_EMITTER_EMAIL
           value: {{ .Values.app.phraseanet_emitter_email | quote }}
