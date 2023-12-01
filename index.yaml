@@ -462,6 +462,16 @@ entries:
   phraseanet:
   - apiVersion: v2
     appVersion: 4.0.0
+    created: "2023-12-01T15:10:17.517421334Z"
+    description: Helm chart for Phraseanet
+    digest: f69006175d4772e868e6e07deccf4ad467b075032241f6f35318e7d3d8913e07
+    name: phraseanet
+    type: application
+    urls:
+    - https://github.com/alchemy-fr/alchemy-helm-charts-repo/releases/download/phraseanet-0.28.0/phraseanet-0.28.0.tgz
+    version: 0.28.0
+  - apiVersion: v2
+    appVersion: 4.0.0
     created: "2023-11-30T22:50:08.174044953Z"
     description: Helm chart for Phraseanet
     digest: 54691f99e14d928a9c807494867cba3a655a98597802318324e32c6406616757
