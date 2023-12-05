@@ -2,6 +2,24 @@ repository:
   baseurl: alchemyfr
   tag: latest
 
+acme:
+  enabled: false
+  email:
+  production: false
+  rootHost:
+  gandi:
+    apiToken:
+
+security:
+  verifySsl: true
+
+stack:
+  # Custom stack name to distinguish multiple stacks
+  name:
+  running: true
+  runSetups: true
+  runMigrations: true
+
 image:
   pullSecret:
     enabled: false
@@ -11,32 +29,34 @@ image:
     password:
     email:
 
-auth:
+configurator:
+  executeMigration: ~
+
+keycloak:
+  realm:
+    name: phrasea
   enabled: true
   autoConnectIdP:
-  defaultUser:
-    externalSecretName:
-    username: admin@phrasea.local
+  masterAdmin:
+    username: admin
     password: __CHANGE_ME_obIaHz6cVTkQKHqLBj
-  api:
-    hostname:
-    baseUrl:
-    config:
-      registrationValidateEmail: true
-    ingress:
-      enabled: true
-      annotations: {}
-      extraLabels: {}
-      tls: []
-  adminOAuthClient:
-    externalSecretName:
-    id: auth-admin
-    randomId: 9mIGK
-    secret: '__CHANGE_ME_0sfyMAp@P@CSnZC71EuDQ2'
-    grantTypes:
-    - authorization_code
-  rabbitmq:
-    vhost: auth
+  defaultAdmin:
+    username: phrasea-admin
+    password: __CHANGE_ME_KFBsKzc7RupJhXkr
+  database:
+    create: true
+    name: keycloak
+  hostname:
+  baseUrl:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "16k"
+    extraLabels: {}
+    tls: []
+
+auth:
   database:
     name: auth
 
@@ -45,7 +65,8 @@ databox:
   api:
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: "2G"
       extraLabels: {}
       maxBodySize: 2G
       tls: []
@@ -75,10 +96,12 @@ databox:
       phraseanet:
         baseUrl:
         oauthToken:
+      secrets:
+        publicKey:
+        secretKey:
   adminOAuthClient:
     externalSecretName:
     id: databox-admin
-    randomId: fiMPj
     secret: '__CHANGE_ME_9jZuZqkwf9qW881jTqG'
     grantTypes:
     - authorization_code
@@ -97,7 +120,6 @@ databox:
     oauthClient:
       externalSecretName:
       id: databox-app
-      randomId: difnr
       secret: '__CHANGE_ME_kga7LfWB8vTowf$9V9'
       redirectUri: "{{ .Values.databox.client.baseUrl }}"
       grantTypes:
@@ -110,9 +132,9 @@ databox:
     uploaderTargetSlug: databox-uploader
   zippy:
     enabled: true
-    baseUrl:
-    clientId:
-    clientSecret:
+    baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
+    clientId: databox
+    clientSecret: __CHANGE_ME_MxWoVddUWq
 
 expose:
   enabled: true
@@ -123,12 +145,14 @@ expose:
     authToken:
     syncPhraseanet:
       enabled: false
-      schedule: "5 30 * * *"
+      schedule: '30 5 * * *'
   api:
     subnet: 0.0.0.0/0
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-body-size: "22G"
       extraLabels: {}
       maxBodySize: 22G
       tls: []
@@ -161,7 +185,6 @@ expose:
   adminOAuthClient:
     externalSecretName:
     id: expose-admin
-    randomId: wIB0s
     secret: '__CHANGE_ME_71EuDQ2H$ei3sHwIB0sfy'
     grantTypes:
     - authorization_code
@@ -180,7 +203,6 @@ expose:
     oauthClient:
       externalSecretName:
       id: expose-app
-      randomId: difnr
       secret: '__CHANGE_ME_owf$9V9kga7LfWB8vT'
       redirectUri: "{{ .Values.expose.client.baseUrl }}"
       grantTypes:
@@ -197,9 +219,9 @@ expose:
     name: expose
   zippy:
     enabled: true
-    baseUrl:
-    clientId:
-    clientSecret:
+    baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
+    clientId: expose
+    clientSecret: __CHANGE_ME_zEp1JbcjuQ
 
 notify:
   enabled: true
@@ -214,7 +236,6 @@ notify:
   adminOAuthClient:
     externalSecretName:
     id: notify-admin
-    randomId: dUdGa
     secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
     grantTypes:
     - authorization_code
@@ -228,7 +249,9 @@ uploader:
   api:
     ingress:
       enabled: true
-      annotations: {}
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-body-size: "22G"
       extraLabels: {}
       maxBodySize: 22G
       tls: []
@@ -255,7 +278,6 @@ uploader:
   adminOAuthClient:
     externalSecretName:
     id: uploader-admin
-    randomId: oqdsq
     secret: '__CHANGE_ME_p@P@CSnZi3sHwIB0sfy'
     grantTypes:
     - authorization_code
@@ -273,7 +295,6 @@ uploader:
     oauthClient:
       externalSecretName:
       id: uploader-app
-      randomId: oqdsq
       secret: '__CHANGE_ME_DpydN$mo7VZoOVw4inxqn'
       redirectUri: "{{ .Values.uploader.client.baseUrl }}"
       grantTypes:
@@ -285,7 +306,7 @@ uploader:
 
 report:
   enabled: true
-  replicas: 2
+  replicas: 1
   api:
     hostname: report-api
     baseUrl: http://report-api
@@ -331,6 +352,9 @@ rabbitmq:
   user: phrasea
   ssl: false
   password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
+  erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
+  epmdPort: 55950
+  nodeName: rabbit@rabbitmq
   persistence:
     enabled: true
     existingClaim:
@@ -348,7 +372,9 @@ minio:
   secretKey: '__CHANGE_ME_bIYN#LuI9$ED9B0ck2scn'
   ingress:
     enabled: true
-    annotations: {}
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-body-size: "22G"
     extraLabels: {}
     maxBodySize: 22G
     tls: []
@@ -360,6 +386,14 @@ minio:
     accessMode: ReadWriteOnce
     size: 20Gi
     subPath:
+  console:
+    enabled: true
+    hostname:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
 
 ingress:
   tls:
@@ -376,10 +410,13 @@ globalConfig:
 
 _internal:
   services:
-  - auth
   - databox
   - expose
   - notify
+  - uploader
+  clients:
+  - databox
+  - expose
   - uploader
   volumes:
 #    uploader:
@@ -387,25 +424,6 @@ _internal:
 #        name: uploader-data
 #        mountPath: /var/data/upload
 #        uid: 1000
-  auth:
-  expose:
-    api:
-      ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-  notify:
-  uploader:
-    api:
-      ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-          #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-  minio:
-    ingress:
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-        #nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
 
 elasticsearch:
   enabled: true
@@ -421,3 +439,21 @@ elasticsearch:
 
 zippy:
   enabled: true
+  ingress:
+    baseUrl: ""
+    hostname: ""
+  rabbitmq:
+    enabled: false
+    username: phrasea
+    password: '__CHANGE_ME_yUZV7fEAnb$u4dqFchQDz'
+    erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
+    nodeName: 'rabbit@rabbitmq'
+
+newrelic:
+  enabled: false
+  licenceKey: ~
+
+sentry:
+  enabled: false
+  dsn: ~
+  environment: prod

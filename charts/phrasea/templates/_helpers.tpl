@@ -168,8 +168,8 @@ CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
 {{- end }}
 
 {{- define "app.client.configMap" }}
-{{- if .Values.auth.autoConnectIdP }}
-AUTO_CONNECT_IDP: {{ .Values.auth.autoConnectIdP | quote }}
+{{- if .Values.keycloak.autoConnectIdP }}
+AUTO_CONNECT_IDP: {{ .Values.keycloak.autoConnectIdP | quote }}
 {{- end }}
 {{- end }}
 
@@ -196,4 +196,47 @@ networking.k8s.io/v1beta1
     servicePort: {{ .port }}
   path: {{ .path | default "/" }}
 {{- end }}
+{{- end }}
+
+{{- define "configurator.containerSpecs" -}}
+name: configurator
+image: {{ .Values.repository.baseurl }}/ps-configurator:{{ .Values.repository.tag }}
+{{- if not (eq "latest" .Values.repository.tag) }}
+imagePullPolicy: Always
+{{- end }}
+terminationMessagePolicy: FallbackToLogsOnError
+volumeMounts:
+- name: configs
+  mountPath: /configs
+env:
+- name: MAIL_FROM
+  value: {{ .Values.mailer.from | quote }}
+- name: MAILER_DSN
+  value: {{ required "Missing .mailer.dsn value" .Values.mailer.dsn | quote }}
+- name: AUTH_DB_NAME
+  value: {{ .Values.auth.database.name | quote }}
+{{- range .Values._internal.services }}
+{{- $appName := . }}
+{{- with (index $.Values $appName) }}
+- name: {{ upper $appName }}_DB_NAME
+  value: {{ .database.name | quote }}
+- name: {{ upper $appName }}_ADMIN_CLIENT_ID
+  value: {{ .adminOAuthClient.id | quote }}
+- name: {{ upper $appName }}_ADMIN_CLIENT_SECRET
+  value: {{ .adminOAuthClient.secret | quote }}
+{{- end }}
+{{- end }}
+{{- range .Values._internal.clients }}
+{{- $appName := . }}
+{{- with (index $.Values $appName) }}
+- name: {{ upper $appName }}_CLIENT_ID
+  value: {{ .client.oauthClient.id | quote }}
+{{- end }}
+{{- end }}
+envFrom:
+- secretRef:
+    name: keycloak
+{{- include "configMapRef.phpApp" $ }}
+{{- include "envFrom.rabbitmq" $ }}
+{{- include "envFrom.postgresql" $ }}
 {{- end }}

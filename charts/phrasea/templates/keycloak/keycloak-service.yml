@@ -1,16 +1,16 @@
-{{- with .Values.report }}
+{{- with .Values.keycloak }}
 {{- if and $.Values.stack.running .enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: report-api
+  name: keycloak
 spec:
   ports:
     - name: http
       port: 80
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: phrasea
-    tier: report-api
+    tier: keycloak
 {{- end }}
 {{- end }}

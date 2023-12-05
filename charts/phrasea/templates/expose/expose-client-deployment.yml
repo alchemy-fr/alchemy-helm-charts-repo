@@ -1,4 +1,4 @@
-{{- if .Values.expose.enabled }}
+{{- if and $.Values.stack.running .Values.expose.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

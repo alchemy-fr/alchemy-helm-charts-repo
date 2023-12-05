@@ -1,4 +1,4 @@
-{{- if .Values.uploader.enabled }}
+{{- if and $.Values.stack.running .Values.uploader.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,6 +23,9 @@ spec:
       containers:
       - name: uploader-client
         image: {{ $.Values.repository.baseurl }}/ps-uploader-client:{{ $.Values.repository.tag }}
+        {{- if not (eq "latest" $.Values.repository.tag) }}
+        imagePullPolicy: Always
+        {{- end }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs

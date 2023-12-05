@@ -1,11 +1,11 @@
-{{- if and $.Values.stack.running .Values.expose.enabled }}
-{{- with .Values.expose.client }}
-{{- if .ingress.enabled }}
+{{- if and $.Values.stack.running .Values.keycloak.enabled }}
+{{- if .Values.keycloak.ingress.enabled }}
+{{- with .Values.keycloak }}
 {{- $ingressNode := . }}
 apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
-  name: expose-client-ingress
+  name: keycloak-ingress
 {{- if .ingress.annotations }}
   annotations:
 {{ toYaml .ingress.annotations | indent 4 }}
@@ -17,10 +17,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ required "Missing .Values.expose.client.hostname" .hostname }}
+  - host: {{ required "Missing keycloak.hostname" .hostname | quote }}
     http:
       paths:
-      {{- include "ingress.rule_path" (dict "_" $ "name" "expose-client" "port" 80) | indent 6 }}
+      {{- include "ingress.rule_path" (dict "_" $ "name" "keycloak" "port" 80) | indent 6 }}
 {{- if .ingress.tls }}
 {{- $tlsNode := .ingress.tls -}}
 {{- range $value := $tlsNode }}

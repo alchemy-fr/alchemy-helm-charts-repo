@@ -1,11 +1,12 @@
-{{- if and $.Values.stack.running .Values.expose.enabled }}
-{{- with .Values.expose.client }}
-{{- if .ingress.enabled }}
+{{- if and $.Values.stack.running .Values.minio.enabled }}
+{{- if .Values.minio.console.enabled }}
+{{- if .Values.minio.console.ingress.enabled }}
+{{- with .Values.minio.console }}
 {{- $ingressNode := . }}
 apiVersion: {{ template "ingress.apiVersion" $ }}
 kind: Ingress
 metadata:
-  name: expose-client-ingress
+  name: minio-console
 {{- if .ingress.annotations }}
   annotations:
 {{ toYaml .ingress.annotations | indent 4 }}
@@ -17,10 +18,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ required "Missing .Values.expose.client.hostname" .hostname }}
+  - host: {{ required "Missing minio.console.hostname" .hostname }}
     http:
       paths:
-      {{- include "ingress.rule_path" (dict "_" $ "name" "expose-client" "port" 80) | indent 6 }}
+      {{- include "ingress.rule_path" (dict "_" $ "name" "minio-console" "port" 9001) | indent 6 }}
 {{- if .ingress.tls }}
 {{- $tlsNode := .ingress.tls -}}
 {{- range $value := $tlsNode }}
@@ -36,6 +37,7 @@ spec:
   - hosts:
     - {{ .hostname }}
     secretName: {{ include "secretRef.ingress.tls.wildcard" $ }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- end }}
