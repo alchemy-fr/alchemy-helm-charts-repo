@@ -1,5 +1,4 @@
 {{- with .Values.uploader }}
-{{- if .enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,5 +6,4 @@ metadata:
 data:
   __UNUSED: "_"
   {{- include "app.client.configMap" $ | indent 2 }}
-{{- end }}
 {{- end }}

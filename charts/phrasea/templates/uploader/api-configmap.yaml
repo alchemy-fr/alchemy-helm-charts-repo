@@ -1,4 +1,3 @@
-{{- if .Values.uploader.enabled }}
 {{- with .Values.uploader.api.config }}
 {{- $tplArgs := dict "app" "uploader" "ctx" . "glob" $ }}
 apiVersion: v1
@@ -11,5 +10,4 @@ data:
   ASSET_CONSUMER_COMMIT_URI: {{ .assetConsumerCommitUri | default "" | quote }}
   ASSET_CONSUMER_ACCESS_TOKEN: {{ .assetConsumerAccessToken | default "" | quote }}
 {{- include "app.s3Storage.configMap" $tplArgs | indent 2 }}
-{{- end }}
 {{- end }}
