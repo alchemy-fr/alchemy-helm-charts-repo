@@ -5,7 +5,7 @@ kind: ConfigMap
 metadata:
   name: expose-api-config
 data:
-  MAPBOX_TOKEN: {{ required "Missing mapbox token at expose.client.mapbox.token" .client.mapbox.token | quote }}
+  MAPBOX_TOKEN: {{ .client.mapbox.token | quote }}
   S3_REQUEST_SIGNATURE_TTL: {{ .api.config.requestSignatureTtl | quote }}
   SIDEBAR_DEFAULT_OPEN: {{ ternary "true" "false" .client.sidebarDefaultOpen | quote }}
   DEV_MODE: "0"
