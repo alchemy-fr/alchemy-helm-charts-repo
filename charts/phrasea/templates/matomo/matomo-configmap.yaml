@@ -7,7 +7,7 @@ kind: ConfigMap
 metadata:
   name: matomo
 data:
-  MATOMO_BASE_URL: {{ .baseUrl | quote }}
+  MATOMO_URL: {{ .baseUrl | quote }}
   MATOMO_SITE_ID: {{ .siteId | quote }}
 {{- end }}
 {{- end }}
