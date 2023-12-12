@@ -7,10 +7,6 @@ metadata:
 data:
   S3_REQUEST_SIGNATURE_TTL: {{ .api.config.requestSignatureTtl | quote }}
   DISABLE_INDEX_PAGE: {{ ternary "true" "false" .client.disableIndexPage | quote }}
-  {{- include "app.client.configMap" $ | indent 2 }}
-  {{- if .matomo.enabled }}
-  MATOMO_URL: {{ required "Missing expose.matomo.baseUrl" .matomo.baseUrl | quote }}
-  MATOMO_SITE_ID: {{ required "Missing expose.matomo.siteId" .matomo.siteId | quote }}
-  {{- end }}
+  {{- include "app.client.configMap" . | indent 2 }}
 {{- end }}
 {{- end }}

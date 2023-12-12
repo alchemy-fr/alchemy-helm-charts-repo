@@ -135,6 +135,10 @@ databox:
     baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
     clientId: databox
     clientSecret: __CHANGE_ME_MxWoVddUWq
+  matomo:
+    enabled: false
+    siteId:
+    baseUrl:
 
 expose:
   enabled: true
@@ -303,6 +307,10 @@ uploader:
     vhost: uploader
   database:
     name: uploader
+  matomo:
+    enabled: false
+    siteId:
+    baseUrl:
 
 report:
   enabled: true
@@ -456,4 +464,5 @@ newrelic:
 sentry:
   enabled: false
   dsn: ~
+  clientDsn: ~
   environment: prod
