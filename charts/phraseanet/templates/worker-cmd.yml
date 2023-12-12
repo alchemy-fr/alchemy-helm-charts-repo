@@ -1,0 +1,116 @@
+{{- if and .Values.running .Values.app.worker.launch.cmd }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phraseanet-cmd
+spec:
+  replicas: {{ .Values.app.replicas.cmd.scale }}
+  selector:
+    matchLabels:
+      app: phraseanet
+      tier: worker-cmd
+  template:
+    metadata:
+      labels:
+        app: phraseanet
+        tier: worker-cmd
+    spec:
+      volumes:
+      - name: phraseanet-config
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc_name.config }}
+      - name: phraseanet-datas
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc_name.data }}
+      - name: phraseanet-thumbnails
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc_name.thumbnails }}
+      - name: phraseanet-custom
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc_name.custom }}
+      - name: phraseanet-tmp
+        emptyDir:
+      - name: phraseanet-logs
+        emptyDir:
+      - name: phraseanet-cache
+        emptyDir:
+      {{ if .Values.image.pullSecret.enabled }}
+      imagePullSecrets:
+      - name: {{ .Values.image.pullSecret.name }}
+      {{ end }}
+      containers:
+      - name: phraseanet-worker
+        image: {{ .Values.image.registry }}/phraseanet-worker:{{ .Values.image.tag.phraseanet }}
+        imagePullPolicy: Always
+        terminationMessagePolicy: FallbackToLogsOnError
+        resources:
+{{ toYaml .Values.app.worker.resources | indent 12 }}
+        volumeMounts:
+        - name: phraseanet-config
+          mountPath: "/var/alchemy/Phraseanet/config"
+        - name: phraseanet-datas
+          mountPath: "/var/alchemy/Phraseanet/datas"
+        - name: phraseanet-tmp
+          mountPath: "/var/alchemy/Phraseanet/tmp"
+        - name: phraseanet-logs
+          mountPath: "/var/alchemy/Phraseanet/logs"
+        - name: phraseanet-thumbnails
+          mountPath: "/var/alchemy/Phraseanet/www/thumbnails"
+        - name: phraseanet-custom
+          mountPath: "/var/alchemy/Phraseanet/www/custom"
+        - name: phraseanet-cache
+          mountPath: "/var/alchemy/Phraseanet/cache"
+        - name: phraseanet-ftp
+          mountPath: "/var/alchemy/Phraseanet/ftp"
+        - name: phraseanet-backup
+          mountPath: "/var/alchemy/Phraseanet/backup"
+        env:
+        - name: STACK_NAME
+          value: {{ .Values.app.stack_name | quote }}
+        - name: PHRASEANET_EXPLODE_WORKER
+          value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
+        - name: PHRASEANET_WORKERS_LAUNCH_METHOD
+          value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
+        - name: PHRASEANET_CMD_MODE
+          value: {{ .Values.app.worker.cmd_mode | quote }}
+        - name: MAX_BODY_SIZE
+          value: {{ .Values.http.max_body_size | quote }}
+        - name: MAX_INPUT_VARS
+          value: {{ .Values.http.max_input_vars | quote }}
+        - name: OPCACHE_ENABLED
+          value: {{ .Values.php.opcache_enabled | quote }}
+        - name: PHP_LOG_LEVEL
+          value: {{ .Values.php.log_level | quote }}
+        - name: PHP_CLI_MEMORY_LIMIT
+          value: {{ .Values.php.php_cli_memory_limit | quote }}
+        - name: SESSION_CACHE_LIMITER
+          value: {{ .Values.php.session_cache_limiter | quote }}
+        - name: SESSION_SAVE_HANDLER
+          value: {{ .Values.php.session_save_handler | quote }}
+        - name: SESSION_SAVE_PATH
+          value: {{ .Values.php.session_save_path | quote }}
+        - name: XDEBUG
+          value: "0"
+        - name: NEWRELIC_ENABLED
+          value: {{ .Values.php.newrelic_enabled | quote }}
+        - name: NEWRELIC_LICENSE_KEY
+          value: {{ .Values.php.newrelic_licence_key | quote }}
+        - name: NEWRELIC_APP_NAME
+          value: {{ .Values.php.newrelic_app_name | quote }}
+        - name: LC_MESSAGES
+          value: "C.UTF-8"
+        - name: LC_COLLATE
+          value: "C.UTF-8"
+        - name: LC_IDENTIFICATION
+          value: "C.UTF-8"
+        - name: LANG
+          value: "C.UTF-8"
+        - name: LC_MEASUREMENT
+          value: "C.UTF-8"
+        - name: LC_CTYPE
+          value: "C.UTF-8"
+        - name: LC_TIME
+          value: "C.UTF-8"
+        - name: LC_NAME
+          value: "C.UTF-8"
+{{- end }}
