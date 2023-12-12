@@ -267,6 +267,7 @@ app:
     phraseanet_worker_webhook: 1
     phraseanet_worker_writemetadatas: 1
     phraseanet_worker_sharebasket: 1
+    phraseanet_cmd_mode: 1
     phraseanet_scheduler: 1
     launch:
       monoworker: true
@@ -277,6 +278,7 @@ app:
       exportftp: false
       ps: false
       noscalable: false
+      cmd: false
       scheduler: false
     resources:
       requests:
@@ -334,6 +336,8 @@ app:
     writemetadatas:
       scale: 1
     monoworker:
+      scale: 1
+    cmd:
       scale: 1
   hpa:
     fpm:
