@@ -113,17 +113,4 @@ spec:
           value: "C.UTF-8"
         - name: LC_NAME
           value: "C.UTF-8"
-      initContainers:
-      - name: create-tmp-locks
-        image: {{ .Values.image.registry }}/phraseanet-worker:{{ .Values.image.tag.phraseanet }}
-        volumeMounts:
-        - name: phraseanet-tmp
-          mountPath: "/var/alchemy/Phraseanet/tmp"
-        command: ['mkdir', '-p', '/var/alchemy/Phraseanet/tmp/locks']
-      - name: chown-phraseanet-tmp
-        image: {{ .Values.image.registry }}/phraseanet-worker:{{ .Values.image.tag.phraseanet }}
-        volumeMounts:
-        - name: phraseanet-tmp
-          mountPath: "/var/alchemy/Phraseanet/tmp"
-        command: ['chown', '-R', 'app:app', '/var/alchemy/Phraseanet/tmp']
 {{- end }}
