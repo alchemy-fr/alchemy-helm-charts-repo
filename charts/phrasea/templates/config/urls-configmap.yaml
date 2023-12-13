@@ -4,17 +4,24 @@ metadata:
   name: urls-config
 data:
   STACK_NAME: {{ .Values.stack.name | default "" | quote }}
+  STACK_VERSION: {{ .Values.repository.tag | quote }}
   REPORT_API_URL: {{ quote .Values.report.api.baseUrl }}
   NOTIFY_API_URL: {{ quote .Values.notify.api.baseUrl }}
   KEYCLOAK_URL: {{ required "Missing keycloak.baseUrl" .Values.keycloak.baseUrl | quote }}
   KEYCLOAK_REALM_NAME: {{ required "Missing .mailer.dsn value" .Values.keycloak.realm.name | quote }}
+  {{- if .Values.expose.enabled }}
   EXPOSE_API_URL: {{ quote .Values.expose.api.baseUrl }}
   EXPOSE_CLIENT_URL: {{ quote .Values.expose.client.baseUrl }}
+  {{- end }}
+  {{- if .Values.databox.enabled }}
   DATABOX_API_URL: {{ quote .Values.databox.api.baseUrl }}
   DATABOX_CLIENT_URL: {{ quote .Values.databox.client.baseUrl }}
+  {{- end }}
+  {{- if .Values.uploader.enabled }}
   UPLOADER_API_URL: {{ quote .Values.uploader.api.baseUrl }}
   UPLOADER_CLIENT_URL: {{ quote .Values.uploader.client.baseUrl }}
-{{- if .Values.dashboard.enabled }}
+  {{- end }}
+  {{- if .Values.dashboard.enabled }}
   DASHBOARD_URL: {{ quote .Values.dashboard.baseUrl }}
   DISPLAY_SERVICES_MENU: {{ ternary "true" "false" .Values.dashboard.menuEnabled | quote }}
-{{- end }}
+  {{- end }}
