@@ -4,10 +4,10 @@ running: true
 image:
   registry: alchemyfr
   tag:
-      phraseanet: 4.1.3
+      phraseanet: 4.1.8-rc7
       phraseanet_saml_sp: latest
-      database: 4.1.3
-      elasticsearch: 4.1.3
+      database: 4.1.8-rc7
+      elasticsearch: 4.1.8-rc7
   pullSecret:
     enabled: false
     name: registry-secret
@@ -267,6 +267,7 @@ app:
     phraseanet_worker_webhook: 1
     phraseanet_worker_writemetadatas: 1
     phraseanet_worker_sharebasket: 1
+    phraseanet_cmd_mode: 1
     phraseanet_scheduler: 1
     launch:
       monoworker: true
@@ -277,6 +278,7 @@ app:
       exportftp: false
       ps: false
       noscalable: false
+      cmd: false
       scheduler: false
     resources:
       requests:
@@ -334,6 +336,8 @@ app:
     writemetadatas:
       scale: 1
     monoworker:
+      scale: 1
+    cmd:
       scale: 1
   hpa:
     fpm:
