@@ -110,3 +110,4 @@ spec:
         - name: LC_NAME
           value: "C.UTF-8"
 {{- end }}
+
