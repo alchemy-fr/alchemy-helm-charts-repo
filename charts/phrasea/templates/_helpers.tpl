@@ -168,17 +168,19 @@ CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
 {{- end }}
 
 {{- define "app.client.configMap" }}
+{{- $ctx := .ctx }}
+{{- $glob := .glob }}
 DEV_MODE: "0"
-{{- if $.Values.keycloak.autoConnectIdP }}
-AUTO_CONNECT_IDP: {{ $.Values.keycloak.autoConnectIdP | quote }}
+{{- if $glob.Values.keycloak.autoConnectIdP }}
+AUTO_CONNECT_IDP: {{ $glob.Values.keycloak.autoConnectIdP | quote }}
 {{- end }}
-{{- if $.Values.sentry.enabled }}
-SENTRY_DSN: {{ required "Missing sentry.clientDsn" $.Values.sentry.clientDsn | quote }}
-SENTRY_ENVIRONMENT: {{ required "Missing sentry.environment" $.Values.sentry.environment | quote }}
+{{- if $glob.Values.sentry.enabled }}
+SENTRY_DSN: {{ required "Missing sentry.clientDsn" $glob.Values.sentry.clientDsn | quote }}
+SENTRY_ENVIRONMENT: {{ required "Missing sentry.environment" $glob.Values.sentry.environment | quote }}
 {{- end }}
-{{- if .matomo.enabled }}
-MATOMO_URL: {{ required "Missing .matomo.baseUrl" .matomo.baseUrl | quote }}
-MATOMO_SITE_ID: {{ required "Missing .matomo.siteId" .matomo.siteId | quote }}
+{{- if $ctx.matomo.enabled }}
+MATOMO_URL: {{ required "Missing .matomo.baseUrl" $ctx.matomo.baseUrl | quote }}
+MATOMO_SITE_ID: {{ required "Missing .matomo.siteId" $ctx.matomo.siteId | quote }}
 {{- end }}
 {{- end }}
 
