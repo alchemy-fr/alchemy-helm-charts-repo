@@ -171,6 +171,7 @@ CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
 {{- $ctx := .ctx }}
 {{- $glob := .glob }}
 DEV_MODE: "0"
+CLIENT_ID: {{ $ctx.client.oauthClient.id | quote }}
 {{- if $glob.Values.keycloak.autoConnectIdP }}
 AUTO_CONNECT_IDP: {{ $glob.Values.keycloak.autoConnectIdP | quote }}
 {{- end }}

@@ -35,6 +35,4 @@ spec:
             name: urls-config
         - configMapRef:
             name: databox-client-config
-        - secretRef:
-            name: {{ $.Values.databox.client.oauthClient.externalSecretName | default "databox-oauth-client-secret" }}
 {{- end }}

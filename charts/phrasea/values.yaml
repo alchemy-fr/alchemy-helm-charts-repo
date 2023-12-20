@@ -103,12 +103,6 @@ databox:
     externalSecretName:
     id: databox-admin
     secret: '__CHANGE_ME_9jZuZqkwf9qW881jTqG'
-    grantTypes:
-    - authorization_code
-    - client_credentials
-    scopes:
-    - user:list
-    - group:list
   client:
     hostname:
     baseUrl:
@@ -118,12 +112,7 @@ databox:
       extraLabels: {}
       tls: []
     oauthClient:
-      externalSecretName:
       id: databox-app
-      secret: '__CHANGE_ME_kga7LfWB8vTowf$9V9'
-      redirectUri: "{{ .Values.databox.client.baseUrl }}"
-      grantTypes:
-      - authorization_code
   rabbitmq:
     vhost: databox
   database:
@@ -190,12 +179,6 @@ expose:
     externalSecretName:
     id: expose-admin
     secret: '__CHANGE_ME_71EuDQ2H$ei3sHwIB0sfy'
-    grantTypes:
-    - authorization_code
-    - client_credentials
-    scopes:
-    - user:list
-    - group:list
   client:
     hostname:
     baseUrl:
@@ -205,12 +188,7 @@ expose:
       extraLabels: {}
       tls: []
     oauthClient:
-      externalSecretName:
       id: expose-app
-      secret: '__CHANGE_ME_owf$9V9kga7LfWB8vT'
-      redirectUri: "{{ .Values.expose.client.baseUrl }}"
-      grantTypes:
-      - password
     mapbox:
       token: "define-me"
     logoUrl: ""
@@ -241,8 +219,6 @@ notify:
     externalSecretName:
     id: notify-admin
     secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
-    grantTypes:
-    - authorization_code
   rabbitmq:
     vhost: notify
   database:
@@ -283,12 +259,6 @@ uploader:
     externalSecretName:
     id: uploader-admin
     secret: '__CHANGE_ME_p@P@CSnZi3sHwIB0sfy'
-    grantTypes:
-    - authorization_code
-    - client_credentials
-    scopes:
-    - user:list
-    - group:list
   client:
     hostname:
     ingress:
@@ -297,12 +267,7 @@ uploader:
       extraLabels: {}
       tls: []
     oauthClient:
-      externalSecretName:
       id: uploader-app
-      secret: '__CHANGE_ME_DpydN$mo7VZoOVw4inxqn'
-      redirectUri: "{{ .Values.uploader.client.baseUrl }}"
-      grantTypes:
-      - authorization_code
   rabbitmq:
     vhost: uploader
   database:
@@ -331,6 +296,9 @@ dashboard:
     annotations: {}
     extraLabels: {}
     tls: []
+  client:
+    oauthClient:
+      id: dashboard-app
 
 mailer:
   dsn: 'null://null'
@@ -426,6 +394,7 @@ _internal:
   - databox
   - expose
   - uploader
+  - dashboard
   volumes:
 #    uploader:
 #      data:

@@ -27,5 +27,7 @@ spec:
         envFrom:
         - configMapRef:
             name: urls-config
+        - configMapRef:
+            name: dashboard-client-config
 {{- end }}
 {{- end }}

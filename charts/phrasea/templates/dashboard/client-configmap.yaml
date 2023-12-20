@@ -1,9 +1,9 @@
-{{- with .Values.uploader }}
+{{- with .Values.dashboard }}
 {{- if and $.Values.stack.running .enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: uploader-client-config
+  name: dashboard-client-config
 data:
   {{- include "app.client.configMap" . | indent 2 }}
 {{- end }}
