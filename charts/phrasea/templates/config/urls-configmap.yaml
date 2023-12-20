@@ -23,5 +23,6 @@ data:
   {{- end }}
   {{- if .Values.dashboard.enabled }}
   DASHBOARD_URL: {{ quote .Values.dashboard.baseUrl }}
+  DASHBOARD_CLIENT_URL: {{ quote .Values.dashboard.baseUrl }}
   DISPLAY_SERVICES_MENU: {{ ternary "true" "false" .Values.dashboard.menuEnabled | quote }}
   {{- end }}
