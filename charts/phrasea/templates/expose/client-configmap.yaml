@@ -1,5 +1,6 @@
 {{- with .Values.expose }}
 {{- if and $.Values.stack.running .enabled }}
+{{- $tplArgs := dict "ctx" . "glob" $ }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,6 +8,6 @@ metadata:
 data:
   S3_REQUEST_SIGNATURE_TTL: {{ .api.config.requestSignatureTtl | quote }}
   DISABLE_INDEX_PAGE: {{ ternary "true" "false" .client.disableIndexPage | quote }}
-  {{- include "app.client.configMap" . | indent 2 }}
+  {{- include "app.client.configMap" $tplArgs | indent 2 }}
 {{- end }}
 {{- end }}
