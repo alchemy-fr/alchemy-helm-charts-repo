@@ -299,6 +299,10 @@ dashboard:
   client:
     oauthClient:
       id: dashboard-app
+  matomo:
+    enabled: false
+    siteId:
+    baseUrl:
 
 mailer:
   dsn: 'null://null'
