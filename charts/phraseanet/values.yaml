@@ -231,6 +231,7 @@ app:
   install_databox: db_databox1
   phraseanet_trusted_proxies:
   phraseanet_maintenance: 0
+  phraseanet_maintenance_message:
   gateway:
     resources:
       requests:
