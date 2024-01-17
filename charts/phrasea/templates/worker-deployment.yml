@@ -35,6 +35,10 @@ spec:
           mountPath: /configs
 {{- include "app.volumesMounts" $tplArgs | indent 8 }}
         env:
+        {{- if (eq "databox" $appName) }}
+        - name: SECRETS_SECRET_KEY
+          value: {{ required "Missing .databox.api.config.secrets.secretKey value" .api.config.secrets.secretKey | quote }}
+        {{- end }}
 {{- include "envRef.phpApp" $tplArgs | indent 8 }}
         envFrom:
 {{- include "configMapRef.phpApp" $ | indent 8 }}
@@ -42,6 +46,10 @@ spec:
 {{- include "envFrom.postgresql" $ | indent 8 }}
         - secretRef:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
+        {{- if (eq "databox" $appName) }}
+        - secretRef:
+            name: {{ $appName }}-secrets
+        {{- end }}
         - configMapRef:
             name: {{ $appName }}-api-config
         {{- if .matomo }}
