@@ -202,6 +202,11 @@ app:
   phraseanet_rabbitmq_vhost: /
   phraseanet_rabbitmq_user: rabbit
   phraseanet_rabbitmq_pass: rabbit
+  phraseanet_session_type: redis
+  phraseanet_session_host: redis-session
+  phraseanet_session_port: 6379
+  phraseanet_user_session_idle: 14400
+  phraseanet_user_session_lifetime: 86400
   phraseanet_available_language: fr,en,de,du
   phraseanet_default_language: en
   phraseanet_api_enabled: 1
