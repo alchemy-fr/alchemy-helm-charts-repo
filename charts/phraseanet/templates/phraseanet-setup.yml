@@ -220,6 +220,16 @@ spec:
           value: {{ .Values.php.session_save_handler | quote }}
         - name: SESSION_SAVE_PATH
           value: {{ .Values.php.session_save_path | quote }}
+        - name: PHRASEANET_SESSION_TYPE
+          value: {{ .Values.app.phraseanet_session_type | quote  }}
+        - name: PHRASEANET_SESSION_HOST
+          value: {{ .Values.app.phraseanet_session_host | quote  }}
+        - name: PHRASEANET_SESSION_PORT
+          value: {{ .Values.app.phraseanet_session_port | quote  }}
+        - name: PHRASEANET_USER_SESSION_IDLE
+          value: {{ .Values.app.phraseanet_user_session_idle | quote  }}
+        - name: PHRASEANET_USER_SESSION_LIFETIME
+          value: {{ .Values.app.phraseanet_user_session_lifetime | quote  }}
         - name: PHRASEANET_TRUSTED_PROXIES
           value: {{ .Values.app.phraseanet_trusted_proxies | quote }}
         - name: PHRASEANET_MAINTENANCE
