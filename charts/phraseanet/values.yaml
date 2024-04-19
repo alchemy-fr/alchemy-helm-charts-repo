@@ -296,8 +296,8 @@ app:
         memory: "4096Mi"
   cronjobs:
   - id: job-0
-    installed: true
-    name: TemplateJob
+    installed: false
+    name: templatejob
     suspend: false
     schedule: "0 0-23/2 * * *"
     command: "bin/console"
