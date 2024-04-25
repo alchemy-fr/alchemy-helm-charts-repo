@@ -238,12 +238,12 @@ app:
   phraseanet_maintenance: 0
   phraseanet_maintenance_message:
   imagemagick_policy_version: 7
-  imagemagick_policy_width: 16KP
-  imagemagick_policy_height: 16KP
-  imagemagick_policy_map: 512MiB
-  imagemagick_policy_memory: 256MiB
-  imagemagick_policy_area: 128MB
-  imagemagick_policy_disk: 1GiB
+  imagemagick_policy_width: 48KP
+  imagemagick_policy_height: 48KP
+  imagemagick_policy_map: 2048MiB
+  imagemagick_policy_memory: 2048MiB
+  imagemagick_policy_area: 4096MB
+  imagemagick_policy_disk: 6GiB
   imagemagick_policy_temporary_path: /tmp
   gateway:
     resources:
