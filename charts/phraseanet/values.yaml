@@ -303,59 +303,36 @@ app:
         cpu: "2000m"
         memory: "4096Mi"
   cronjobs:
-  - id: job-0
-    installed: false
-    name: templatejob
-    suspend: false
-    schedule: "0 0-23/2 * * *"
-    command: "bin/console"
-    volumes:
-      - name: config
-      - name: datas
-      - name: thumbnails
-      - name: custom
-      - name: ftp
-      - name: backup
   - id: job-1
     installed: true
     name: validationreminder
     suspend: false
     schedule: "0 0-23/2 * * *"
     command: "bin/console validation:remind"
-    volumes:
-      - name: config
   - id: job-2
     installed: false
     name: cleanusers
     suspend: true
     schedule: "30 3 * * 2"
     command: "bin/maintenance clean:user --inactivity_period 365 --grace_duration 7 --max_relances 2 --remove_basket --dry-run"
-    volumes:
-      - name: config
   - id: job-3
     installed: false
     name: apilogclean
     suspend: false
     schedule: "* 5 * * 5"
     command: "bin/maintenance clean:ApiLogs --help"
-    volumes:
-      - name: config
   - id: job-4
     installed: false
     name: workerjobclean
     suspend: false
     schedule: "* 4 * * 3"
     command: "bin/maintenance clean:WorkerRunningJob --help"
-    volumes:
-      - name: config
   - id: job-5
     installed: false
     name: dbbackup
     suspend: false
     schedule: "* 5 * * 0-6"
     command: "bin/console system:backup-db -g backup/"
-    volumes:
-      - name: config
   replicas:
     fpm:
       scale: 1
