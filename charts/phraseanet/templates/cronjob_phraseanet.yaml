@@ -21,24 +21,11 @@ spec:
       template:
         spec:
           volumes:
-          - name: phraseanet-config
+          {{- range $volume := $cronjob.volumes }}
+          - name: phraseanet-{{ $volume.name }}
             persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.config }}
-          - name: phraseanet-datas
-            persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.data }}
-          - name: phraseanet-thumbnails
-            persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.thumbnails }}
-          - name: phraseanet-custom
-            persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.custom }}
-          - name: phraseanet-ftp
-            persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.ftp }}
-          - name: phraseanet-backup
-            persistentVolumeClaim:
-              claimName: {{ $.Values.app.pvc_name.backup }}
+              claimName: phraseanet-{{ $volume.name }}
+          {{- end }}
           - name: phraseanet-tmp
             emptyDir:
           - name: phraseanet-logs
@@ -56,25 +43,10 @@ spec:
             - -c
             - docker/phraseanet/worker/entrypoint.sh; export TERM=xterm; su app -c "{{ $cronjob.command }}"
             volumeMounts:
-              - name: phraseanet-config
-                mountPath: "/var/alchemy/Phraseanet/config"
-              - name: phraseanet-datas
-                mountPath: "/var/alchemy/Phraseanet/datas"
-              - name: phraseanet-tmp
-                mountPath: "/var/alchemy/Phraseanet/tmp"
-              - name: phraseanet-logs
-                mountPath: "/var/alchemy/Phraseanet/logs"
-              - name: phraseanet-thumbnails
-                mountPath: "/var/alchemy/Phraseanet/www/thumbnails"
-              - name: phraseanet-custom
-                mountPath: "/var/alchemy/Phraseanet/www/custom"
-              - name: phraseanet-cache
-                mountPath: "/var/alchemy/Phraseanet/cache"
-              - name: phraseanet-ftp
-                mountPath: "/var/alchemy/Phraseanet/ftp"
-              - name: phraseanet-backup
-                mountPath: "/var/alchemy/Phraseanet/backup"
-
+            {{- range $volume := $cronjob.volumes }}
+            - name: phraseanet-{{ $volume.name }}
+              mountPath: "/var/alchemy/Phraseanet/{{ $volume.name }}"
+            {{- end }}
             env:
               - name: STACK_NAME
                 value: {{ $.Values.app.stack_name | quote }}
