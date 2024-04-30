@@ -87,6 +87,8 @@ spec:
           value: {{ .Values.php.session_save_handler | quote }}
         - name: SESSION_SAVE_PATH
           value: {{ .Values.php.session_save_path | quote }}
+        - name: PHRASEANET_USER_SESSION_LIFETIME
+          value: {{ .Values.app.phraseanet_user_session_lifetime | quote }}
         - name: XDEBUG
           value: "0"
         - name: NEWRELIC_ENABLED
