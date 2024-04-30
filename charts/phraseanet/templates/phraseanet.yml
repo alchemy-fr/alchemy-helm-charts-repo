@@ -206,6 +206,8 @@ spec:
           value: {{ .Values.app.phraseanet_rabbitmq_ssl | quote }}
         - name: PHRASEANET_RABBITMQ_HEARTBEAT
           value: {{ .Values.rabbitmq.heartbeat | quote }}
+        - name: PHRASEANET_USER_SESSION_LIFETIME
+          value: {{ .Values.app.phraseanet_user_session_lifetime | quote }}
         - name: PHRASEANET_CACHE_TYPE
           value: {{ .Values.app.phraseanet_cache_type | quote }}
         - name: PHRASEANET_CACHE_HOST
