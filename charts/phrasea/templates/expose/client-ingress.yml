@@ -17,7 +17,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ required "Missing .Values.expose.client.hostname" .hostname }}
+  - host: {{ required "Missing expose.client.hostname" .hostname }}
     http:
       paths:
       {{- include "ingress.rule_path" (dict "_" $ "name" "expose-client" "port" 80) | indent 6 }}

@@ -78,6 +78,10 @@ gateway-tls
     name: php-config
 - configMapRef:
     name: urls-config
+- configMapRef:
+    name: soketi
+- secretRef:
+    name: soketi
 {{- end }}
 
 {{- define "envRef.phpApp" }}
@@ -180,8 +184,8 @@ SENTRY_DSN: {{ required "Missing sentry.clientDsn" $glob.Values.sentry.clientDsn
 SENTRY_ENVIRONMENT: {{ required "Missing sentry.environment" $glob.Values.sentry.environment | quote }}
 {{- end }}
 {{- if $ctx.matomo.enabled }}
-MATOMO_URL: {{ required "Missing .matomo.baseUrl" $ctx.matomo.baseUrl | quote }}
-MATOMO_SITE_ID: {{ required "Missing .matomo.siteId" $ctx.matomo.siteId | quote }}
+MATOMO_URL: {{ required "Missing matomo.baseUrl" $ctx.matomo.baseUrl | quote }}
+MATOMO_SITE_ID: {{ required "Missing matomo.siteId" $ctx.matomo.siteId | quote }}
 {{- end }}
 {{- end }}
 
@@ -224,7 +228,7 @@ env:
 - name: MAIL_FROM
   value: {{ .Values.mailer.from | quote }}
 - name: MAILER_DSN
-  value: {{ required "Missing .mailer.dsn value" .Values.mailer.dsn | quote }}
+  value: {{ required "Missing mailer.dsn value" .Values.mailer.dsn | quote }}
 - name: AUTH_DB_NAME
   value: {{ .Values.auth.database.name | quote }}
 {{- range .Values._internal.services }}

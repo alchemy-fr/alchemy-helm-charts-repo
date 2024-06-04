@@ -430,6 +430,30 @@ zippy:
     erlangCookie: 'H#75$3CjoTKn3129DNwcqlHvhfqs15'
     nodeName: 'rabbit@rabbitmq'
 
+soketi:
+  enabled: true
+  host:
+  appId: phrasea
+  key:
+  secret:
+  app:
+    extraEnv:
+     - name: SOKETI_DEFAULT_APP_ID
+       valueFrom:
+         configMapKeyRef:
+           name: soketi
+           key: SOKETI_APP_ID
+     - name: SOKETI_DEFAULT_APP_KEY
+       valueFrom:
+         configMapKeyRef:
+           name: soketi
+           key: SOKETI_KEY
+     - name: SOKETI_DEFAULT_APP_SECRET
+       valueFrom:
+         secretKeyRef:
+           name: soketi
+           key: SOKETI_SECRET
+
 newrelic:
   enabled: false
   licenceKey: ~
