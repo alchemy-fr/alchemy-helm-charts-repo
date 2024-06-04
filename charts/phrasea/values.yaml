@@ -437,6 +437,8 @@ soketi:
   appId: phrasea
   key:
   secret:
+  service:
+    port: 80
   app:
     extraEnv:
      - name: SOKETI_DEFAULT_APP_ID
