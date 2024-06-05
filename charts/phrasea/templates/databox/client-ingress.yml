@@ -17,7 +17,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ required "Missing .Values.databox.client.hostname" .hostname | quote }}
+  - host: {{ required "Missing databox.client.hostname" .hostname | quote }}
     http:
       paths:
       {{- include "ingress.rule_path" (dict "_" $ "name" "databox-client" "port" 80) | indent 6 }}

@@ -37,7 +37,7 @@ spec:
         env:
         {{- if (eq "databox" $appName) }}
         - name: SECRETS_SECRET_KEY
-          value: {{ required "Missing .databox.api.config.secrets.secretKey value" .api.config.secrets.secretKey | quote }}
+          value: {{ required "Missing databox.api.config.secrets.secretKey value" .api.config.secrets.secretKey | quote }}
         {{- end }}
 {{- include "envRef.phpApp" $tplArgs | indent 8 }}
         envFrom:

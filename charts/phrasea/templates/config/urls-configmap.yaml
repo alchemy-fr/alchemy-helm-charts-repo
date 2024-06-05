@@ -5,16 +5,16 @@ metadata:
 data:
   STACK_NAME: {{ .Values.stack.name | default "" | quote }}
   STACK_VERSION: {{ .Values.repository.tag | quote }}
-  REPORT_API_URL: {{ quote .Values.report.api.baseUrl }}
-  NOTIFY_API_URL: {{ quote .Values.notify.api.baseUrl }}
+  REPORT_API_URL: {{ required "Missing report.api.baseUrl" .Values.report.api.baseUrl | quote }}
+  NOTIFY_API_URL: {{ required "Missing notify.api.baseUrl" .Values.notify.api.baseUrl | quote }}
   KEYCLOAK_URL: {{ required "Missing keycloak.baseUrl" .Values.keycloak.baseUrl | quote }}
-  KEYCLOAK_REALM_NAME: {{ required "Missing .mailer.dsn value" .Values.keycloak.realm.name | quote }}
-  EXPOSE_API_URL: {{ quote .Values.expose.api.baseUrl }}
-  EXPOSE_CLIENT_URL: {{ quote .Values.expose.client.baseUrl }}
-  DATABOX_API_URL: {{ quote .Values.databox.api.baseUrl }}
-  DATABOX_CLIENT_URL: {{ quote .Values.databox.client.baseUrl }}
-  UPLOADER_API_URL: {{ quote .Values.uploader.api.baseUrl }}
-  UPLOADER_CLIENT_URL: {{ quote .Values.uploader.client.baseUrl }}
-  DASHBOARD_URL: {{ quote .Values.dashboard.baseUrl }}
-  DASHBOARD_CLIENT_URL: {{ quote .Values.dashboard.baseUrl }}
+  KEYCLOAK_REALM_NAME: {{ required "Missing mailer.dsn value" .Values.keycloak.realm.name | quote }}
+  EXPOSE_API_URL: {{ required "Missing expose.api.baseUrl" .Values.expose.api.baseUrl | quote }}
+  EXPOSE_CLIENT_URL: {{ required "Missing expose.client.baseUrl" .Values.expose.client.baseUrl | quote }}
+  DATABOX_API_URL: {{ required "Missing databox.api.baseUrl" .Values.databox.api.baseUrl | quote }}
+  DATABOX_CLIENT_URL: {{ required "Missing databox.client.baseUrl" .Values.databox.client.baseUrl | quote }}
+  UPLOADER_API_URL: {{ required "Missing uploader.api.baseUrl" .Values.uploader.api.baseUrl | quote }}
+  UPLOADER_CLIENT_URL: {{ required "Missing uploader.client.baseUrl" .Values.uploader.client.baseUrl | quote }}
+  DASHBOARD_URL: {{ required "Missing dashboard.baseUrl" .Values.dashboard.baseUrl | quote }}
+  DASHBOARD_CLIENT_URL: {{ required "Missing dashboard.baseUrl" .Values.dashboard.baseUrl | quote }}
   DISPLAY_SERVICES_MENU: {{ ternary "true" "false" .Values.dashboard.menuEnabled | quote }}
