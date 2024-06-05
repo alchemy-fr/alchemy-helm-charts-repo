@@ -432,7 +432,7 @@ zippy:
 
 soketi:
   enabled: true
-  fullnameOverride: soketi
+  fullnameOverride: phrasea-soketi
   host:
   appId: phrasea
   key:
