@@ -78,10 +78,6 @@ gateway-tls
     name: php-config
 - configMapRef:
     name: urls-config
-- configMapRef:
-    name: soketi
-- secretRef:
-    name: soketi
 {{- end }}
 
 {{- define "envRef.phpApp" }}
