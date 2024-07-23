@@ -22,9 +22,6 @@ spec:
           image: {{ $.Values.repository.baseurl }}/ps-keycloak:{{ $.Values.repository.tag }}
           args:
           - 'start'
-          {{- if $.Values.security.verifySsl }}
-          - '--hostname-strict-https=false'
-          {{- end }}
           {{- if not (eq "latest" $.Values.repository.tag) }}
           imagePullPolicy: Always
           {{- end }}
