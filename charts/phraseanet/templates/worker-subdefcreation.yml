@@ -15,6 +15,18 @@ spec:
         app: phraseanet
         tier: worker-subdefcreation
     spec:
+      {{- if .Values.nodeAffinity.enabledAffinity }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: node.type
+                    operator: In
+                    values:
+                      - {{ .Values.nodeAffinity.systemNodeLabel }}
+              topologyKey: "kubernetes.io/hostname"
+      {{- end }}
       volumes:
       - name: phraseanet-config
         persistentVolumeClaim:
@@ -60,72 +72,4 @@ spec:
           mountPath: "/var/alchemy/Phraseanet/www/custom"
         - name: phraseanet-cache
           mountPath: "/var/alchemy/Phraseanet/cache"
-        env:
-        - name: STACK_NAME
-          value: {{ .Values.app.stack_name | quote }}
-        - name: PHRASEANET_EXPLODE_WORKER
-          value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
-        - name: PHRASEANET_WORKERS_LAUNCH_METHOD
-          value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name:  PHRASEANET_WORKER_subdefCreation
-          value: {{ .Values.app.worker.phraseanet_worker_subdefcreation | quote }}
-        - name: MAX_BODY_SIZE
-          value: {{ .Values.http.max_body_size | quote }}
-        - name: MAX_INPUT_VARS
-          value: {{ .Values.http.max_input_vars | quote }}
-        - name: OPCACHE_ENABLED
-          value: {{ .Values.php.opcache_enabled | quote }}
-        - name: PHP_LOG_LEVEL
-          value: {{ .Values.php.log_level | quote }}
-        - name: PHP_CLI_MEMORY_LIMIT
-          value: {{ .Values.php.php_cli_memory_limit | quote }}
-        - name: SESSION_CACHE_LIMITER
-          value: {{ .Values.php.session_cache_limiter | quote }}
-        - name: SESSION_SAVE_HANDLER
-          value: {{ .Values.php.session_save_handler | quote }}
-        - name: SESSION_SAVE_PATH
-          value: {{ .Values.php.session_save_path | quote }}
-        - name: PHRASEANET_USER_SESSION_LIFETIME
-          value: {{ .Values.app.phraseanet_user_session_lifetime | quote }}
-        - name: XDEBUG
-          value: "0"
-        - name: NEWRELIC_ENABLED
-          value: {{ .Values.php.newrelic_enabled | quote }}
-        - name: NEWRELIC_LICENSE_KEY
-          value: {{ .Values.php.newrelic_licence_key | quote }}
-        - name: NEWRELIC_APP_NAME
-          value: {{ .Values.php.newrelic_app_name | quote }}
-        - name: LC_MESSAGES
-          value: "C.UTF-8"
-        - name: LC_COLLATE
-          value: "C.UTF-8"
-        - name: LC_IDENTIFICATION
-          value: "C.UTF-8"
-        - name: LANG
-          value: "C.UTF-8"
-        - name: LC_MEASUREMENT
-          value: "C.UTF-8"
-        - name: LC_CTYPE
-          value: "C.UTF-8"
-        - name: LC_TIME
-          value: "C.UTF-8"
-        - name: LC_NAME
-          value: "C.UTF-8"
-        - name: IMAGEMAGICK_POLICY_VERSION
-          value: {{ .Values.app.imagemagick_policy_version | quote }}
-        - name: IMAGEMAGICK_POLICY_WIDTH
-          value: {{ .Values.app.imagemagick_policy_width | quote }}
-        - name: IMAGEMAGICK_POLICY_HEIGHT
-          value: {{ .Values.app.imagemagick_policy_height | quote }}
-        - name: IMAGEMAGICK_POLICY_MAP
-          value: {{ .Values.app.imagemagick_policy_map | quote }}
-        - name: IMAGEMAGICK_POLICY_MEMORY
-          value: {{ .Values.app.imagemagick_policy_memory | quote }}
-        - name: IMAGEMAGICK_POLICY_AREA
-          value: {{ .Values.app.imagemagick_policy_area | quote }}
-        - name: IMAGEMAGICK_POLICY_DISK
-          value: {{ .Values.app.imagemagick_policy_disk | quote }}
-        - name: IMAGEMAGICK_POLICY_TEMPORARY_PATH
-          value: {{ .Values.app.imagemagick_policy_temporary_path | quote }}
 {{- end }}
-
