@@ -15,17 +15,19 @@ spec:
         app: phraseanet
         tier: worker-subdefcreation
     spec:
-      {{- if .Values.nodeAffinity.enabledAffinity }}
+      {{- if .Values.Affinity }}
       affinity:
+        {{- if .Values.antiAffinity.enabled }}
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
-                  - key: node.type
+                  - key: {{ .Values.antiAffinity.nodeLabel }}
                     operator: In
                     values:
-                      - {{ .Values.nodeAffinity.systemNodeLabel }}
+                      - {{ .Values.antiAffinity.nodeLabelValue }}
               topologyKey: "kubernetes.io/hostname"
+        {{- end }}
       {{- end }}
       volumes:
       - name: phraseanet-config

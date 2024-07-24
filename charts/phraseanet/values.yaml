@@ -16,9 +16,12 @@ image:
     password:
     email:
 
-nodeAffinity:
-  enabledAffinity: false
-  systemNodeLabel: "infra"
+
+affinity: true
+antiAffinity:
+  enabled: false
+  NodeLabel: "node.type"
+  NodeLabelValue: "infra"
 
 mysql:
   enabled: true
