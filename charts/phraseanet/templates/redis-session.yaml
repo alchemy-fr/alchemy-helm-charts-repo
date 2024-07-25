@@ -15,6 +15,9 @@ spec:
         app: phraseanet
         tier: redis-session
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+    {{- end }}
       containers:
       - name: redis-session
         image: redis:5.0.5

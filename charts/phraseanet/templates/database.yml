@@ -17,6 +17,9 @@ spec:
         app: phraseanet
         tier: db
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+    {{- end }}
       volumes:
       - name: database
         persistentVolumeClaim:

@@ -16,6 +16,9 @@ spec:
         tier: saml-sp
       {{- template "saml.annotations" . }}
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+    {{- end }}
       volumes:
       {{- if eq .Values.saml.saml_configmap.enabled true }}
       - name: phraseanet-saml-idp-config-dir
