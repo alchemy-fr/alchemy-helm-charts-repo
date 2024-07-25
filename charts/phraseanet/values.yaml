@@ -17,11 +17,17 @@ image:
     email:
 
 
-affinity: true
 antiAffinity:
   enabled: false
   NodeLabel: "node.type"
   NodeLabelValue: "infra"
+  topologyKey: "topology.kubernetes.io/region"
+
+affinity:
+  enabled: false
+  NodeLabel: ""
+  NodeLabelValue: ""
+  topologyKey: ""
 
 mysql:
   enabled: true
