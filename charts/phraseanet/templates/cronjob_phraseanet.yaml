@@ -20,8 +20,8 @@ spec:
     spec:
       template:
         spec:
-        {{- if .Values.nodeSelector }}
-          nodeSelector: {{ toYaml .Values.nodeSelector | nindent 12 }}
+        {{- if $.Values.nodeSelector }}
+          nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 12 }}
         {{- end }}
           volumes:
           - name: phraseanet-config
