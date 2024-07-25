@@ -16,6 +16,17 @@ image:
     password:
     email:
 
+antiAffinity:
+  enabled: false
+  nodeLabel: ""
+  nodeLabelValue: ""
+  topologyKey: ""
+
+affinity:
+  enabled: false
+  nodeLabel: ""
+  nodeLabelValue: ""
+  topologyKey: ""
 
 mysql:
   enabled: true
