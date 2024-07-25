@@ -19,7 +19,6 @@ image:
 nodeSelector:
   kubernetes.io/os: linux
   
-
 mysql:
   enabled: true
   user: "{{ .Values.app.phraseanet_db_user }}"
