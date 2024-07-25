@@ -15,6 +15,9 @@ spec:
         app: phraseanet
         tier: worker-cmd
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+    {{- end }}
       volumes:
       - name: phraseanet-config
         persistentVolumeClaim:
