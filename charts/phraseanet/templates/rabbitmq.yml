@@ -15,6 +15,9 @@ spec:
         app: phraseanet
         tier: rabbitmq
     spec:
+    {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+    {{- end }}
       volumes:
       - name: data
       {{- if .Values.rabbitmq.persistence.enabled }}
