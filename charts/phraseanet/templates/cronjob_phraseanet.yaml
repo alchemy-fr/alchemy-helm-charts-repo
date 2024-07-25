@@ -18,6 +18,9 @@ spec:
   successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       template:
         spec:
           volumes:
