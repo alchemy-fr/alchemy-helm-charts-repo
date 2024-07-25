@@ -16,7 +16,8 @@ image:
     password:
     email:
 
-
+nodeSelector:
+  
 mysql:
   enabled: true
   user: "{{ .Values.app.phraseanet_db_user }}"
