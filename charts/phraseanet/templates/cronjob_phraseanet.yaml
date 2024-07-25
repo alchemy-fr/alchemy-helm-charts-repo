@@ -20,9 +20,9 @@ spec:
     spec:
       template:
         spec:
-          {{- if .Values.nodeSelector }}
+        {{- if .Values.nodeSelector }}
           nodeSelector: {{ toYaml .Values.nodeSelector | nindent 12 }}
-          {{- end }}
+        {{- end }}
           volumes:
           - name: phraseanet-config
             persistentVolumeClaim:
