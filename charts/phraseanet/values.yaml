@@ -16,12 +16,11 @@ image:
     password:
     email:
 
-
 antiAffinity:
   enabled: false
-  NodeLabel: "node.type"
-  NodeLabelValue: "infra"
-  topologyKey: "topology.kubernetes.io/region"
+  NodeLabel: ""
+  NodeLabelValue: ""
+  topologyKey: ""
 
 affinity:
   enabled: false
