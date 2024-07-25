@@ -16,6 +16,9 @@ image:
     password:
     email:
 
+nodeSelector:
+  kubernetes.io/os: linux
+  
 
 mysql:
   enabled: true
