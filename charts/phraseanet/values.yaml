@@ -17,7 +17,6 @@ image:
     email:
 
 nodeSelector:
-  kubernetes.io/os: linux
   
 mysql:
   enabled: true
