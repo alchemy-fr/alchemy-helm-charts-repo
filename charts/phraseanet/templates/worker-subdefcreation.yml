@@ -9,13 +9,16 @@ spec:
     matchLabels:
       app: phraseanet
       tier: worker-subdefcreation
-{{ toYaml .nodeSelector | indent 2 }}
   template:
     metadata:
       labels:
         app: phraseanet
         tier: worker-subdefcreation
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       volumes:
       - name: phraseanet-config
         persistentVolumeClaim:
@@ -30,22 +33,22 @@ spec:
         persistentVolumeClaim:
           claimName: {{ .Values.app.pvc_name.custom }}
       - name: phraseanet-tmp
-        emptyDir:
+        emptyDir: {}
       - name: phraseanet-logs
-        emptyDir:
+        emptyDir: {}
       - name: phraseanet-cache
-        emptyDir:
-      {{ if .Values.image.pullSecret.enabled }}
+        emptyDir: {}
+      {{- if .Values.image.pullSecret.enabled }}
       imagePullSecrets:
       - name: {{ .Values.image.pullSecret.name }}
-      {{ end }}
+      {{- end }}
       containers:
       - name: phraseanet-worker
         image: {{ .Values.image.registry }}/phraseanet-worker:{{ .Values.image.tag.phraseanet }}
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
-{{ toYaml .Values.app.worker.resources | indent 12 }}
+          {{- toYaml .Values.app.worker.resources | nindent 12 }}
         volumeMounts:
         - name: phraseanet-config
           mountPath: "/var/alchemy/Phraseanet/config"
@@ -68,7 +71,7 @@ spec:
           value: {{ .Values.app.worker.phraseanet_explode_worker | quote }}
         - name: PHRASEANET_WORKERS_LAUNCH_METHOD
           value: {{ .Values.app.worker.phraseanet_workers_launch_method | quote }}
-        - name:  PHRASEANET_WORKER_subdefCreation
+        - name: PHRASEANET_WORKER_subdefCreation
           value: {{ .Values.app.worker.phraseanet_worker_subdefcreation | quote }}
         - name: MAX_BODY_SIZE
           value: {{ .Values.http.max_body_size | quote }}
@@ -129,4 +132,3 @@ spec:
         - name: IMAGEMAGICK_POLICY_TEMPORARY_PATH
           value: {{ .Values.app.imagemagick_policy_temporary_path | quote }}
 {{- end }}
-
