@@ -18,14 +18,14 @@ image:
 
 antiAffinity:
   enabled: false
-  NodeLabel: ""
-  NodeLabelValue: ""
+  nodeLabel: ""
+  nodeLabelValue: ""
   topologyKey: ""
 
 affinity:
   enabled: false
-  NodeLabel: ""
-  NodeLabelValue: ""
+  nodeLabel: ""
+  nodeLabelValue: ""
   topologyKey: ""
 
 mysql:
