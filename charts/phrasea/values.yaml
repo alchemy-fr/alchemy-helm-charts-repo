@@ -29,6 +29,8 @@ image:
     password:
     email:
 
+nodeSelector:
+
 configurator:
   executeMigration: ~
 

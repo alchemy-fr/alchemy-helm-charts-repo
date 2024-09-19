@@ -15,6 +15,9 @@ spec:
         app: phrasea
         tier: minio
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- end }}
       containers:
       - name: minio
         image: minio/minio

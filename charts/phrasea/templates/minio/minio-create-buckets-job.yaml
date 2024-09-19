@@ -11,6 +11,9 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- end }}    
       containers:
       - name: {{ $jobName }}
         image: minio/mc:RELEASE.2020-09-18T00-13-21Z

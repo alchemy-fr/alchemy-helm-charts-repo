@@ -17,6 +17,9 @@ spec:
         tier: dashboard
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- end }}
       containers:
       - name: dashboard
         image: {{ $.Values.repository.baseurl }}/ps-dashboard:{{ $.Values.repository.tag }}

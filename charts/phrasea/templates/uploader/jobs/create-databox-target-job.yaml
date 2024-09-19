@@ -24,6 +24,9 @@ spec:
   template:
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- end }}
       volumes:
       - name: scripts
         configMap:

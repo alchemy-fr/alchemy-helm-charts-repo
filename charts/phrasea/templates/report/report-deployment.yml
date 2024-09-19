@@ -17,6 +17,9 @@ spec:
         tier: report-api
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- end }}
       containers:
       - name: report-api
         image: {{ $.Values.repository.baseurl }}/ps-report-api:{{ $.Values.repository.tag }}
