@@ -25,7 +25,8 @@ spec:
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
       {{- if .Values.nodeSelector }}
-      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      nodeSelector: 
+        {{- toYaml .Values.nodeSelector | indent 8 }}
       {{- end }}
       volumes:
       - name: scripts
