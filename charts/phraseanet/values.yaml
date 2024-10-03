@@ -108,6 +108,7 @@ http:
 php:
   php_cli_memory_limit: "2048M"
   fpm_memory_limit: "2048M"
+  php_upload_tmp_dir: "/var/alchemy/Phraseanet/tmp/php_upload_tmp"
   fpm_pm_type: "dynamic"
   fpm_maxchildren: 9
   fpm_startservers: 3
