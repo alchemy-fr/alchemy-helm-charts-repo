@@ -102,7 +102,7 @@ spec:
         - name: PHP_LOG_LEVEL
           value: {{ .Values.php.log_level | quote }}
         - name: PHP_UPLOAD_TMP_DIR
-          value: "/var/alchemy/Phraseanet/tmp/php_upload_tmp"
+          value: {{ .Values.php.php_upload_tmp_dir | quote }}
         - name: PHP_CLI_MEMORY_LIMIT
           value: {{ .Values.php.php_cli_memory_limit | quote }}
         - name: PHRASEANET_INSTALL
