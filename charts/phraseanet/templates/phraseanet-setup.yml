@@ -48,7 +48,7 @@ spec:
       containers:
       - name: phraseanet-setup
         image: {{ .Values.image.registry }}/phraseanet-setup:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.app.web.resources | indent 12 }}

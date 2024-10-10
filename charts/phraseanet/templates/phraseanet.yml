@@ -56,7 +56,7 @@ spec:
       containers:
       - name: phraseanet-fpm
         image: {{ .Values.image.registry }}/phraseanet-fpm:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.app.web.resources | indent 12 }}

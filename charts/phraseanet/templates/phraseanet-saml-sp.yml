@@ -47,7 +47,7 @@ spec:
       containers:
       - name: phraseanet-saml-sp
         image: {{ .Values.image.registry }}/phraseanet-saml-sp:{{ .Values.image.tag.phraseanet_saml_sp }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.app.web.resources | indent 12 }}

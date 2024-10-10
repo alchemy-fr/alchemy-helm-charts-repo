@@ -31,7 +31,7 @@ spec:
       containers:
       - name: db
         image: {{ .Values.image.registry }}/phraseanet-db:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         env:
         - name: MYSQL_ROOT_PASSWORD

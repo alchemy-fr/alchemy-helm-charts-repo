@@ -3,11 +3,12 @@ running: true
 
 image:
   registry: alchemyfr
+  imagePullPolicy: IfNotPresent
   tag:
-      phraseanet: 4.1.8-rc7
+      phraseanet: 4.1.9
       phraseanet_saml_sp: latest
-      database: 4.1.8-rc7
-      elasticsearch: 4.1.8-rc7
+      database: 4.1.9
+      elasticsearch: 4.1.9
   pullSecret:
     enabled: false
     name: registry-secret
