@@ -3,6 +3,7 @@ running: true
 
 image:
   registry: alchemyfr
+  imagePullPolicy: IfNotPresent
   tag:
       phraseanet: 4.1.8-rc7
       phraseanet_saml_sp: latest

@@ -38,7 +38,7 @@ spec:
       containers:
       - name: gateway
         image: {{ .Values.image.registry }}/phraseanet-nginx:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.app.gateway.resources | indent 12 }}
