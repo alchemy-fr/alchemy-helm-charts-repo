@@ -31,7 +31,7 @@ spec:
       containers:
       - name: elasticsearch
         image: {{ .Values.image.registry }}/phraseanet-elasticsearch:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.elasticsearch.resources | indent 12 }}

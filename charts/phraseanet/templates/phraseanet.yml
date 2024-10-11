@@ -56,7 +56,7 @@ spec:
       containers:
       - name: phraseanet-fpm
         image: {{ .Values.image.registry }}/phraseanet-fpm:{{ .Values.image.tag.phraseanet }}
-        imagePullPolicy: Always
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         resources:
 {{ toYaml .Values.app.web.resources | indent 12 }}
@@ -109,6 +109,8 @@ spec:
           value: {{ .Values.php.opcache_enabled | quote }}
         - name: PHP_LOG_LEVEL
           value: {{ .Values.php.log_level | quote }}
+        - name: PHP_UPLOAD_TMP_DIR
+          value: {{ .Values.php.php_upload_tmp_dir | quote }}
         - name: FPM_MEMORY_LIMIT
           value: {{ .Values.php.fpm_memory_limit | quote }}
         - name: FPM_PM_TYPE
