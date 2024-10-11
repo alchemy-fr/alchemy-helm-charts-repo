@@ -22,8 +22,8 @@ spec:
         {{- include "annotation.checksum.configs" $ | indent 8 }}
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
-      {{- if .Values.nodeSelector }}
-      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- if $.Values.nodeSelector }}
+      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 4 }}
       {{- end }}
       volumes:
 {{- include "volumes.configs" $ | indent 6 }}

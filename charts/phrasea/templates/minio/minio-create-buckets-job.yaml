@@ -11,8 +11,8 @@ metadata:
 spec:
   template:
     spec:
-      {{- if .Values.nodeSelector }}
-      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 6 }}
+      {{- if $.Values.nodeSelector }}
+      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 4 }}
       {{- end }}    
       containers:
       - name: {{ $jobName }}
