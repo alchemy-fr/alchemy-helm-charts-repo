@@ -16,7 +16,7 @@ spec:
         tier: minio
     spec:
       {{- if $.Values.nodeSelector }}
-      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 4 }}
+      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 8 }}
       {{- end }}
       containers:
       - name: minio
