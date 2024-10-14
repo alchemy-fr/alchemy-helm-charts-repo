@@ -20,7 +20,7 @@ spec:
     spec:
       {{ include "imagePullSecrets" $ | indent 6 }}
       {{- if $.Values.nodeSelector }}
-      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 4 }}
+      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 8 }}
       {{- end }}
       containers:
       - name: {{ $appName }}-api-nginx

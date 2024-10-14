@@ -11,7 +11,7 @@ spec:
   template:
     spec:
       {{- if $.Values.nodeSelector }}
-      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 4 }}
+      nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 8 }}
       {{- end }}
       volumes:
       {{- include "volumes.configs" $ | indent 6 }}
