@@ -34,6 +34,13 @@ spec:
         {{- if not (eq "latest" $.Values.repository.tag) }}
         imagePullPolicy: Always
         {{- end }}
+        resources:
+          requests:
+            memory: {{(index $.Values $appName).api.resources.requests.memory}}
+            cpu: {{(index $.Values $appName).api.resources.requests.cpu}}
+          limits:
+            memory: {{(index $.Values $appName).api.resources.limits.memory}}
+            cpu: {{(index $.Values $appName).api.resources.limits.cpu}}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs

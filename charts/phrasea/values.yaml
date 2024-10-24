@@ -74,6 +74,14 @@ databox:
       tls: []
     hostname:
     baseUrl:
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
     config:
       requestSignatureTtl: 86400
       s3Storage:
@@ -115,6 +123,15 @@ databox:
       tls: []
     oauthClient:
       id: databox-app
+  worker:
+    replicas: 1
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+    limits:
+      cpu: "2000m"
+      memory: "4096Mi"
   rabbitmq:
     vhost: databox
   database:
