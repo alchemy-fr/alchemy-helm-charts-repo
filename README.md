@@ -10,6 +10,9 @@ Phraseanet is our active and comprehensive DAM solution that enables organizatio
 ### Phrasea
 Phrasea is the modern descendant of Phraseanet, representing a complete rewrite of the original solution. Designed for modern infrastructures and streamlined operations, Phrasea offers enhanced performance and simplified management. The Helm chart for Phrasea facilitates its seamless integration and management within a Kubernetes environment, leveraging the latest advancements in technology and design.
 
+### Upcoming Changes
+Soon, we will be splitting this repository into two separate ones—one for Phraseanet and another for Phrasea—to better align with their development paths and to streamline updates and management.
+
 ## Configuration
 
 Each chart includes a `values.yaml` file, which you can customize according to your needs. For detailed configuration options, it is recommended to review the specific documentation of each chart.
