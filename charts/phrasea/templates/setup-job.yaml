@@ -19,8 +19,8 @@ spec:
       nodeSelector: {{ toYaml $.Values.nodeSelector | nindent 8 }}
       {{- end }}
       volumes:
-{{- include "volumes.configs" $ | indent 6 }}
-{{- include "app.volumes" $tplArgs | indent 6 }}
+      {{- include "volumes.configs" $ | indent 6 }}
+      {{- include "app.volumes" $tplArgs | indent 6 }}
       containers:
       - name: {{ $appName }}-php-job
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
@@ -32,15 +32,18 @@ spec:
         volumeMounts:
         - name: configs
           mountPath: /configs
-{{- include "app.volumesMounts" $tplArgs | indent 8 }}
+        {{- include "app.volumesMounts" $tplArgs | indent 8 }}
         env:
-{{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.configuratorSecrets" $ | indent 8 }}
         envFrom:
-{{- include "configMapRef.phpApp" $ | indent 8 }}
-{{- include "envFrom.rabbitmq" $ | indent 8 }}
-{{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- include "envFrom.phpApp" $ | indent 8 }}
+        {{- include "envFrom.rabbitmq" $ | indent 8 }}
+        {{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- if .adminOAuthClient }}
         - secretRef:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
+        {{- end }}
         - configMapRef:
             name: {{ $appName }}-api-config
       restartPolicy: Never

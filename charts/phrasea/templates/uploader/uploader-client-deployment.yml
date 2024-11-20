@@ -41,4 +41,6 @@ spec:
             name: urls-config
         - configMapRef:
             name: uploader-client-config
+        - configMapRef:
+            name: configurator-s3
 {{- end }}

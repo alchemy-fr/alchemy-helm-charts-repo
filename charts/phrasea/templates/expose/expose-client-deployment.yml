@@ -38,4 +38,6 @@ spec:
             name: urls-config
         - configMapRef:
             name: expose-client-config
+        - configMapRef:
+            name: configurator-s3
 {{- end }}

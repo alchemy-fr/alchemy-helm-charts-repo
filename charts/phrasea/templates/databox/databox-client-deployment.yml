@@ -40,4 +40,6 @@ spec:
             name: soketi
         - configMapRef:
             name: databox-client-config
+        - configMapRef:
+            name: configurator-s3
 {{- end }}

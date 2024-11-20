@@ -33,6 +33,21 @@ nodeSelector:
 
 configurator:
   executeMigration: ~
+  database:
+    name: configurator
+  s3:
+    endpoint: "{{ .Values.minio.baseUrl }}"
+    region:
+    bucketName: config
+    # Can be used to support a single CloudFront distribution with multiple origins
+    pathPrefix: ''
+    usePathStyleEndpoint: false
+    accessKey:
+    secretKey:
+    externalSecretKey:
+    externalSecretMapping:
+      accessKey: CONFIGURATOR_S3_ACCESS_KEY
+      secretKey: CONFIGURATOR_S3_SECRET_KEY
 
 keycloak:
   realm:
@@ -82,7 +97,7 @@ databox:
         bucketName: databox
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -161,7 +176,7 @@ expose:
         bucketName: expose
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -250,7 +265,7 @@ uploader:
         bucketName: uploader-deposit
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -392,6 +407,7 @@ globalConfig:
 
 _internal:
   services:
+  - configurator
   - databox
   - expose
   - notify
