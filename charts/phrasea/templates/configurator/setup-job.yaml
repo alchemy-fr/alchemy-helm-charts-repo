@@ -1,11 +1,14 @@
-{{- if .Values.configurator.executeMigration }}
+{{- if .Values.stack.runSetups }}
+{{ $appName := "configurator" }}
+{{- with (index $.Values $appName)  }}
+{{ $tplArgs := dict "app" $appName "ctx" . "glob" $ }}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: configurator-migrate-{{ .Values.configurator.executeMigration }}
+  name: {{ $appName }}-setup
   annotations:
-    "helm.sh/hook": post-upgrade
-    "helm.sh/hook-weight": "7"
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "6"
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
@@ -18,9 +21,9 @@ spec:
       {{- include "volumes.configs" $ | indent 6 }}
       containers:
       - {{- include "configurator.containerSpecs" $ | nindent 8 }}
-        args:
-          - bin/console
-          - 'migration:{{ .Values.configurator.executeMigration }}'
+        args: ["bin/setup.sh"]
       restartPolicy: Never
   backoffLimit: 0
+---
+{{- end }}
 {{- end }}

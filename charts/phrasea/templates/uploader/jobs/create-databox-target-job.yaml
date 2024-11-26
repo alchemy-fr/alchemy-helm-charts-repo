@@ -51,7 +51,7 @@ spec:
         envFrom:
         - configMapRef:
             name: uploader-api-config
-{{- include "configMapRef.phpApp" $ | indent 8 }}
+{{- include "envFrom.phpApp" $ | indent 8 }}
 {{- include "envFrom.rabbitmq" $ | indent 8 }}
 {{- include "envFrom.postgresql" $ | indent 8 }}
       restartPolicy: Never
