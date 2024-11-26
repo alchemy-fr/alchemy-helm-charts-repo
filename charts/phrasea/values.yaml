@@ -407,7 +407,6 @@ globalConfig:
 
 _internal:
   services:
-  - configurator
   - databox
   - expose
   - notify
