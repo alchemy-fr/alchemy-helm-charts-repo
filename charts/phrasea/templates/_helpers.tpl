@@ -103,6 +103,8 @@ gateway-tls
 - name: RABBITMQ_VHOST
   value: {{ $ctx.rabbitmq.vhost | quote }}
 {{- end }}
+- name: CONFIGURATOR_DB_NAME
+  value: {{ $glob.Values.configurator.database.name | quote }}
 {{- if $ctx.database }}
 - name: DB_NAME
   value: {{ $ctx.database.name | quote }}
