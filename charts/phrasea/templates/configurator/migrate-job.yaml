@@ -5,9 +5,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $appName }}-setup
+  name: {{ $appName }}-migrate
   annotations:
-    "helm.sh/hook": post-upgrade
+    "helm.sh/hook": pre-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
@@ -21,6 +21,7 @@ spec:
       containers:
       - {{- include "configurator.containerSpecs" $ | nindent 8 }}
         args: ["bin/migrate.sh"]
+        terminationMessagePolicy: FallbackToLogsOnError
       restartPolicy: Never
   backoffLimit: 0
 ---

@@ -230,6 +230,8 @@ env:
   value: {{ required "Missing mailer.dsn value" .Values.mailer.dsn | quote }}
 - name: AUTH_DB_NAME
   value: {{ .Values.auth.database.name | quote }}
+- name: CONFIGURATOR_DB_NAME
+  value: {{ .Values.configurator.database.name | quote }}
 {{- range .Values._internal.services }}
 {{- $appName := . }}
 {{- with (index $.Values $appName) }}
