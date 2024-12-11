@@ -75,6 +75,10 @@ gateway-tls
     name: urls-config
 - configMapRef:
     name: configurator-s3
+- configMapRef:
+    name: novu
+- secretRef:
+    name: novu
 {{- end }}
 
 {{- define "envRef.phpApp" }}

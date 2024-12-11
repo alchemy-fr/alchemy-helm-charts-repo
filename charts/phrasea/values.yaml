@@ -77,6 +77,20 @@ auth:
   database:
     name: auth
 
+novu:
+  enabled: true
+  bridge:
+    hostname:
+    baseUrl:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+  apiHost: api.novu.co
+  wsUrl: https://ws.novu.co
+  applicationIdentifier:
+
 databox:
   enabled: true
   api:
@@ -221,25 +235,6 @@ expose:
     baseUrl: "{{ .Values.zippy.ingress.baseUrl }}"
     clientId: expose
     clientSecret: __CHANGE_ME_zEp1JbcjuQ
-
-notify:
-  enabled: true
-  api:
-    hostname:
-    baseUrl:
-    ingress:
-      enabled: true
-      annotations: {}
-      extraLabels: {}
-      tls: []
-  adminOAuthClient:
-    externalSecretName:
-    id: notify-admin
-    secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
-  rabbitmq:
-    vhost: notify
-  database:
-    name: notify
 
 uploader:
   enabled: true
@@ -409,7 +404,6 @@ _internal:
   services:
   - databox
   - expose
-  - notify
   - uploader
   clients:
   - databox
