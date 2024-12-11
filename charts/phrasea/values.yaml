@@ -90,6 +90,7 @@ novu:
   apiHost: api.novu.co
   wsUrl: https://ws.novu.co
   applicationIdentifier:
+  secretKey:
 
 databox:
   enabled: true
