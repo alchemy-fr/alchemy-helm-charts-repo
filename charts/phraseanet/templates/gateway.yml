@@ -74,6 +74,8 @@ spec:
           value: {{ .Values.http.gateway_users }}
         - name: "GATEWAY_CSP"
           value: {{ .Values.http.gateway_csp | quote }}
+        - name: "HTTP_REQUEST_LIMITS"
+          value: {{ .Values.http.request_limits | quote }}          
         - name: "HTTP_READ_REQUEST_LIMIT_MEMORY"
           value: {{ .Values.http.read_request_limit_memory | quote }}
         - name: "HTTP_READ_REQUEST_LIMIT_RATE"
