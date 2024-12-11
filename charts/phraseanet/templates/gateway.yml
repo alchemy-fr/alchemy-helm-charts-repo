@@ -74,5 +74,18 @@ spec:
           value: {{ .Values.http.gateway_users }}
         - name: "GATEWAY_CSP"
           value: {{ .Values.http.gateway_csp | quote }}
+        - name: "HTTP_READ_REQUEST_LIMIT_MEMORY"
+          value: {{ .Values.http.read_request_limit_memory | quote }}
+        - name: "HTTP_READ_REQUEST_LIMIT_RATE"
+          value: {{ .Values.http.read_request_limit_rate | quote }}
+        - name: "HTTP_READ_REQUEST_LIMIT_BURST"
+          value: {{ .Values.http.read_request_limit_burst | quote }}
+        - name: "HTTP_WRITE_REQUEST_LIMIT_MEMORY"
+          value: {{ .Values.http.write_request_limit_memory | quote }}
+        - name: "HTTP_WRITE_REQUEST_LIMIT_RATE"
+          value: {{ .Values.http.write_request_limit_rate | quote }}
+        - name: "HTTP_WRITE_REQUEST_LIMIT_BURST"
+          value: {{ .Values.http.write_request_limit_burst | quote }}
+
 {{- end }}
 
