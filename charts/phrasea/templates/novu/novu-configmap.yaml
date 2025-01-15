@@ -11,6 +11,7 @@ metadata:
 data:
   NOVU_API_HOST: {{ required "Missing novu.apiHost" .apiHost | quote }}
   NOVU_API_URL: {{ (print "https://" (required "Missing novu.apiHost" .apiHost)) | quote }}
+  NOVU_DASHBOARD_URL: {{ required "Missing novu.dashboardUrl" .dashboardUrl | quote }}
   NOVU_BRIDGE_URL: {{ required "Missing novu.bridge.baseUrl" .bridge.baseUrl | quote }}
   NOVU_WS_URL: {{ required "Missing novu.wsUrl" .wsUrl | quote }}
   NOVU_APPLICATION_IDENTIFIER: {{ required "Missing novu.applicationIdentifier" .applicationIdentifier | quote }}

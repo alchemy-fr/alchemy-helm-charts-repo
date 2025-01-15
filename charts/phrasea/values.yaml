@@ -87,6 +87,7 @@ novu:
       annotations: {}
       extraLabels: {}
       tls: []
+  dashboardUrl: https://dashboard.novu.co
   apiHost: api.novu.co
   wsUrl: https://ws.novu.co
   applicationIdentifier:
