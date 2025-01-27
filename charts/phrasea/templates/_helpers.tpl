@@ -278,3 +278,32 @@ envFrom:
       name: {{ $secretName }}
       key: {{ $mapping.secretKey }}
 {{- end }}
+
+{{- define "novuBridge.containerSpecs" -}}
+image: {{ .Values.repository.baseurl }}/ps-novu-bridge:{{ .Values.repository.tag }}
+{{- if not (eq "latest" .Values.repository.tag) }}
+imagePullPolicy: Always
+{{- end }}
+terminationMessagePolicy: FallbackToLogsOnError
+env:
+- name: NEXT_PUBLIC_NOVU_SECRET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: novu
+      key: NOVU_SECRET_KEY
+- name: NEXT_PUBLIC_NOVU_APPLICATION_IDENTIFIER
+  valueFrom:
+    configMapKeyRef:
+      name: novu
+      key: NOVU_APPLICATION_IDENTIFIER
+- name: NEXT_PUBLIC_NOVU_API_URL
+  valueFrom:
+    configMapKeyRef:
+      name: novu
+      key: NOVU_API_URL
+envFrom:
+  - configMapRef:
+      name: novu
+  - secretRef:
+      name: novu
+{{- end }}
