@@ -34,6 +34,8 @@ spec:
                 name: {{ include "secretName.postgresql" $ }}
             - secretRef:
                 name: keycloak
+            - configMapRef:
+                name: urls-config            
           env:
           - name: KC_PROXY
             value: edge
@@ -41,7 +43,5 @@ spec:
             value: {{ .hostname | quote }}
           - name: KC_DB
             value: postgres
-          - name: DASHBOARD_CLIENT_URL
-            value: dashboard.phrasea.local
 {{- end }}
 {{- end }}
