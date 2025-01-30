@@ -25,7 +25,7 @@ spec:
           image: {{ $.Values.repository.baseurl }}/ps-keycloak:{{ $.Values.repository.tag }}
           args:
           - 'start'
-          imagePullPolicy: $.Values.repository.imagePullPolicy
+          imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
           terminationMessagePolicy: FallbackToLogsOnError
           envFrom:
             - secretRef:

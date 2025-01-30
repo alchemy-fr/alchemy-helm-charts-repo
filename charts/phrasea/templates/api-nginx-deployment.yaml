@@ -25,7 +25,7 @@ spec:
       containers:
       - name: {{ $appName }}-api-nginx
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-nginx:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         env:
       {{- if .api.subnet }}

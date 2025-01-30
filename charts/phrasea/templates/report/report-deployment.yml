@@ -23,7 +23,7 @@ spec:
       containers:
       - name: report-api
         image: {{ $.Values.repository.baseurl }}/ps-report-api:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         envFrom:
         - configMapRef:

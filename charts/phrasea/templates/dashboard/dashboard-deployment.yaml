@@ -23,7 +23,7 @@ spec:
       containers:
       - name: dashboard
         image: {{ $.Values.repository.baseurl }}/ps-dashboard:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         envFrom:
         - configMapRef:
