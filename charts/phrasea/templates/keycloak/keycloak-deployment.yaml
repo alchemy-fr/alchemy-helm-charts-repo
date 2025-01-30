@@ -41,5 +41,7 @@ spec:
             value: {{ .hostname | quote }}
           - name: KC_DB
             value: postgres
+          - name: DASHBOARD_CLIENT_URL
+            value: dashboard.phrasea.local
 {{- end }}
 {{- end }}
