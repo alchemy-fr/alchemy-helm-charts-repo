@@ -26,7 +26,7 @@ spec:
       containers:
       - name: expose-client
         image: {{ $.Values.repository.baseurl }}/ps-expose-client:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs

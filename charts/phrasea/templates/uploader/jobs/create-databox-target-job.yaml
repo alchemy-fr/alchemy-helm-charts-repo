@@ -35,7 +35,7 @@ spec:
       containers:
       - name: {{ $jobName }}
         image: {{ $.Values.repository.baseurl }}/ps-uploader-api-php:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         args: ["/setup/job.sh"]
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:

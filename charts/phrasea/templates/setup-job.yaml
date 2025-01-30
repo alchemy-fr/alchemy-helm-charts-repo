@@ -24,7 +24,7 @@ spec:
       containers:
       - name: {{ $appName }}-php-job
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         args: ["bin/setup.sh"]
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:

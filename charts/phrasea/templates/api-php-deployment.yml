@@ -31,7 +31,7 @@ spec:
       containers:
       - name: {{ $appName }}-api-php
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
-        imagePullPolicy: $.Values.repository.imagePullPolicy
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs
