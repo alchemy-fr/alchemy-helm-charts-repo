@@ -23,12 +23,10 @@ spec:
           containers:
           - name: {{ $appName }}-api-php
             image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
-            {{- if not (eq "latest" $.Values.repository.tag) }}
+            imagePullPolicy: $.Values.repository.imagePullPolicy
             command:
               - bin/console
               - app:matomo:sync-phraseanet
-            imagePullPolicy: Always
-            {{- end }}
             volumeMounts:
             - name: configs
               mountPath: /configs

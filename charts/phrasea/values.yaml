@@ -1,6 +1,7 @@
 repository:
   baseurl: alchemyfr
   tag: latest
+  imagePullPolicy: IfNotPresent
 
 acme:
   enabled: false

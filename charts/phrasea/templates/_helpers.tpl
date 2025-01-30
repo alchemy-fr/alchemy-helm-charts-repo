@@ -213,9 +213,7 @@ networking.k8s.io/v1beta1
 {{- define "configurator.containerSpecs" -}}
 name: configurator
 image: {{ .Values.repository.baseurl }}/ps-configurator:{{ .Values.repository.tag }}
-{{- if not (eq "latest" .Values.repository.tag) }}
-imagePullPolicy: Always
-{{- end }}
+imagePullPolicy: .Values.repository.imagePullPolicy
 terminationMessagePolicy: FallbackToLogsOnError
 volumeMounts:
 - name: configs
