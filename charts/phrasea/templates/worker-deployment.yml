@@ -40,11 +40,12 @@ spec:
         - name: SECRETS_SECRET_KEY
           value: {{ required "Missing databox.api.config.secrets.secretKey value" .api.config.secrets.secretKey | quote }}
         {{- end }}
-{{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.configuratorSecrets" $ | indent 8 }}
         envFrom:
-{{- include "configMapRef.phpApp" $ | indent 8 }}
-{{- include "envFrom.rabbitmq" $ | indent 8 }}
-{{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- include "envFrom.phpApp" $ | indent 8 }}
+        {{- include "envFrom.rabbitmq" $ | indent 8 }}
+        {{- include "envFrom.postgresql" $ | indent 8 }}
         - secretRef:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
         {{- if (eq "databox" $appName) }}

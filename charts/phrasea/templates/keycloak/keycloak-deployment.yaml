@@ -32,6 +32,8 @@ spec:
                 name: {{ include "secretName.postgresql" $ }}
             - secretRef:
                 name: keycloak
+            - configMapRef:
+                name: urls-config            
           env:
           - name: KC_PROXY
             value: edge

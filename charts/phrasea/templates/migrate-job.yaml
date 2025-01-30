@@ -29,15 +29,17 @@ spec:
         volumeMounts:
         - name: configs
           mountPath: /configs
-{{- include "app.volumesMounts" $tplArgs | indent 8 }}
+        {{- include "app.volumesMounts" $tplArgs | indent 8 }}
         env:
-{{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.phpApp" $tplArgs | indent 8 }}
         envFrom:
-{{- include "configMapRef.phpApp" $ | indent 8 }}
-{{- include "envFrom.rabbitmq" $ | indent 8 }}
-{{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- include "envFrom.phpApp" $ | indent 8 }}
+        {{- include "envFrom.rabbitmq" $ | indent 8 }}
+        {{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- if .adminOAuthClient }}
         - secretRef:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
+        {{- end }}
         - configMapRef:
             name: {{ $appName }}-api-config
       restartPolicy: Never

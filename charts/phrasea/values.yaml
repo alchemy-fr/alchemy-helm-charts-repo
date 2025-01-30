@@ -34,6 +34,21 @@ nodeSelector:
 
 configurator:
   executeMigration: ~
+  database:
+    name: configurator
+  s3:
+    endpoint: "{{ .Values.minio.baseUrl }}"
+    region:
+    bucketName: config
+    # Can be used to support a single CloudFront distribution with multiple origins
+    pathPrefix: ''
+    usePathStyleEndpoint: false
+    accessKey:
+    secretKey:
+    externalSecretKey:
+    externalSecretMapping:
+      accessKey: CONFIGURATOR_S3_ACCESS_KEY
+      secretKey: CONFIGURATOR_S3_SECRET_KEY
 
 keycloak:
   realm:
@@ -63,6 +78,22 @@ auth:
   database:
     name: auth
 
+novu:
+  enabled: true
+  bridge:
+    hostname:
+    baseUrl:
+    ingress:
+      enabled: true
+      annotations: {}
+      extraLabels: {}
+      tls: []
+  dashboardUrl: https://dashboard.novu.co
+  apiHost: api.novu.co
+  wsUrl: https://ws.novu.co
+  applicationIdentifier:
+  secretKey:
+
 databox:
   enabled: true
   api:
@@ -83,7 +114,7 @@ databox:
         bucketName: databox
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -162,7 +193,7 @@ expose:
         bucketName: expose
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -208,25 +239,6 @@ expose:
     clientId: expose
     clientSecret: __CHANGE_ME_zEp1JbcjuQ
 
-notify:
-  enabled: true
-  api:
-    hostname:
-    baseUrl:
-    ingress:
-      enabled: true
-      annotations: {}
-      extraLabels: {}
-      tls: []
-  adminOAuthClient:
-    externalSecretName:
-    id: notify-admin
-    secret: '__CHANGE_ME_5H$56@IbhNuJpDY3O#'
-  rabbitmq:
-    vhost: notify
-  database:
-    name: notify
-
 uploader:
   enabled: true
   api:
@@ -251,7 +263,7 @@ uploader:
         bucketName: uploader-deposit
         # Can be used to support a single CloudFront distribution with multiple origins
         pathPrefix: ''
-        usePathSyleEndpoint: false
+        usePathStyleEndpoint: false
         accessKey:
         secretKey:
         externalSecretKey:
@@ -395,7 +407,6 @@ _internal:
   services:
   - databox
   - expose
-  - notify
   - uploader
   clients:
   - databox

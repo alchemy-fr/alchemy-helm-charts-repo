@@ -68,23 +68,26 @@ gateway-tls
     name: {{ include "secretName.postgresql" . }}
 {{- end }}
 
-{{- define "secretRef.postgresql" }}
-- secretRef:
-    name: {{ .Values.postgresql.externalSecretName | default "api-db-secret" }}
-{{- end }}
-
-{{- define "configMapRef.phpApp" }}
+{{- define "envFrom.phpApp" }}
 - configMapRef:
     name: php-config
 - configMapRef:
     name: urls-config
+- configMapRef:
+    name: configurator-s3
+- configMapRef:
+    name: novu
+- secretRef:
+    name: novu
 {{- end }}
 
 {{- define "envRef.phpApp" }}
 {{- $appName := .app }}
 {{- $ctx := .ctx }}
 {{- $glob := .glob }}
-{{- if or (eq $appName "databox") (or (eq $appName "uploader") (eq $appName "expose")) }}
+{{- if $ctx.api }}
+{{- if $ctx.api.config }}
+{{- if $ctx.api.config.s3Storage }}
 {{- $secretName := $ctx.api.config.s3Storage.externalSecretKey | default (printf "%s-s3-secret" $appName) }}
 {{- $mapping := $ctx.api.config.s3Storage.externalSecretMapping }}
 - name: S3_ACCESS_KEY
@@ -98,10 +101,14 @@ gateway-tls
       name: {{ $secretName }}
       key: {{ $mapping.secretKey }}
 {{- end }}
+{{- end }}
+{{- end }}
 {{- if $ctx.rabbitmq }}
 - name: RABBITMQ_VHOST
   value: {{ $ctx.rabbitmq.vhost | quote }}
 {{- end }}
+- name: CONFIGURATOR_DB_NAME
+  value: {{ $glob.Values.configurator.database.name | quote }}
 {{- if $ctx.database }}
 - name: DB_NAME
   value: {{ $ctx.database.name | quote }}
@@ -149,8 +156,8 @@ gateway-tls
 {{- $ctx := .ctx }}
 {{- $glob := .glob }}
 S3_ENDPOINT: {{ tpl $ctx.s3Storage.endpoint $glob | quote }}
-S3_REGION: {{ $ctx.s3Storage.region | default "eu-central-1" | quote }}
-S3_USE_PATH_STYLE_ENDPOINT: {{ ternary "true" "false" (or $ctx.s3Storage.usePathSyleEndpoint $glob.Values.minio.enabled) | quote }}
+S3_REGION: {{ $ctx.s3Storage.region | default "eu-west-3" | quote }}
+S3_USE_PATH_STYLE_ENDPOINT: {{ ternary "true" "false" (or $ctx.s3Storage.usePathStyleEndpoint $glob.Values.minio.enabled) | quote }}
 S3_BUCKET_NAME: {{ $ctx.s3Storage.bucketName | quote }}
 S3_PATH_PREFIX: {{ $ctx.s3Storage.pathPrefix | quote }}
 {{- end }}
@@ -160,7 +167,7 @@ S3_PATH_PREFIX: {{ $ctx.s3Storage.pathPrefix | quote }}
 {{- $glob := .glob }}
 {{- if $ctx.cloudFront.url }}
 CLOUD_FRONT_URL: {{ tpl $ctx.cloudFront.url $glob | quote }}
-CLOUD_FRONT_REGION: {{ $ctx.cloudFront.region | default "eu-central-1" | quote }}
+CLOUD_FRONT_REGION: {{ $ctx.cloudFront.region | default "eu-west-3" | quote }}
 CLOUD_FRONT_PRIVATE_KEY: {{ $ctx.cloudFront.privateKey | quote }}
 CLOUD_FRONT_KEY_PAIR_ID: {{ $ctx.cloudFront.keyPairId | quote }}
 CLOUD_FRONT_TTL: {{ $ctx.cloudFront.ttl | quote }}
@@ -225,15 +232,19 @@ env:
   value: {{ required "Missing mailer.dsn value" .Values.mailer.dsn | quote }}
 - name: AUTH_DB_NAME
   value: {{ .Values.auth.database.name | quote }}
+- name: CONFIGURATOR_DB_NAME
+  value: {{ .Values.configurator.database.name | quote }}
 {{- range .Values._internal.services }}
 {{- $appName := . }}
 {{- with (index $.Values $appName) }}
 - name: {{ upper $appName }}_DB_NAME
   value: {{ .database.name | quote }}
+{{- if .adminOAuthClient }}
 - name: {{ upper $appName }}_ADMIN_CLIENT_ID
   value: {{ .adminOAuthClient.id | quote }}
 - name: {{ upper $appName }}_ADMIN_CLIENT_SECRET
   value: {{ .adminOAuthClient.secret | quote }}
+{{- end }}
 {{- end }}
 {{- end }}
 {{- range .Values._internal.clients }}
@@ -246,7 +257,51 @@ env:
 envFrom:
 - secretRef:
     name: keycloak
-{{- include "configMapRef.phpApp" $ }}
+{{- include "envFrom.phpApp" $ }}
 {{- include "envFrom.rabbitmq" $ }}
 {{- include "envFrom.postgresql" $ }}
+{{- end }}
+
+{{- define "envRef.configuratorSecrets" }}
+{{- $secretName := .Values.configurator.s3.externalSecretKey | default "configurator-s3" }}
+{{- $mapping := .Values.configurator.s3.externalSecretMapping }}
+- name: CONFIGURATOR_S3_ACCESS_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ $secretName }}
+      key: {{ $mapping.accessKey }}
+- name: CONFIGURATOR_S3_SECRET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: {{ $secretName }}
+      key: {{ $mapping.secretKey }}
+{{- end }}
+
+{{- define "novuBridge.containerSpecs" -}}
+image: {{ .Values.repository.baseurl }}/ps-novu-bridge:{{ .Values.repository.tag }}
+{{- if not (eq "latest" .Values.repository.tag) }}
+imagePullPolicy: Always
+{{- end }}
+terminationMessagePolicy: FallbackToLogsOnError
+env:
+- name: NEXT_PUBLIC_NOVU_SECRET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: novu
+      key: NOVU_SECRET_KEY
+- name: NEXT_PUBLIC_NOVU_APPLICATION_IDENTIFIER
+  valueFrom:
+    configMapKeyRef:
+      name: novu
+      key: NOVU_APPLICATION_IDENTIFIER
+- name: NEXT_PUBLIC_NOVU_API_URL
+  valueFrom:
+    configMapKeyRef:
+      name: novu
+      key: NOVU_API_URL
+envFrom:
+  - configMapRef:
+      name: novu
+  - secretRef:
+      name: novu
 {{- end }}

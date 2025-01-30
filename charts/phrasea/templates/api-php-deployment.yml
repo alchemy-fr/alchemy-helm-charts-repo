@@ -38,17 +38,18 @@ spec:
           mountPath: /configs
 {{- include "app.volumesMounts" $tplArgs | indent 8 }}
         env:
-{{- include "envRef.phpApp" $tplArgs | indent 8 }}
-      {{- if .api.ingress }}
-      {{- if .api.ingress.maxBodySize }}
+        {{- include "envRef.phpApp" $tplArgs | indent 8 }}
+        {{- include "envRef.configuratorSecrets" $ | indent 8 }}
+        {{- if .api.ingress }}
+        {{- if .api.ingress.maxBodySize }}
         - name: UPLOAD_MAX_FILE_SIZE
           value: {{ .api.ingress.maxBodySize | quote }}
-      {{- end }}
-      {{- end }}
+        {{- end }}
+        {{- end }}
         envFrom:
-{{- include "configMapRef.phpApp" $ | indent 8 }}
-{{- include "envFrom.rabbitmq" $ | indent 8 }}
-{{- include "envFrom.postgresql" $ | indent 8 }}
+        {{- include "envFrom.phpApp" $ | indent 8 }}
+        {{- include "envFrom.rabbitmq" $ | indent 8 }}
+        {{- include "envFrom.postgresql" $ | indent 8 }}
         - secretRef:
             name: {{ .adminOAuthClient.externalSecretName | default (printf "%s-admin-oauth-client-secret" $appName) }}
         {{- if (eq "databox" $appName) }}
