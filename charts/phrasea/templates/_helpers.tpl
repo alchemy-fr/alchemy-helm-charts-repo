@@ -220,7 +220,7 @@ networking.k8s.io/v1beta1
 {{- define "configurator.containerSpecs" -}}
 name: configurator
 image: {{ .Values.repository.baseurl }}/ps-configurator:{{ .Values.repository.tag }}
-imagePullPolicy: .Values.repository.imagePullPolicy
+imagePullPolicy: {{ .Values.repository.imagePullPolicy }}
 terminationMessagePolicy: FallbackToLogsOnError
 volumeMounts:
 - name: configs
@@ -280,7 +280,7 @@ envFrom:
 {{- define "novuBridge.containerSpecs" -}}
 image: {{ .Values.repository.baseurl }}/ps-novu-bridge:{{ .Values.repository.tag }}
 {{- if not (eq "latest" .Values.repository.tag) }}
-imagePullPolicy: Always
+imagePullPolicy:  {{ .Values.repository.imagePullPolicy }}
 {{- end }}
 terminationMessagePolicy: FallbackToLogsOnError
 env:
