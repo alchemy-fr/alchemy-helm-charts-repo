@@ -25,15 +25,15 @@ spec:
           image: {{ $.Values.repository.baseurl }}/ps-keycloak:{{ $.Values.repository.tag }}
           args:
           - 'start'
-          {{- if not (eq "latest" $.Values.repository.tag) }}
-          imagePullPolicy: Always
-          {{- end }}
+          imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
           terminationMessagePolicy: FallbackToLogsOnError
           envFrom:
             - secretRef:
                 name: {{ include "secretName.postgresql" $ }}
             - secretRef:
                 name: keycloak
+            - configMapRef:
+                name: urls-config            
           env:
           - name: KC_PROXY
             value: edge

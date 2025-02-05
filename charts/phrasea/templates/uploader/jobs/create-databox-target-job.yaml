@@ -35,9 +35,7 @@ spec:
       containers:
       - name: {{ $jobName }}
         image: {{ $.Values.repository.baseurl }}/ps-uploader-api-php:{{ $.Values.repository.tag }}
-        {{- if not (eq "latest" $.Values.repository.tag) }}
-        imagePullPolicy: Always
-        {{- end }}
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         args: ["/setup/job.sh"]
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
@@ -51,7 +49,7 @@ spec:
         envFrom:
         - configMapRef:
             name: uploader-api-config
-{{- include "configMapRef.phpApp" $ | indent 8 }}
+{{- include "envFrom.phpApp" $ | indent 8 }}
 {{- include "envFrom.rabbitmq" $ | indent 8 }}
 {{- include "envFrom.postgresql" $ | indent 8 }}
       restartPolicy: Never

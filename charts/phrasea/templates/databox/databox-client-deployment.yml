@@ -26,9 +26,7 @@ spec:
       containers:
       - name: databox-client
         image: {{ $.Values.repository.baseurl }}/ps-databox-client:{{ $.Values.repository.tag }}
-        {{- if not (eq "latest" $.Values.repository.tag) }}
-        imagePullPolicy: Always
-        {{- end }}
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs
@@ -37,7 +35,11 @@ spec:
         - configMapRef:
             name: urls-config
         - configMapRef:
+            name: novu
+        - configMapRef:
             name: soketi
         - configMapRef:
             name: databox-client-config
+        - configMapRef:
+            name: configurator-s3
 {{- end }}

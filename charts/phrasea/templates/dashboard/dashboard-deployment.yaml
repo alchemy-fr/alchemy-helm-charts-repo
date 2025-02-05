@@ -23,13 +23,15 @@ spec:
       containers:
       - name: dashboard
         image: {{ $.Values.repository.baseurl }}/ps-dashboard:{{ $.Values.repository.tag }}
-        {{- if not (eq "latest" $.Values.repository.tag) }}
-        imagePullPolicy: Always
-        {{- end }}
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         terminationMessagePolicy: FallbackToLogsOnError
         envFrom:
         - configMapRef:
             name: urls-config
+        - configMapRef:
+            name: novu
+        - configMapRef:
+            name: configurator-s3
         - configMapRef:
             name: dashboard-client-config
 {{- end }}

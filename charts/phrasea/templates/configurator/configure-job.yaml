@@ -4,7 +4,7 @@ metadata:
   name: configurator-configure
   annotations:
     "helm.sh/hook": post-{{- if .Values.configurator.executeMigration -}}upgrade{{- else -}}install{{- end }}
-    "helm.sh/hook-weight": "6"
+    "helm.sh/hook-weight": "7"
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:

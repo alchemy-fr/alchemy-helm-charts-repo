@@ -23,12 +23,10 @@ spec:
           containers:
           - name: {{ $appName }}-api-php
             image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
-            {{- if not (eq "latest" $.Values.repository.tag) }}
+            imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
             command:
               - bin/console
               - app:matomo:sync-phraseanet
-            imagePullPolicy: Always
-            {{- end }}
             volumeMounts:
             - name: configs
               mountPath: /configs
@@ -36,7 +34,7 @@ spec:
             env:
             {{- include "envRef.phpApp" $tplArgs | indent 12 }}
             envFrom:
-            {{- include "configMapRef.phpApp" $ | indent 12 }}
+            {{- include "envFrom.phpApp" $ | indent 12 }}
             {{- include "envFrom.rabbitmq" $ | indent 12 }}
             {{- include "envFrom.postgresql" $ | indent 12 }}
             - secretRef:
