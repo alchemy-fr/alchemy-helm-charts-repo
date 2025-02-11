@@ -8,7 +8,7 @@ kind: Deployment
 metadata:
   name: {{ $appName }}-worker
 spec:
-  replicas: {{(index $.Values $appName).worker.replicas}}
+  replicas: {{(index $.Values $appName).worker.replicas }}
   selector:
     matchLabels:
       app: phrasea
@@ -30,12 +30,15 @@ spec:
       - name: {{ $appName }}-worker
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-worker:{{ $.Values.repository.tag }}
         imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
+        {{- if (index $.Values $appName).resourcesquotas }}
+        resources:
           requests:
             memory: {{(index $.Values $appName).worker.resources.requests.memory}}
             cpu: {{(index $.Values $appName).worker.resources.requests.cpu}}
           limits:
             memory: {{(index $.Values $appName).worker.resources.limits.memory}}
             cpu: {{(index $.Values $appName).worker.resources.limits.cpu}}
+        {{- end }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs

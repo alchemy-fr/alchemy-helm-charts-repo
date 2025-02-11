@@ -92,7 +92,7 @@ stack:
 
 Restore stack:
 
-If you are porgresql service is enabled, you need to disable migrations so ot will start the pod.
+If your PostgreSQL service is enabled, you will need to disable migrations for the pod to start.
 
 Change the:
 
