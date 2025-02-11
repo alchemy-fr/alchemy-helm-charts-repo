@@ -8,7 +8,7 @@ kind: Deployment
 metadata:
   name: {{ $appName }}-api-php
 spec:
-  replicas: 1
+  replicas: {{(index $.Values $appName).api.replicas}}
   selector:
     matchLabels:
       app: phrasea
@@ -32,6 +32,15 @@ spec:
       - name: {{ $appName }}-api-php
         image: {{ $.Values.repository.baseurl }}/ps-{{ $appName }}-api-php:{{ $.Values.repository.tag }}
         imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
+        {{- if (index $.Values $appName).resourcesquota }}
+        resources:
+          requests:
+            memory: {{(index $.Values $appName).api.resources.requests.memory}}
+            cpu: {{(index $.Values $appName).api.resources.requests.cpu}}
+          limits:
+            memory: {{(index $.Values $appName).api.resources.limits.memory}}
+            cpu: {{(index $.Values $appName).api.resources.limits.cpu}}
+        {{- end }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: configs

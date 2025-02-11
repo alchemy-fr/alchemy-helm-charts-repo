@@ -97,6 +97,7 @@ novu:
 databox:
   enabled: true
   api:
+    replicas: 1
     ingress:
       enabled: true
       annotations:
@@ -106,6 +107,14 @@ databox:
       tls: []
     hostname:
     baseUrl:
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
     config:
       requestSignatureTtl: 86400
       s3Storage:
@@ -147,6 +156,16 @@ databox:
       tls: []
     oauthClient:
       id: databox-app
+  worker:
+    replicas: 1
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
   rabbitmq:
     vhost: databox
   database:
@@ -174,6 +193,7 @@ expose:
       enabled: false
       schedule: '30 5 * * *'
   api:
+    replicas: 1
     subnet: 0.0.0.0/0
     ingress:
       enabled: true
@@ -185,6 +205,14 @@ expose:
       tls: []
     hostname:
     baseUrl:
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
     config:
       requestSignatureTtl: 86400
       s3Storage:
@@ -213,6 +241,16 @@ expose:
     externalSecretName:
     id: expose-admin
     secret: '__CHANGE_ME_71EuDQ2H$ei3sHwIB0sfy'
+  worker:
+    replicas: 1
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
   client:
     hostname:
     baseUrl:
@@ -242,6 +280,7 @@ expose:
 uploader:
   enabled: true
   api:
+    replicas: 1
     ingress:
       enabled: true
       annotations:
@@ -252,6 +291,14 @@ uploader:
       tls: []
     hostname:
     baseUrl:
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
     config:
       deleteAssetGracefulTime: 0
       assetConsumerCommitUri:
@@ -274,8 +321,19 @@ uploader:
     externalSecretName:
     id: uploader-admin
     secret: '__CHANGE_ME_p@P@CSnZi3sHwIB0sfy'
+  worker:
+    replicas: 1
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
   client:
     hostname:
+    baseUrl:
     ingress:
       enabled: true
       annotations: {}
@@ -298,6 +356,14 @@ report:
   api:
     hostname: report-api
     baseUrl: http://report-api
+    ressourcesquota: false
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "256Mi"
+      limits:
+        cpu: "2000m"
+        memory: "2048Mi"
   databaseName: report
   createDatabase: true
 
