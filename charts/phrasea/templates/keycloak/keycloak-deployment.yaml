@@ -33,10 +33,10 @@ spec:
             - secretRef:
                 name: keycloak
             - configMapRef:
-                name: urls-config            
+                name: urls-config
           env:
-          - name: KC_PROXY
-            value: edge
+          - name: KC_HTTP_ENABLED
+            value: 'true'
           - name: KC_HOSTNAME
             value: {{ .hostname | quote }}
           - name: KC_DB
