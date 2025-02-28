@@ -38,7 +38,7 @@ spec:
           - name: KC_HTTP_ENABLED
             value: 'true'
           - name: KC_HOSTNAME
-            value: {{ .hostname | quote }}
+            value: {{ .baseUrl | quote }}
           - name: KC_DB
             value: postgres
 {{- end }}
