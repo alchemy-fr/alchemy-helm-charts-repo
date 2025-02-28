@@ -37,6 +37,8 @@ spec:
           env:
           - name: KC_HTTP_ENABLED
             value: 'true'
+          - name: KC_PROXY_HEADERS
+            value: xforwarded
           - name: KC_HOSTNAME
             value: {{ .baseUrl | quote }}
           - name: KC_DB
