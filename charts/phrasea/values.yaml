@@ -259,6 +259,8 @@ expose:
       annotations: {}
       extraLabels: {}
       tls: []
+    csp:
+      allowedFrameAncestors: ""
     oauthClient:
       id: expose-app
     mapbox:

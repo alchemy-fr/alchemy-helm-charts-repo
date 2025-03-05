@@ -190,6 +190,11 @@ SENTRY_ENVIRONMENT: {{ required "Missing sentry.environment" $glob.Values.sentry
 MATOMO_URL: {{ required "Missing matomo.baseUrl" $ctx.matomo.baseUrl | quote }}
 MATOMO_SITE_ID: {{ required "Missing matomo.siteId" $ctx.matomo.siteId | quote }}
 {{- end }}
+{{- if $ctx.client }}
+{{- if $ctx.client.csp }}
+ALLOWED_FRAME_ANCESTORS: {{ $ctx.csp.allowedFrameAncestors | quote }}
+{{- end }}
+{{- end }}
 {{- end }}
 
 {{- define "ingress.apiVersion" -}}
