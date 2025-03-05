@@ -192,7 +192,7 @@ MATOMO_SITE_ID: {{ required "Missing matomo.siteId" $ctx.matomo.siteId | quote }
 {{- end }}
 {{- if $ctx.client }}
 {{- if $ctx.client.csp }}
-ALLOWED_FRAME_ANCESTORS: {{ $ctx.csp.allowedFrameAncestors | quote }}
+ALLOWED_FRAME_ANCESTORS: {{ $ctx.client.csp.allowedFrameAncestors | quote }}
 {{- end }}
 {{- end }}
 {{- end }}
