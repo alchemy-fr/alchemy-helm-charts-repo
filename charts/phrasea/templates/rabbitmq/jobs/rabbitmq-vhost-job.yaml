@@ -5,7 +5,7 @@ kind: Job
 metadata:
   name: rabbitmq-vhost-setup
   annotations:
-    "helm.sh/hook": post-install
+    "helm.sh/hook": post-install,post-upgrade
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   template:
@@ -35,7 +35,18 @@ spec:
             {{- $appName := . }}
             {{- if (index $.Values $appName).rabbitmq }}
             {{- $vhost := (index $.Values $appName).rabbitmq.vhost }}
-            rabbitmqctl -n {{ $nodeName }} add_vhost {{ $vhost | quote }}
+
+            # Check if vhost exists
+            if ! rabbitmqctl -n {{ $nodeName }} list_vhosts | grep -q "^{{ $vhost }}$"; then
+              rabbitmqctl -n {{ $nodeName }} add_vhost {{ $vhost | quote }}
+            fi
+
+            # Check if user exists
+            if ! rabbitmqctl -n {{ $nodeName }} list_users | grep -q "^{{ $RABBITMQ_USER }}$"; then
+              rabbitmqctl -n {{ $nodeName }} add_user ${RABBITMQ_USER} {{ (index $.Values $appName).rabbitmq.password }}
+            fi
+
+            # Set permissions for the user on the vhost
             rabbitmqctl -n {{ $nodeName }} set_permissions -p {{ $vhost | quote }} ${RABBITMQ_USER} '.*' '.*' '.*'
             {{- end }}
             {{- end }}
