@@ -35,7 +35,7 @@ spec:
             {{- $appName := . }}
             {{- if (index $.Values $appName).rabbitmq }}
             {{- $vhost := (index $.Values $appName).rabbitmq.vhost }}
-            {{- $user := (index $.Values $appName).rabbitmq.user | default "guest" }}
+            {{- $user := (index $.Values $appName).rabbitmq.user }}
 
             # Check if vhost exists
             if ! rabbitmqctl -n {{ $nodeName }} list_vhosts | grep -q "^{{ $vhost }}$"; then
@@ -44,7 +44,7 @@ spec:
 
             # Check if user exists
             if ! rabbitmqctl -n {{ $nodeName }} list_users | grep -q "^{{ $user }}$"; then
-              rabbitmqctl -n {{ $nodeName }} add_user {{ $user }} {{ (index $.Values $appName).rabbitmq.password | default "guest" }}
+              rabbitmqctl -n {{ $nodeName }} add_user {{ $user }} {{ (index $.Values $appName).rabbitmq.password }}
             fi
 
             # Set permissions for the user on the vhost
