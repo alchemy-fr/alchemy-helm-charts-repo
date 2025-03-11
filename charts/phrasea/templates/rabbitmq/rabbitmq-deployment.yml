@@ -40,6 +40,9 @@ spec:
         volumeMounts:
         - name: data
           mountPath: "/var/lib/rabbitmq"
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000   
         env:
         - name: RABBITMQ_DEFAULT_USER
           valueFrom:
