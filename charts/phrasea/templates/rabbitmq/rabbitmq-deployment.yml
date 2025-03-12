@@ -41,8 +41,8 @@ spec:
         - name: data
           mountPath: "/var/lib/rabbitmq"
         securityContext:
-          runAsUser: 1000
-          runAsGroup: 1000   
+          runAsUser: 999
+          runAsGroup: 999   
         env:
         - name: RABBITMQ_DEFAULT_USER
           valueFrom:
