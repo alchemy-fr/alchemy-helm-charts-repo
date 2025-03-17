@@ -289,11 +289,6 @@ imagePullPolicy:  {{ .Values.repository.imagePullPolicy }}
 {{- end }}
 terminationMessagePolicy: FallbackToLogsOnError
 env:
-- name: NEXT_PUBLIC_NOVU_SECRET_KEY
-  valueFrom:
-    secretKeyRef:
-      name: novu
-      key: NOVU_SECRET_KEY
 - name: NEXT_PUBLIC_NOVU_APPLICATION_IDENTIFIER
   valueFrom:
     configMapKeyRef:
@@ -305,6 +300,8 @@ env:
       name: novu
       key: NOVU_API_URL
 envFrom:
+  - configMapRef:
+      name: urls-config
   - configMapRef:
       name: novu
   - secretRef:
