@@ -26,6 +26,17 @@ mysql:
   root_password: "{{ .Values.app.phraseanet_db_password }}"
   max_allowed_packet: 16M
   max_connection: 100
+  mysqlBackup:
+    enabled: true
+    pre-upgrade_backup: false
+    pre-delete_backup: false
+    image: "percona:5.7"
+    maxBackups: 5
+    initBackup: "false"
+    initRestoreLatest: "false"
+    cronTime: "0 0 * * *"
+    gzipLevel: 9
+    backupVolumePath: "/var/alchemy/Phraseanet/backup"         
   pvc_name: phraseanet-database
   resources:
     requests:
