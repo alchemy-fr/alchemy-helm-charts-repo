@@ -44,6 +44,20 @@ spec:
           value: {{ .Values.mysql.max_allowed_packet }}
         - name: MYSQL_MAX_CONNECTION
           value: {{ .Values.mysql.max_connection | quote }}
+        - name: MYSQL_CONNECT_TIMEOUT
+          value: {{ .Values.mysql.connect_timeout | quote }}
+        - name: MYSQL_WAIT_TIMEOUT
+          value: {{ .Values.mysql.wait_timeout | quote }}
+        - name: MYSQL_LONG_QUERY_TIME
+          value: {{ .Values.mysql.long_query_time | quote }}
+        - name: MYSQL_SLOW_QUERY_LOG
+          value: {{ .Values.mysql.slow_query_log | quote }}
+        - name: MYSQL_KEY_BUFFER_SIZE
+          value: {{ .Values.mysql.key_buffer_size | quote }}
+        - name: MYSQL_QUERY_CACHE_SIZE
+          value: {{ .Values.mysql.query_cache_size | quote }}
+        - name: MYSQL_QUERY_CACHE_LIMIT
+          value: {{ .Values.mysql.query_cache_limit | quote }}
         volumeMounts:
         - name: "database"
           mountPath: "/var/lib/mysql"

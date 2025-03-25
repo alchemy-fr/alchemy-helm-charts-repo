@@ -1,0 +1,20 @@
+{{- if and .Values.running .Values.mysql.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-db-script
+data:
+  init-db.sh: |
+    #!/bin/sh
+    set -ex
+
+    # Wait for MySQL to be ready
+    until mysqladmin ping -h $MYSQL_HOST --silent; do
+      echo "Waiting for MySQL to be ready..."
+      sleep 5
+    done
+
+    # Check and create databases
+    mysql -u $MYSQL_USER -p$MYSQL_PASS -e "CREATE DATABASE IF NOT EXISTS $INSTALL_APPBOX;"
+    mysql -u $MYSQL_USER -p$MYSQL_PASS -e "CREATE DATABASE IF NOT EXISTS $INSTALL_DATABOX;"
+{{- end }}
