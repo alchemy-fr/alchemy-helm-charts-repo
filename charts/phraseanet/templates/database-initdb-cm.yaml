@@ -6,7 +6,7 @@ metadata:
 data:
   init-db.sh: |
     #!/bin/sh
-    set -ex
+    set -e
 
     # Wait for MySQL to be ready
     until mysqladmin ping -h $MYSQL_HOST --silent; do
