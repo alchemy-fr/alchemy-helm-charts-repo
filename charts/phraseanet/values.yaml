@@ -212,8 +212,8 @@ app:
   phraseanet_setup: 1
   phraseanet_upgrade: 1
   phraseanet_admin_account_id:
-  phraseanet_admin_account_email: admin@alchemy.fr
-  phraseanet_admin_account_password: phraseanet
+  phraseanet_admin_account_email: admin@phraseanet.local
+  phraseanet_admin_account_password: _change-me_
   phraseanet_db_host: db
   phraseanet_db_port: 3306
   phraseanet_db_user: root

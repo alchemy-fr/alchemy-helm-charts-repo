@@ -7,7 +7,8 @@
 
 ## Deploy chart
 
-First you should write your own configuration file named `myvalues.yaml` (see [sample.yaml](./sample.yaml))
+First you should write your own configuration file named `myvalues.yaml` (see [values.yaml](./values.yaml))
+and review keys containting `password` in name 
 
 ```bash
 helm install -f myvalues.yaml phraseanet ./all
