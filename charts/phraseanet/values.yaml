@@ -237,7 +237,7 @@ app:
   phraseanet_user_session_lifetime: 86400
   phraseanet_available_language: fr,en,de,du
   phraseanet_default_language: en
-  phraseanet_api_enabled: 1
+  phraseanet_api_enabled: true
   phraseanet_api_ssl: true
   phraseanet_api_auth_token_header_only: false
   phraseanet_download_async: false
