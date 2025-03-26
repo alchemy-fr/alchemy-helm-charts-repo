@@ -217,7 +217,7 @@ app:
   phraseanet_db_host: db
   phraseanet_db_port: 3306
   phraseanet_db_user: root
-  phraseanet_db_password: phraseanet
+  phraseanet_db_password: _change-me_
   phraseanet_cache_type: redis
   phraseanet_cache_host: redis
   phraseanet_cache_port: 6379
