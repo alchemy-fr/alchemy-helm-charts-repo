@@ -153,8 +153,12 @@ php:
 
 ingress:
   enabled: false
-  host: phraseanet
+  ingressClassName: nginx
+  hosts:
+    - phraseanet.local
   tls: false
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 
 saml:
   enabled: true

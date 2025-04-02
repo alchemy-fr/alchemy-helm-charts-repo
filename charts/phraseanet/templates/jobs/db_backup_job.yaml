@@ -10,6 +10,9 @@ metadata:
 spec:
   template:
     spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
       volumes:
       - name: phraseanet-backup
         persistentVolumeClaim:
