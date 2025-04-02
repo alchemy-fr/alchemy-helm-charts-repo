@@ -1,0 +1,60 @@
+{{- if and .Values.running .Values.mysql.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-init-db
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: init-db-script
+        configMap:
+          name: init-db-script
+          items:
+          - key: init-db.sh
+            path: init-db.sh
+      {{- if .Values.image.pullSecret.enabled }}
+      imagePullSecrets:
+      - name: {{ .Values.image.pullSecret.name }}
+      {{- end }}
+      containers:
+      - name: mysql-init-db
+        image: {{ .Values.image.registry }}/phraseanet-db:{{ .Values.image.tag.phraseanet }}
+        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+        envFrom:
+        env:
+        - name: MYSQL_USER
+          value: {{ .Values.app.phraseanet_db_user | quote  }}
+        - name: MYSQL_PASS
+          value: {{ .Values.app.phraseanet_db_password | quote }}
+        - name: MYSQL_HOST
+          value: {{ .Values.app.phraseanet_db_host | quote }}
+        - name: MYSQL_PORT
+          value: {{ .Values.app.phraseanet_db_port | quote }}
+        - name: INSTALL_APPBOX
+          value: {{ .Values.app.install_appbox | quote }}
+        - name: INSTALL_DATABOX 
+          value: {{ .Values.app.install_databox | quote }}
+        command: ["sh", "-c"]
+        args:
+          - |
+            #!/bin/sh
+            set -ex
+
+            # Run the init script for db creation
+            
+            sh /docker-entrypoint-initdb.d/init-db.sh
+        volumeMounts:
+        - name: init-db-script
+          mountPath: /docker-entrypoint-initdb.d/init-db.sh
+          subPath: init-db.sh
+      restartPolicy: OnFailure
+  backoffLimit: 5  # Number of retries
+{{- end }}

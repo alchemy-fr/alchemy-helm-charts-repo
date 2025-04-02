@@ -25,7 +25,25 @@ mysql:
   password: "{{ .Values.app.phraseanet_db_password }}"
   root_password: "{{ .Values.app.phraseanet_db_password }}"
   max_allowed_packet: 16M
-  max_connection: 100
+  max_connection: 200
+  connect_timeout: 60
+  wait_timeout: 600
+  long_query_time: 10
+  slow_query_log: 0
+  key_buffer_size: 128M
+  query_cache_size: 64M
+  query_cache_limit: 128k
+  mysqlBackup:
+    enabled: true
+    pre-upgrade_backup: false
+    pre-delete_backup: false
+    image: "fradelg/mysql-cron-backup"
+    maxBackups: 5
+    initBackup: "false"
+    initRestoreLatest: "false"
+    cronTime: "0 0 * * *"
+    gzipLevel: 9
+    backupVolumePath: "/var/alchemy/Phraseanet/backup"         
   pvc_name: phraseanet-database
   resources:
     requests:
@@ -135,8 +153,12 @@ php:
 
 ingress:
   enabled: false
-  host: phraseanet
+  ingressClassName: nginx
+  hosts:
+    - phraseanet.local
   tls: false
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 
 saml:
   enabled: true
@@ -194,12 +216,12 @@ app:
   phraseanet_setup: 1
   phraseanet_upgrade: 1
   phraseanet_admin_account_id:
-  phraseanet_admin_account_email: admin@alchemy.fr
-  phraseanet_admin_account_password: phraseanet
+  phraseanet_admin_account_email: admin@phraseanet.local
+  phraseanet_admin_account_password: _change-me_
   phraseanet_db_host: db
   phraseanet_db_port: 3306
   phraseanet_db_user: root
-  phraseanet_db_password: phraseanet
+  phraseanet_db_password: _change-me_
   phraseanet_cache_type: redis
   phraseanet_cache_host: redis
   phraseanet_cache_port: 6379
@@ -219,7 +241,7 @@ app:
   phraseanet_user_session_lifetime: 86400
   phraseanet_available_language: fr,en,de,du
   phraseanet_default_language: en
-  phraseanet_api_enabled: 1
+  phraseanet_api_enabled: true
   phraseanet_api_ssl: true
   phraseanet_api_auth_token_header_only: false
   phraseanet_download_async: false
@@ -232,15 +254,13 @@ app:
   phraseanet_smtp_port:
   phraseanet_smtp_user:
   phraseanet_smtp_password:
-  phraseanet_emitter_email:
-  phraseanet_mail_object_prefix:
-  phraseanet_ffmpeg_timeout:
-  phraseanet_ffprobe_timeout:
-  phraseanet_gs_timeout:
-  phraseanet_mp4box_timeout:
-  phraseanet_swftools_timeout:
-  phraseanet_unocon_timeout:
-  phraseanet_exiftool_timeout:
+  phraseanet_ffmpeg_timeout: 7200
+  phraseanet_ffprobe_timeout: 120
+  phraseanet_gs_timeout: 120
+  phraseanet_mp4box_timeout: 120
+  phraseanet_swftools_timeout: 120
+  phraseanet_unocon_timeout: 120
+  phraseanet_exiftool_timeout: 120
   install_db_template: DublinCore
   install_appbox: ab_master
   install_databox: db_databox1

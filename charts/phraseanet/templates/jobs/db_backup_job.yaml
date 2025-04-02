@@ -1,0 +1,42 @@
+{{- if .Values.mysql.mysqlBackup.pre_upgrade_backup }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mysql-backup-pre-upgrade
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      {{- if .Values.nodeSelector }}
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: phraseanet-backup
+        persistentVolumeClaim:
+          claimName: {{ .Values.app.pvc.backup.name }}
+      containers:
+      - name: mysql-backup
+        image: {{ .Values.mysql.mysqlBackup.image }}
+        command:
+            - /backup.sh
+        env:
+        - name: MYSQL_HOST
+          value: {{ .Values.app.phraseanet_db_host | quote }}
+        - name: MYSQL_USER
+          value: {{ .Values.app.phraseanet_db_user | quote  }}
+        - name: MYSQL_PASS
+          value: {{ .Values.app.phraseanet_db_password | quote }}
+        - name: INIT_BACKUP
+          value: "{{ .Values.mysql.mysqlBackup.initBackup }}"
+        - name: GZIP_LEVEL
+          value: "{{ .Values.mysql.mysqlBackup.gzipLevel }}"
+        volumeMounts:
+        - name: phraseanet-backup
+          mountPath: "/backup"
+          subPath: "pre-upgrade/database"
+      restartPolicy: Never
+  backoffLimit: 1
+{{- end }}
