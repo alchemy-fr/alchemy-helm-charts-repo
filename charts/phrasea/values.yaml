@@ -407,6 +407,9 @@ postgresql:
     size: 10Gi
     subPath:
 
+redis:
+  enabled: true
+
 rabbitmq:
   enabled: true
   externalSecretName:

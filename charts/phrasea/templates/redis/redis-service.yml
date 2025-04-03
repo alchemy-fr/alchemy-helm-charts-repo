@@ -1,4 +1,4 @@
-{{- if and $.Values.stack.running }}
+{{- if and $.Values.stack.running $.values.redis.enabled}}
 apiVersion: v1
 kind: Service
 metadata:
