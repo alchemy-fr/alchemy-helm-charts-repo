@@ -14,17 +14,18 @@ spec:
       containers:
       - name: cleanup
         image: curlimages/curl:latest
+        imagePullPolicy: {{ $.Values.repository.imagePullPolicy }}
         env:
         - name: ELASTICSEARCH_URL
           valueFrom:
             configMapKeyRef:
               name: databox-api-config
-              key: elasticsearch-url
+              key: ELASTICSEARCH_URL
         - name: ELASTICSEARCH_INDEX_PREFIX
           valueFrom:
             configMapKeyRef:
               name: databox-api-config
-              key: elasticsearch-index-prefix
+              key: ELASTICSEARCH_INDEX_PREFIX
         command:
         - /bin/sh
         - -c
