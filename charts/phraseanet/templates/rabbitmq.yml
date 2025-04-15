@@ -32,7 +32,7 @@ spec:
             - "rabbitmq"
       containers:
       - name: rabbitmq
-        image: rabbitmq:3-management
+        image: rabbitmq:3.8.34-management
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: data
