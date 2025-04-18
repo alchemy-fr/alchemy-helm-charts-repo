@@ -32,7 +32,7 @@ spec:
             - "rabbitmq"
       containers:
       - name: rabbitmq
-        image: {{ .Values.rabbitmq.image_version }}
+        image: {{ .Values.rabbitmq.image_version }}
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:
         - name: data
