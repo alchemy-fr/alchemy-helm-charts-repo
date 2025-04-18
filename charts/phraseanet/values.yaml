@@ -64,6 +64,7 @@ elasticsearch:
 
 rabbitmq:
   enabled: true
+  image_version: "rabbitmq:3.13.7-management"
   port: "{{ .Values.app.phraseanet_rabbitmq_port }}"
   default_user: "{{ .Values.app.phraseanet_rabbitmq_user }}"
   default_pass: "{{ .Values.app.phraseanet_rabbitmq_pass }}"
