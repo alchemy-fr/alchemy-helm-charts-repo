@@ -1,4 +1,6 @@
-# Helm Chart
+# /!\ Phraseanet helm chart are now Here /!\ 
+
+https://github.com/alchemy-fr/phraseanet-helm-charts
 
 
 ## Images
