@@ -1,4 +1,4 @@
-# /!\ Phraseanet helm chart are now Here /!\ 
+# /!\ Phraseanet Helm charts are now Here /!\ 
 
 https://github.com/alchemy-fr/phraseanet-helm-charts
 
